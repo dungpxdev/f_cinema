@@ -1,5 +1,6 @@
 package com.fsoft.F_Cinema.entities;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.GeneratedValue;
@@ -18,7 +19,12 @@ import lombok.Setter;
 @Getter
 @Setter
 @MappedSuperclass
-public class BaseEntity {
+public class BaseEntity implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7075797625123723994L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

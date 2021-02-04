@@ -1,7 +1,7 @@
 package com.fsoft.F_Cinema.entities;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,6 +21,11 @@ import lombok.Setter;
 @Table(name = "roles")
 public class RoleEntity extends BaseEntity {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 820604150119042973L;
+
 	@Column(name = "name")
 	private String name;
 
@@ -28,5 +33,5 @@ public class RoleEntity extends BaseEntity {
 	private Integer code;
 
 	@ManyToMany(mappedBy = "roles")
-	private List<UserEntity> roles = new ArrayList<UserEntity>();
+	private Set<UserEntity> roles = new HashSet<UserEntity>();
 }

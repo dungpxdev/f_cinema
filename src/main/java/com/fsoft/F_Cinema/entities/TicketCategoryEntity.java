@@ -18,6 +18,11 @@ import lombok.Setter;
 @Table(name = "ticket_categories")
 public class TicketCategoryEntity extends BaseEntity {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2810756407931602169L;
+
 	@Column(name = "name")
 	private String name;
 

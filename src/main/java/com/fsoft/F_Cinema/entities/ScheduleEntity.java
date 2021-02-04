@@ -24,6 +24,11 @@ import lombok.Setter;
 @Table(name = "schedules")
 public class ScheduleEntity extends BaseEntity {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4325745940783371239L;
+
 	@Column(name = "name")
 	private String name;
 
@@ -43,7 +48,7 @@ public class ScheduleEntity extends BaseEntity {
 	@ManyToOne
 	@JoinColumn(name = "room_id", nullable = false)
 	private RoomEntity room;
-	
+
 	@OneToMany(mappedBy = "schedule")
 	private Set<TicketEntity> tickets = new HashSet<TicketEntity>();
 

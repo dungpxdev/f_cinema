@@ -1,4 +1,4 @@
-package com.fsoft.F_Cinema.Exception;
+package com.fsoft.F_Cinema.exception;
 
 import java.util.Date;
 import java.util.List;

@@ -19,6 +19,11 @@ import lombok.Setter;
 @Table(name = "disable_plan")
 public class DisablePlanEntity extends BaseEntity {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7811716561414604846L;
+
 	@Column(name = "name")
 	private String name;
 
