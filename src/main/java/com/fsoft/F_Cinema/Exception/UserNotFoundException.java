@@ -1,4 +1,4 @@
-package com.fsoft.F_Cinema.Exception;
+package com.fsoft.F_Cinema.exception;
 
 public class UserNotFoundException extends RuntimeException {
 

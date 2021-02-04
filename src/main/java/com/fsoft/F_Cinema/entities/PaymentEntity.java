@@ -21,6 +21,11 @@ import lombok.Setter;
 @Table(name = "payment")
 public class PaymentEntity extends BaseEntity {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5761589493361372204L;
+
 	@Column(name = "total")
 	private Long total;
 

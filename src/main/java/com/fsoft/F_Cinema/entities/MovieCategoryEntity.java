@@ -18,6 +18,11 @@ import lombok.Setter;
 @Table(name = "movie_categories")
 public class MovieCategoryEntity extends BaseEntity {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2879224988886581589L;
+
 	@Column(name = "name")
 	private String name;
 

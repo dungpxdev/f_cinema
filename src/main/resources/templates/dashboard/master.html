@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+  <head>
+  	<title layout:title-pattern="$CONTENT_TITLE - $LAYOUT_TITLE"></title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<!-- Meta, title, CSS, favicons, etc. -->
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+	<!-- Bootstrap -->
+	<link th:href="@{/vendors/bootstrap/dist/css/bootstrap.min.css}" rel="stylesheet">
+	<!-- Font Awesome -->
+	<link th:href="@{/vendors/font-awesome/css/font-awesome.min.css}" rel="stylesheet">
+	<!-- NProgress -->
+	<link th:href="@{/vendors/nprogress/nprogress.css}" rel="stylesheet">
+	<!-- iCheck -->
+	<link th:href="@{/vendors/iCheck/skins/flat/green.css}" rel="stylesheet">
+	
+	<!-- bootstrap-progressbar -->
+	<link th:href="@{/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css}" rel="stylesheet">
+	<!-- JQVMap -->
+	<link th:href="@{/vendors/jqvmap/dist/jqvmap.min.css}" rel="stylesheet"/>
+	<!-- bootstrap-daterangepicker -->
+	<link th:href="@{/vendors/bootstrap-daterangepicker/daterangepicker.css}" rel="stylesheet">
+		
+	<!-- Custom Theme Style -->
+	<link th:href="@{/build/css/custom.min.css}" rel="stylesheet">
+	<link rel="shortcut icon" th:href="@{/icons/favicon.ico}" type="image/x-icon">
+  </head>
+  <body class="nav-md">
+    <div class="container body">
+      <div class="main_container">
+        <div class="col-md-3 left_col">
+          <div class="left_col scroll-view">
+            <div class="navbar nav_title" style="border: 0;">
+              <a href="index.html" class="site_title"><img src="/images/movie-ticket.png" width="60"><span><img src="/icons/logo.svg" width="130"></span></a>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <!-- menu profile quick info -->
+            <div class="profile clearfix">
+              <div class="profile_pic">
+                <img src="/images/img.jpg" alt="..." class="img-circle profile_img">
+              </div>
+              <div class="profile_info">
+                <span>Welcome,</span>
+                <h2 th:text="${username}"></h2>
+              </div>
+            </div>
+            <!-- /menu profile quick info -->
+
+            <br />
+
+			<div layout:fragment="side_bar"></div>
+
+            <!-- /menu footer buttons -->
+            <div class="sidebar-footer hidden-small">
+              <a data-toggle="tooltip" data-placement="top" title="Settings">
+                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="Lock">
+                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
+                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+              </a>
+            </div>
+            <!-- /menu footer buttons -->
+          </div>
+        </div>
+
+		<div layout:fragment="top_nav"></div>
+		
+		<div layout:fragment="content"></div>
+
+
+        <!-- footer content -->
+        <footer>
+          <div class="pull-right">
+            F_Movie - Dashboard Admin created by <a href="/">F_AE team</a>
+          </div>
+          <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
+      </div>
+    </div>
+
+    <!-- jQuery -->
+    <script th:src="@{/vendors/jquery/dist/jquery.min.js}"></script>
+    <!-- Bootstrap -->
+    <script th:src="@{/vendors/bootstrap/dist/js/bootstrap.min.js}"></script>
+    <!-- FastClick -->
+    <script th:src="@{/vendors/fastclick/lib/fastclick.js}"></script>
+    <!-- NProgress -->
+    <script th:src="@{/vendors/nprogress/nprogress.js}"></script>
+    <!-- Chart.js -->
+    <script th:src="@{/vendors/Chart.js/dist/Chart.min.js}"></script>
+    <!-- gauge.js -->
+    <script th:src="@{/vendors/gauge.js/dist/gauge.min.js}"></script>
+    <!-- bootstrap-progressbar -->
+    <script th:src="@{/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js}"></script>
+    <!-- iCheck -->
+    <script th:src="@{/vendors/iCheck/icheck.min.js}"></script>
+    <!-- Skycons -->
+    <script th:src="@{/vendors/skycons/skycons.js}"></script>
+    <!-- Flot -->
+    <script th:src="@{/vendors/Flot/jquery.flot.js}"></script>
+    <script th:src="@{/vendors/Flot/jquery.flot.pie.js}"></script>
+    <script th:src="@{/vendors/Flot/jquery.flot.time.js}"></script>
+    <script th:src="@{/vendors/Flot/jquery.flot.stack.js}"></script>
+    <script th:src="@{/vendors/Flot/jquery.flot.resize.js}"></script>
+    <!-- Flot plugins -->
+    <script th:src="@{/vendors/flot.orderbars/js/jquery.flot.orderBars.js}"></script>
+    <script th:src="@{/vendors/flot-spline/js/jquery.flot.spline.min.js}"></script>
+    <script th:src="@{/vendors/flot.curvedlines/curvedLines.js}"></script>
+    <!-- DateJS -->
+    <script th:src="@{/vendors/DateJS/build/date.js}"></script>
+    <!-- JQVMap -->
+    <script th:src="@{/vendors/jqvmap/dist/jquery.vmap.js}"></script>
+    <script th:src="@{/vendors/jqvmap/dist/maps/jquery.vmap.world.js}"></script>
+    <script th:src="@{/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js}"></script>
+    <!-- bootstrap-daterangepicker -->
+    <script th:src="@{/vendors/moment/min/moment.min.js}"></script>
+    <script th:src="@{/vendors/bootstrap-daterangepicker/daterangepicker.js}"></script>
+
+    <!-- Custom Theme Scripts -->
+    <script th:src="@{/build/js/custom.min.js}"></script>
+	
+  </body>
+</html>
