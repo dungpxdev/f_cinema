@@ -19,6 +19,11 @@ import lombok.Setter;
 @Table(name = "seat")
 public class SeatEntity extends BaseEntity {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6110362291696885344L;
+
 	@Column(name = "name")
 	private String name;
 

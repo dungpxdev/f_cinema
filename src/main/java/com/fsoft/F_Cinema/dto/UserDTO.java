@@ -1,12 +1,10 @@
 package com.fsoft.F_Cinema.dto;
 
 import java.util.Date;
-
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import java.util.Set;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,12 +15,8 @@ import lombok.Setter;
 @Setter
 public class UserDTO extends AbstractDTO {
 
-	@NotNull(message = "Please provide your username")
-	@NotEmpty(message = "Please provide your username")
 	private String username;
 
-	@NotNull(message = "Please provide your password")
-	@NotEmpty(message = "Please provide your password")
 	private String password;
 
 	private String firstname;
@@ -35,13 +29,39 @@ public class UserDTO extends AbstractDTO {
 
 	private String gender;
 
-	private Date dob;
+	private String address;
 
-	@Email(message = "Email format invalid")
-	@NotNull(message = "Please provide your email")
-	@NotEmpty(message = "Please provide your email")
-	private String email;
+	private String dob;
 
 	private String avatar;
+
+	private String email;
+
+	private Set<String> roles;
+
+	public void setFullname() {
+		this.fullname = new StringBuilder(this.firstname)
+				.append(" ")
+				.append(this.lastname).toString();
+	}
+
+	@Builder
+	public UserDTO(String createdBy, String modifiedBy, Date createdDate, Date modifiedDate, String username,
+			String password, String firstname, String lastname, String fullname, String phone, String gender,
+			String address, String dob, String avatar, String email, Set<String> roles) {
+		super(createdBy, modifiedBy, createdDate, modifiedDate);
+		this.username = username;
+		this.password = password;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.fullname = fullname;
+		this.phone = phone;
+		this.gender = gender;
+		this.address = address;
+		this.dob = dob;
+		this.avatar = avatar;
+		this.email = email;
+		this.roles = roles;
+	}
 
 }

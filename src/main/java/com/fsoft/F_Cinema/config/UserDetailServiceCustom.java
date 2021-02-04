@@ -15,16 +15,15 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.fsoft.F_Cinema.entities.RoleEntity;
 import com.fsoft.F_Cinema.entities.UserEntity;
-import com.fsoft.F_Cinema.repository.IUserRepository;
+import com.fsoft.F_Cinema.repository.UserRepository;
 
 @Component
 public class UserDetailServiceCustom implements UserDetailsService {
 
 	@Autowired
-	private IUserRepository userRepository;
+	private UserRepository userRepository;
 
 	/**
-	 * checking if exist email then client can login to their account
 	 * 
 	 * @param { String } email
 	 * @return { UserDetails } User

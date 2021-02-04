@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Nationalized;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,6 +23,12 @@ import lombok.Setter;
 @Table(name = "cinema")
 public class CinemaEntity extends BaseEntity {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4251325890843119554L;
+
+	@Nationalized
 	@Column(name = "name")
 	private String name;
 
@@ -30,6 +38,7 @@ public class CinemaEntity extends BaseEntity {
 	@Column(name = "number_of_room")
 	private Integer numberOfRoom;
 
+	@Nationalized
 	@Column(name = "address")
 	private String address;
 

@@ -25,6 +25,11 @@ import lombok.Setter;
 @Table(name = "movies")
 public class MovieEntity extends BaseEntity {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2303284766282907280L;
+
 	@Column(name = "name")
 	private String name;
 
@@ -49,7 +54,7 @@ public class MovieEntity extends BaseEntity {
 	@Column(name = "length")
 	private Integer length;
 
-	@Column(name = "")
+	@Column(name = "rating")
 	private Integer rating;
 
 	@Column(name = "description")

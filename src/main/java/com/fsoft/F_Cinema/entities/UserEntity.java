@@ -26,6 +26,11 @@ import lombok.Setter;
 @Table(name = "users")
 public class UserEntity extends BaseEntity {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7191268814940554554L;
+
 	@Column(name = "username", unique = true)
 	private String username;
 
@@ -59,7 +64,7 @@ public class UserEntity extends BaseEntity {
 	@Column(name = "address")
 	private String address;
 
-	@ManyToMany(cascade = CascadeType.MERGE)
+	@ManyToMany(cascade = { CascadeType.ALL })
 	@JoinTable(name = "user_role", 
 	joinColumns = @JoinColumn(name = "user_id"), 
 	inverseJoinColumns = @JoinColumn(name = "role_id"))

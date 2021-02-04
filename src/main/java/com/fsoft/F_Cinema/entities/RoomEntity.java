@@ -23,6 +23,11 @@ import lombok.Setter;
 @Table(name = "rooms")
 public class RoomEntity extends BaseEntity {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6828274552785108681L;
+
 	@Column(name = "name")
 	private String name;
 
