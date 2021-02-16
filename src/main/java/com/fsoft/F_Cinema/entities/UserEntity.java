@@ -69,6 +69,12 @@ public class UserEntity extends BaseEntity {
 	joinColumns = @JoinColumn(name = "user_id"), 
 	inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<RoleEntity> roles = new HashSet<RoleEntity>();
+	
+	@ManyToMany(cascade = { CascadeType.ALL })
+	@JoinTable(name = "user_cinema", 
+	joinColumns = @JoinColumn(name = "user_id"), 
+	inverseJoinColumns = @JoinColumn(name = "cinema_id"))
+	private Set<CinemaEntity> cinemas = new HashSet<CinemaEntity>();
 
 	@OneToMany(mappedBy = "user")
 	private Set<PaymentEntity> payments = new HashSet<PaymentEntity>();

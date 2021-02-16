@@ -19,4 +19,5 @@ public interface UserService {
 	UserEntity findByUsername(String username);
 	
 	List<UserDTO> findNewsUsers();
+
 }

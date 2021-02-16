@@ -10,6 +10,6 @@ public class AdminTicketController {
 
 	@GetMapping(path = {"/", ""})
 	public String getTickets() {
-		return "";
+		return "a";
 	}
 }

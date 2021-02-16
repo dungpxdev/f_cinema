@@ -25,8 +25,10 @@ import com.fsoft.F_Cinema.constants.GenderConstant;
 import com.fsoft.F_Cinema.constants.RoleConstant;
 import com.fsoft.F_Cinema.dto.RoleDTO;
 import com.fsoft.F_Cinema.dto.UserDTO;
+import com.fsoft.F_Cinema.entities.CinemaEntity;
 import com.fsoft.F_Cinema.entities.RoleEntity;
 import com.fsoft.F_Cinema.entities.UserEntity;
+import com.fsoft.F_Cinema.services.CinemaService;
 import com.fsoft.F_Cinema.services.RoleService;
 import com.fsoft.F_Cinema.services.UserService;
 import com.fsoft.F_Cinema.utils.Converter;
@@ -53,6 +55,9 @@ public class AdminUserController {
 	private RoleService roleService;
 	
 	@Autowired
+	private CinemaService cinemaService;
+	
+	@Autowired
 	private Converter converter;
 
 	@GetMapping("/register")
@@ -75,7 +80,9 @@ public class AdminUserController {
 			if (!(principal instanceof UsernamePasswordAuthenticationToken) || 
 					!"admin".equals(principal.getName()))
 				throw new Exception("You Don't have permission for this operation !");
+			
 			List<String> errors = new ArrayList<String>();
+			
 			switch (userDTO.getGender()) {
 			case "MALE":
 				userDTO.setGender(GenderConstant.MALE.getKey());
@@ -150,7 +157,7 @@ public class AdminUserController {
 							.append(" ")
 							.append(userDTO.getLastname())
 							.toString())
-					.email(new StringBuilder(username)
+					.email(new StringBuilder(username.toLowerCase())
 							.append("@fmovie.com").toString())
 					.password(passwordEncoder.encode(
 							new StringBuilder(userDTO.getFirstname())
@@ -175,8 +182,14 @@ public class AdminUserController {
 				}
 			});
 			
+			Set<CinemaEntity> cinemas = new HashSet<CinemaEntity>();
+			CinemaEntity cinemaEntity = cinemaService.findByOwner(principal);
+			cinemas.add(cinemaEntity);
+			
 			UserEntity newUser = converter.convertTo(userBuilder);
 			newUser.setRoles(roles);
+			newUser.setCinemas(cinemas);
+			
 			userService.save(newUser);
 			
 			logger.info(new StringBuilder("INSERTED: New user ")

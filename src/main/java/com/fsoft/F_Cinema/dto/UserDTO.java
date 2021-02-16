@@ -15,6 +15,11 @@ import lombok.Setter;
 @Setter
 public class UserDTO extends AbstractDTO {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3058557665740988106L;
+	
 	private String username;
 
 	private String password;
@@ -38,6 +43,8 @@ public class UserDTO extends AbstractDTO {
 	private String email;
 
 	private Set<String> roles;
+	
+	private Set<String> cinemas;
 
 	public void setFullname() {
 		this.fullname = new StringBuilder(this.firstname)
@@ -48,7 +55,7 @@ public class UserDTO extends AbstractDTO {
 	@Builder
 	public UserDTO(String createdBy, String modifiedBy, Date createdDate, Date modifiedDate, String username,
 			String password, String firstname, String lastname, String fullname, String phone, String gender,
-			String address, String dob, String avatar, String email, Set<String> roles) {
+			String address, String dob, String avatar, String email, Set<String> roles, Set<String> cinemas) {
 		super(createdBy, modifiedBy, createdDate, modifiedDate);
 		this.username = username;
 		this.password = password;
@@ -62,6 +69,6 @@ public class UserDTO extends AbstractDTO {
 		this.avatar = avatar;
 		this.email = email;
 		this.roles = roles;
+		this.cinemas = cinemas;
 	}
-
 }

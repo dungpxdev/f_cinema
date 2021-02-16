@@ -7,18 +7,17 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
-public class CinemaDTO extends AbstractDTO {
+@AllArgsConstructor
+public class MovieCategoryDTO extends AbstractDTO {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 6255197106749172119L;
+	private static final long serialVersionUID = -4191227421427664428L;
 
 	private String name;
 	private String code;
-	private String address;
-	private Integer numberOfRoom;
+	private MovieDTO movie;
 
 }

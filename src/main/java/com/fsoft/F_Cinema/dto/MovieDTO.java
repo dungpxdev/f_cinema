@@ -1,12 +1,9 @@
 package com.fsoft.F_Cinema.dto;
 
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.fsoft.F_Cinema.entities.BaseEntity;
-import com.fsoft.F_Cinema.entities.MovieCategoryEntity;
-import com.fsoft.F_Cinema.entities.ScheduleEntity;
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,7 +14,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class MovieDTO extends BaseEntity {
+public class MovieDTO extends AbstractDTO {
 
 	/**
 	 * 
@@ -26,8 +23,8 @@ public class MovieDTO extends BaseEntity {
 
 	private String name;
 	private String code;
-	private Date startTime;
-	private Date endTime;
+	private String startTime;
+	private String endTime;
 	private String cast;
 	private String director;
 	private String language;
@@ -38,9 +35,10 @@ public class MovieDTO extends BaseEntity {
 	private Integer year;
 	private Long numberOfTickets;
 	private Integer status;
+	private MultipartFile poster;
 	private String image;
 	private String trailer;
-	private MovieCategoryEntity movieCat;
-	private Set<ScheduleEntity> schedules = new HashSet<ScheduleEntity>();
+	private MovieCategoryDTO movieCat;
+	private Set<ScheduleDTO> schedules = new HashSet<ScheduleDTO>();
 
 }

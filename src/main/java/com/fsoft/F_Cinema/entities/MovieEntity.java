@@ -12,14 +12,13 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "movies")
@@ -29,6 +28,31 @@ public class MovieEntity extends BaseEntity {
 	 * 
 	 */
 	private static final long serialVersionUID = -2303284766282907280L;
+	
+	@Builder
+	public MovieEntity(String name, String code, Date startTime, Date endTime, String cast, String director,
+			String language, Integer length, Integer rating, String description, String country, Integer year,
+			Long numberOfTickets, Integer status, String image, String trailer, MovieCategoryEntity movieCat,
+			Set<ScheduleEntity> schedules) {
+		this.name = name;
+		this.code = code;
+		this.startTime = startTime;
+		this.endTime = endTime;
+		this.cast = cast;
+		this.director = director;
+		this.language = language;
+		this.length = length;
+		this.rating = rating;
+		this.description = description;
+		this.country = country;
+		this.year = year;
+		this.numberOfTickets = numberOfTickets;
+		this.status = status;
+		this.image = image;
+		this.trailer = trailer;
+		this.movieCat = movieCat;
+		this.schedules = schedules;
+	}
 
 	@Column(name = "name")
 	private String name;
