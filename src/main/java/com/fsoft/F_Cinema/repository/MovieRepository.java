@@ -1,11 +1,11 @@
 package com.fsoft.F_Cinema.repository;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.fsoft.F_Cinema.entities.MovieEntity;
 
 @Repository
-public interface MovieRepository extends CrudRepository<MovieEntity, Long> {
+public interface MovieRepository extends JpaRepository<MovieEntity, Long>, MovieRepositoryCustom {
 
 }

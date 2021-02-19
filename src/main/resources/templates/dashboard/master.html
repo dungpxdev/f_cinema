@@ -66,7 +66,13 @@
 				      </li>
 				      <li><a><i class="fa fa-edit"></i> Management <span class="fa fa-chevron-down"></span></a>
 				        <ul class="nav child_menu">
-				          <li><a href="/admin/movie">Movie Management</a></li>
+				         <li><a>Movie Management<span class="fa fa-chevron-down"></span></a>
+                          <ul class="nav child_menu">
+                            <li class="sub_menu"><a href="/admin/movie">All</a></li>
+                            <li><a href="/admin/movie/add">Add movie</a></li>
+                            <li><a href="/admin/movie/modify">List movies</a></li>
+                          </ul>
+                        </li>
 				          <li><a href="/admin/ticket">Ticket Management</a></li>
 				          <li><a href="/admin/room">Room Management</a></li>
 				          <li><a href="/admin/schedule">Schedule Management</a></li>

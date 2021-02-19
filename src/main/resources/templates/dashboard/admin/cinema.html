@@ -3,7 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{/dashboard/master.html}">
 <head>
-   	<title>F-Movie | Rooms Management</title>
+   	<title>F-Movie | Cinema Management</title>
 </head>
 <body>
 <div layout:fragment="content">
@@ -11,7 +11,7 @@
              <div class="col-md-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Projects</h2>
+                    <h2>All Cinemas</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -47,7 +47,7 @@
                       </thead>
                       <tbody>
                         <tr th:each="cinema: ${cinemas}">
-                          <td th:text="${cinema.id}">#</td>
+                          <td th:text="${cinema.code}">#</td>
                           <td>
                             <a th:text="${cinema.name}"></a>
                             <br />
