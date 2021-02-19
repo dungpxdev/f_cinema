@@ -1,15 +1,15 @@
 package com.fsoft.F_Cinema.repository;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.fsoft.F_Cinema.entities.RoleEntity;
 
 @Repository
-public interface RoleRepository extends CrudRepository<RoleEntity, Long> {
+public interface RoleRepository extends JpaRepository<RoleEntity, Long> {
 	RoleEntity findByCode(Integer code);
 
 	@Modifying

@@ -12,6 +12,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -60,9 +62,11 @@ public class MovieEntity extends BaseEntity {
 	@Column(name = "code", unique = true)
 	private String code;
 
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "start_time")
 	private Date startTime;
 
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "end_time")
 	private Date endTime;
 
@@ -81,7 +85,7 @@ public class MovieEntity extends BaseEntity {
 	@Column(name = "rating")
 	private Integer rating;
 
-	@Column(name = "description")
+	@Column(name = "description", columnDefinition = "text")
 	private String description;
 
 	@Column(name = "country")
