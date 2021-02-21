@@ -13,4 +13,6 @@ public interface CinemaRepository extends JpaRepository<CinemaEntity, Long> {
 	@Query(value = "select top 1 * from cinema c left join user_cinema uc on c.id = uc.cinema_id where uc.user_id = :userId",
 		   nativeQuery = true)
 	CinemaEntity findByUserId(@Param("userId") Long id);
+	
+	CinemaEntity findByCode(String code);
 }

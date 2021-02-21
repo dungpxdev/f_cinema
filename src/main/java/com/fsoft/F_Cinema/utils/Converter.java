@@ -6,11 +6,17 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 import com.fsoft.F_Cinema.constants.StatusConstant;
+import com.fsoft.F_Cinema.dto.CinemaDTO;
 import com.fsoft.F_Cinema.dto.MovieDTO;
 import com.fsoft.F_Cinema.dto.RoleDTO;
+import com.fsoft.F_Cinema.dto.RoomDTO;
+import com.fsoft.F_Cinema.dto.SeatDTO;
 import com.fsoft.F_Cinema.dto.UserDTO;
+import com.fsoft.F_Cinema.entities.CinemaEntity;
 import com.fsoft.F_Cinema.entities.MovieEntity;
 import com.fsoft.F_Cinema.entities.RoleEntity;
+import com.fsoft.F_Cinema.entities.RoomEntity;
+import com.fsoft.F_Cinema.entities.SeatEntity;
 import com.fsoft.F_Cinema.entities.UserEntity;
 
 @Component
@@ -56,6 +62,22 @@ public class Converter {
 				.build();
 
 		return movieBuilder;
+	}
+	
+	public RoomEntity convertTo(RoomDTO roomDTO) {
+		return new ModelMapper().map(roomDTO, RoomEntity.class);
+	}
+	
+	public CinemaEntity convertTo(CinemaDTO cinemaDTO) {
+		return new ModelMapper().map(cinemaDTO, CinemaEntity.class);
+	}
+	
+	public SeatDTO convertTo(SeatEntity seatEntity) {
+		return new ModelMapper().map(seatEntity, SeatDTO.class);
+	}
+	
+	public RoomDTO convertTo(RoomEntity roomEntity) {
+		return new ModelMapper().map(roomEntity, RoomDTO.class);
 	}
 
 }

@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.fsoft.F_Cinema.dto.CinemaDTO;
 import com.fsoft.F_Cinema.entities.CinemaEntity;
 
 @Service
@@ -15,7 +14,7 @@ public interface CinemaService {
 	 * @param cinemaDTO
 	 * @return CinemaEntity
 	 */
-	CinemaEntity save(CinemaDTO cinemaDTO);
+	CinemaEntity save(CinemaEntity cinemaEntity);
 	
 	/**
 	 * 
@@ -31,4 +30,5 @@ public interface CinemaService {
 	 */
 	CinemaEntity findByOwner(Principal principal);
 	
+	CinemaEntity findByCode(String code);
 }
