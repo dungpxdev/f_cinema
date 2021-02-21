@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.fsoft.F_Cinema.dto.CinemaDTO;
 import com.fsoft.F_Cinema.entities.CinemaEntity;
 import com.fsoft.F_Cinema.services.CinemaService;
+import com.fsoft.F_Cinema.utils.Converter;
 
 @RequestMapping("/admin/cinema")
 @Controller
@@ -27,17 +28,22 @@ public class AdminCinemaController {
 
 	@Autowired
 	private CinemaService cinemaService;
+	
+	@Autowired
+	private Converter converter;
 
-	@PostMapping(path = { "/", "" })
-	public String postMovie(Principal principal ,@Valid CinemaDTO cinemaDTO) {
+	@PostMapping(path = { "/add" })
+	public String postCinema(Principal principal, @Valid CinemaDTO cinemaDTO) {
 		try {
 			cinemaDTO.setCreatedBy(principal.getName());
 			cinemaDTO.setCreatedDate(new Date());
-			cinemaService.save(cinemaDTO);
+			CinemaEntity cinemaEntity = converter.convertTo(cinemaDTO);
+			cinemaService.save(cinemaEntity);
 
 			logger.info(new StringBuilder("INSERTED: ")
 					.append(cinemaDTO.getCode())
-					.append(" successful").toString());
+					.append(" successful")
+					.toString());
 		} catch (Exception e) {
 			logger.info(new StringBuilder("INSERTED: ")
 					.append(cinemaDTO.getCode())
@@ -52,6 +58,11 @@ public class AdminCinemaController {
 		List<CinemaEntity> cinemas = cinemaService.findAll();
 		model.addAttribute("cinemas", cinemas);
 		return "dashboard/admin/cinema";
+	}
+	
+	@GetMapping(path = { "/add" })
+	public String getAddCinemas(Model model) {
+		return "dashboard/admin/addCinema";
 	}
 
 }

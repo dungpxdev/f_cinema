@@ -9,16 +9,14 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class SeatDTO extends AbstractDTO {
+public class SeatParamsDTO extends AbstractDTO {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -4580596515816698457L;
+	private static final long serialVersionUID = 6185817957589650910L;
 
-	private String name;
-	private String code;
-	private Integer status;
-	private RoomDTO room;
+	private String cinemaCode;
+	private String roomCode;
 
 }
