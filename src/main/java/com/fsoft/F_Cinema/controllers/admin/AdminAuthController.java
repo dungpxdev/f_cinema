@@ -71,5 +71,5 @@ public class AdminAuthController {
 			return "redirect:/auth/login";
 		}
 	}
-
+	
 }

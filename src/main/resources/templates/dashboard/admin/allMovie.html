@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/dashboard/master.html}">
+<head>
+   	<title>F-Movie | Movie Management</title>
+   	<!-- main movie custom css -->
+	<link th:href="@{/vendors/main/main.css}" rel="stylesheet">
+</head>
+<body>
+<div layout:fragment="content">
+          <div class="row">
+             <div class="col-md-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>All Movies</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                          <li><a href="#">Settings 1</a>
+                          </li>
+                          <li><a href="#">Settings 2</a>
+                          </li>
+                        </ul>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <!-- start list movies-->
+                    <div th:each="movie: ${movies}">
+						<div class="movie_card">
+						  <div class="info_section">
+						    <div class="movie_header">
+						      <img class="locandina" th:src="${movie.image}"/>
+						      <h1 th:text="${movie.name}"></h1>
+						      <h4 th:text="${movie.director}"></h4>
+						      <span class="minutes" th:text="${movie.length} + ' min'"></span>
+						      <p class="type">Action, Crime, Fantasy</p>
+						    </div>
+						    <div class="movie_desc">
+						      <p class="text" th:text="${movie.description}"></p>
+						    </div>
+						    <div class="movie_social">
+						      <ul>
+						        <li><i class="fa fa-share-alt"></i></li>
+						        <li><i class="fa fa-heart"></i></li>
+						        <li><i class="fa fa-comment"></i></li>
+						      </ul>
+						    </div>
+						  </div>
+						  <div class="blur_back bright_back"></div>
+						</div>
+					</div>
+					 <!-- start list movies-->
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>
+</body>
+</html>

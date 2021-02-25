@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/dashboard/master.html}">
+<head>
+   	<title>F-Movie | Seats Management</title>
+   	<!-- Switchery -->
+    <link th:href="@{/vendors/switchery/dist/switchery.min.css}" rel="stylesheet">
+    <link th:href="@{/vendors/main/main.css}" rel="stylesheet">
+</head>
+<body>
+<div layout:fragment="content">
+          <div class="row">
+				 <div class="col-md-12 col-sm-12 col-xs-12">
+                  <div class="x_panel">
+                    <div class="x_content">
+			        	<div class="movie-container">
+			        	  <label for="cinema">Pick a Cinema:</label>
+			              <select id="cinema">
+			                  <option th:each="cinema: ${cinemas}" th:value="${cinema.code}" th:text="${cinema.name}"></option>
+			              </select>
+			              <label for="room">Pick a Room:</label>
+			              <select id="room">
+			              	 <option th:each="room: ${rooms}" th:value="${room.code}" th:text="${room.name}"></option>
+			              </select>
+			              <button type="submit" id="addRow" class="btn btn-success">Add row</button>
+			              <button type="submit" id="addCol" class="btn btn-success">Add column</button>
+			            </div>
+						<p>Note* Room structure allow <code>12</code> seats in a row and multiple columns</p>
+			            <ul class="showcase">
+			              <li>
+			                  <div class="seat"></div>
+			                  <small>AVAILABLE</small>
+			              </li>
+			              <li>
+			                  <div class="seat selected"></div>
+			                  <small>SELECTED</small>
+			              </li>
+			              <li>
+			                  <div class="seat occupied"></div>
+			                  <small>OCCUPIED</small>
+			              </li>
+			          </ul>
+			          <div class="room">
+			              <div class="screen">
+			                <h1>SCREEN</h1>
+			              </div>
+			          </div>
+			          <div class="modal fade" id="seatModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			            <div class="modal-dialog" role="document">
+			              <div class="modal-content">
+			                <div class="modal-header">
+			                  <h5 class="modal-title">Seat details</h5>
+							  <ul class="list-unstyled timeline">
+								<li>
+								  <div class="block">
+									<div class="tags">
+									  <a href="" class="tag">
+										<span id="cinemaModalCode"></span>
+									  </a>
+									</div>
+									<div class="block_content">
+									  <h2 class="title">
+													  <a id="cinemaModalName"></a>
+												  </h2>
+									  <div class="byline">
+										<span></span><a></a>
+									  </div>
+									</div>
+								  </div>
+								</li>
+							  </ul>
+			                </div>
+			                <div class="modal-body">
+			                  <label>
+			                    <input id="seatStatusModal" type="checkbox" class="js-switch"/> Disable
+			                  </label>
+			                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Room code <span class="required">*</span>
+			                  </label>
+			                  <div class="col-md-6 col-sm-6 col-xs-12">
+			                    <input type="text" id="name" required="required" class="form-control col-md-7 col-xs-12">
+			                  </div>
+			                </div>
+			                <div class="modal-footer">
+			                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			                  <button type="button" id="modal" class="btn btn-primary">Save changes</button>
+			                </div>
+			              </div>
+			            </div>
+			          </div>
+                    </div>
+                  </div>
+                </div>
+          </div>
+          <!-- Switchery -->
+          <script th:src="@{/vendors/switchery/dist/switchery.min.js}"></script>
+          <!-- Custom Js -->
+          <script type="text/javascript" th:src="@{/vendors/main/js/main.js}"></script>
+        </div>
+</body>
+</html>

@@ -1,5 +1,6 @@
 package com.fsoft.F_Cinema.dto;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import lombok.AllArgsConstructor;
@@ -11,7 +12,12 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public abstract class AbstractDTO {
+public abstract class AbstractDTO implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4485956048331103970L;
 
 	private String createdBy;
 	private String modifiedBy;

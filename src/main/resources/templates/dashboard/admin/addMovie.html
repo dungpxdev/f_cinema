@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/dashboard/master.html}">
+<head>
+   	<title>F-Movie | Movies Management</title>
+</head>
+<body>
+<div layout:fragment="content">
+          <div class="row">
+				 <div class="col-md-12 col-sm-12 col-xs-12">
+                  <div class="x_panel">
+                    <div class="x_content">
+                    <form action="/admin/movie/add" th:action="@{/admin/movie/add}" method="POST" enctype="multipart/form-data" th:object="${file}" class="form-horizontal form-label-left">
+                        <span class="section">Add Movie</span>
+                        <div class="item form-group">
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Movie <span class="required">*</span>
+                          </label>
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input id="name" th:field="*{name}" name="name" required="required" class="form-control col-md-7 col-xs-12">
+                          </div>
+                        </div>
+                        <div class="item form-group">
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="code">Movie Code <span class="required">*</span>
+                          </label>
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input id="code" name="code" th:field="*{code}" required="required" class="form-control col-md-7 col-xs-12">
+                          </div>
+                        </div>
+                          <div class="item form-group">
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="startTime">Start Date <span class="required">*</span>
+                          </label>
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input id="startDate" th:field="*{startTime}" name="startTime" required="required" type="date" class="form-control col-md-7 col-xs-12">
+                          </div>
+                        </div>
+						 <div class="item form-group">
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="endTime">End Date <span class="required">*</span>
+                          </label>
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input id="endDate" name="endTime" th:field="*{endTime}" required="required" type="date" class="form-control col-md-7 col-xs-12">
+                          </div>
+                        </div>
+                        <div class="item form-group">
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cast">Cast <span class="required">*</span>
+                          </label>
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input id="cast" name="cast" th:field="*{cast}" required="required" class="form-control col-md-7 col-xs-12">
+                          </div>
+                        </div>
+                        <div class="item form-group">
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="director">Director <span class="required">*</span>
+                          </label>
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input id="director" name="director" th:field="*{director}" required="required" class="form-control col-md-7 col-xs-12">
+                          </div>
+                        </div>
+                        <div class="item form-group">
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="length">Length <span class="required">*</span>
+                          </label>
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input id="length" name="length" th:field="*{length}" required="required" class="form-control col-md-7 col-xs-12">
+                          </div>
+                        </div>
+                        <div class="item form-group">
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="language">Language <span class="required">*</span>
+                          </label>
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input id="language" name="language" th:field="*{language}" required="required" class="form-control col-md-7 col-xs-12">
+                          </div>
+                        </div>
+                        <div class="item form-group">
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="description">Description <span class="required">*</span>
+                          </label>
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                            <textarea id="description" class="form-control" th:field="*{description}" name="description" rows="3" placeholder="Short description of the movie"></textarea>                          </div>
+                        </div>
+                        <div class="item form-group">
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="country">Country <span class="required">*</span>
+                          </label>
+                          <div class="col-md-6 col-sm-9 col-xs-12">
+                            <select th:field="*{country}" id="country" name="country" class="form-control">
+                              <option value="VN">VietNam </option>
+                              <option value="US">America </option>
+                              <option value="CN">China </option>
+                            </select>
+                          </div>
+                        </div>       
+                        <div class="item form-group">
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="fileInput">Poster <span class="required">*</span>
+                          </label>
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input type="file" th:field="*{poster}" class="form-control" name="poster" id="fileInput">
+                            <div class="container js-file-list">
+                            </div>
+                          </div>
+                        </div>
+                         <div class="item form-group">
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12">Movie genre</label>
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input id="tags_1" type="text" name="genre" class="tags form-control" value="social, adverts, sales" />
+                            <div id="suggestions-container" style="position: relative; float: left; width: 250px; margin: 10px;"></div>
+                          </div>
+                        </div> 
+                        <div class="ln_solid"></div>
+                        <div class="form-group">
+                          <div class="col-md-6 col-md-offset-3">
+                            <button type="button" class="btn btn-primary">Cancel</button>
+                            <button type="submit" class="btn btn-success">Create</button>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+          </div>
+        </div>
+</body>
+</html>

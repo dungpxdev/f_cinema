@@ -11,6 +11,11 @@ import lombok.Setter;
 @NoArgsConstructor
 public class RoleDTO extends AbstractDTO {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -467530505770168231L;
+	
 	private String name;
 	private Integer code;
 

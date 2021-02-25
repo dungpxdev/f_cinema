@@ -27,7 +27,7 @@ public class SeatEntity extends BaseEntity {
 	@Column(name = "name")
 	private String name;
 
-	@Column(name = "code", unique = true)
+	@Column(name = "code")
 	private String code;
 
 	@Column(name = "status")

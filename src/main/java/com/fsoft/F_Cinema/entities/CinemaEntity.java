@@ -5,6 +5,7 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -44,5 +45,8 @@ public class CinemaEntity extends BaseEntity {
 
 	@OneToMany(mappedBy = "cinema")
 	private Set<RoomEntity> rooms = new HashSet<RoomEntity>();
+	
+	@ManyToMany(mappedBy = "cinemas")
+	private Set<UserEntity> users = new HashSet<UserEntity>();
 
 }
