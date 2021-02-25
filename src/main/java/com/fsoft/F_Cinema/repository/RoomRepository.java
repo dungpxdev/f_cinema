@@ -15,5 +15,12 @@ public interface RoomRepository extends JpaRepository<RoomEntity, Long> {
 	@Query(value = "select * from rooms where cinema_id = :cinemaId", 
 		   nativeQuery = true)
 	List<RoomEntity> findbyCinemaid(@Param("cinemaId") Long cinemaId);
-
+	
+	@Query(value = "select * from rooms where cinema_id = :cinemaId and code = :code",
+		   nativeQuery = true)
+	RoomEntity findByCodeAndCinemaId(
+			@Param("code") String code,
+			@Param("cinemaId") Long cinemaId);
+	
+	RoomEntity findByCode(String code);
 }

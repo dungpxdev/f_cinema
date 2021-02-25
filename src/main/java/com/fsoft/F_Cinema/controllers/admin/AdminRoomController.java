@@ -1,6 +1,7 @@
 package com.fsoft.F_Cinema.controllers.admin;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -43,7 +44,7 @@ public class AdminRoomController {
 	}
 	
 	@PostMapping(path = { "/", "" })
-	public String postRoom(RoomDTO roomDTO, Principal principal) {
+	public String postRoom(RoomDTO roomDTO, Model model, Principal principal) {
 		try {
 			roomDTO.setCreatedBy(principal.getName());
 			roomDTO.setCreatedDate(new Date());
@@ -51,6 +52,24 @@ public class AdminRoomController {
 			roomDTO.setCode(roomDTO.getCode().toUpperCase());
 			RoomEntity roomEntity = converter.convertTo(roomDTO);
 			CinemaEntity cinemaEntity = cinemaService.findByCode(roomDTO.getCinema());
+			RoomEntity isExistRoom = roomService.findByCodeAndCinemaId(roomEntity.getCode(), cinemaEntity.getId());
+			List<String> errors = new ArrayList<String>();
+			if (isExistRoom != null) {
+				errors.add(
+						new StringBuilder("The Room with code ")
+						.append(roomEntity.getCode())
+						.append(" in cinema ID ")
+						.append(cinemaEntity.getCode())
+						.append(" already exist. Please check!")
+						.toString());
+			}
+			
+			if (!errors.isEmpty()) {
+				model.addAttribute("errors", errors);
+				model.addAttribute("room", roomDTO);
+				return "redirect:/admin/room";
+			}
+			
 			roomEntity.setCinema(cinemaEntity);
 			roomService.save(roomEntity);
 		} catch (Exception e) {
@@ -58,7 +77,8 @@ public class AdminRoomController {
 					.append(e.getMessage())
 					.toString());
 		}
-		return "redirect:/seat";
+		
+		return "redirect:/admin/seat";
 	}
 
 }

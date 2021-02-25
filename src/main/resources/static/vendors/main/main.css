@@ -167,6 +167,9 @@
     width: 30px;
     margin: 5px;
     border-radius: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
   }
   
   .seat.selected {

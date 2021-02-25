@@ -13,4 +13,10 @@ public interface RoomService {
 	List<RoomEntity> findAll();
 	
 	List<RoomEntity> findbyCinemaId(Long cinemaId);
+	
+	RoomEntity findByCodeAndCinemaId(String code, Long cinemaId);
+	
+	RoomEntity findById(Long id);
+	
+	RoomEntity findByCode(String code);
 }

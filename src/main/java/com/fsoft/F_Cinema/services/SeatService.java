@@ -10,5 +10,10 @@ import com.fsoft.F_Cinema.entities.SeatEntity;
 public interface SeatService {
 
 	List<SeatEntity> findByCinemaCodeAndRoomCode(String cinemaCode, String roomCode);
+	
+	SeatEntity save(SeatEntity seatEntity);
+
+	SeatEntity findByCodeAndRoomCodeAndCinemaId(String code, 
+			String roomCode, String cinemaCode) throws Exception;
 
 }

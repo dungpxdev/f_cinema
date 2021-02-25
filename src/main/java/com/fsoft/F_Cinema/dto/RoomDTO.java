@@ -26,4 +26,5 @@ public class RoomDTO extends AbstractDTO {
 	private Set<ScheduleDTO> schedules = new HashSet<ScheduleDTO>();
 	private String cinema;
 	private Set<SeatDTO> seats = new HashSet<SeatDTO>();
+	
 }

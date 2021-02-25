@@ -18,5 +18,8 @@ public class SeatParamsDTO extends AbstractDTO {
 
 	private String cinemaCode;
 	private String roomCode;
+	private String name;
+	private String code;
+	private Integer status;
 
 }

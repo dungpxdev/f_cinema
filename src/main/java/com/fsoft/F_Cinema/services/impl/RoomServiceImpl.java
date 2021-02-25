@@ -30,4 +30,19 @@ public class RoomServiceImpl implements RoomService {
 		return roomRepository.findbyCinemaid(cinemaId);
 	}
 
+	@Override
+	public RoomEntity findByCodeAndCinemaId(String code, Long cinemaId) {
+		return roomRepository.findByCodeAndCinemaId(code, cinemaId);
+	}
+
+	@Override
+	public RoomEntity findById(Long id) {
+		return roomRepository.findById(id).get();
+	}
+
+	@Override
+	public RoomEntity findByCode(String code) {
+		return roomRepository.findByCode(code);
+	}
+
 }

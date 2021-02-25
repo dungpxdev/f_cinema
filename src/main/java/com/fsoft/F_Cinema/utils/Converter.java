@@ -11,6 +11,7 @@ import com.fsoft.F_Cinema.dto.MovieDTO;
 import com.fsoft.F_Cinema.dto.RoleDTO;
 import com.fsoft.F_Cinema.dto.RoomDTO;
 import com.fsoft.F_Cinema.dto.SeatDTO;
+import com.fsoft.F_Cinema.dto.SeatParamsDTO;
 import com.fsoft.F_Cinema.dto.UserDTO;
 import com.fsoft.F_Cinema.entities.CinemaEntity;
 import com.fsoft.F_Cinema.entities.MovieEntity;
@@ -72,6 +73,22 @@ public class Converter {
 		return new ModelMapper().map(cinemaDTO, CinemaEntity.class);
 	}
 	
+	public SeatEntity convertTo(SeatDTO seatDTO) {
+		return new ModelMapper().map(seatDTO, SeatEntity.class);
+	}
+	
+	public SeatEntity convertTo(SeatParamsDTO seatParamsDTO) {
+		SeatDTO seatDTO = new SeatDTO();
+		seatDTO.setCode(seatParamsDTO.getCode());
+		seatDTO.setName(seatParamsDTO.getName());
+		seatDTO.setStatus(seatParamsDTO.getStatus());
+		seatDTO.setCreatedDate(seatParamsDTO.getCreatedDate());
+		seatDTO.setCreatedBy(seatParamsDTO.getCreatedBy());
+		seatDTO.setModifiedDate(seatParamsDTO.getModifiedDate());
+		seatDTO.setModifiedBy(seatParamsDTO.getModifiedBy());
+		return new ModelMapper().map(seatDTO, SeatEntity.class);
+	}
+
 	public SeatDTO convertTo(SeatEntity seatEntity) {
 		return new ModelMapper().map(seatEntity, SeatDTO.class);
 	}

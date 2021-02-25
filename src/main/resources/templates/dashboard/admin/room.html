@@ -56,9 +56,9 @@
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Cinema<span class="required">*</span></label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <select class="form-control" name="cinema" th:each="cinema: ${cinemas}">
-                            <option>Choose option</option>
-                            <option th:value="${cinema.code}" th:text="${cinema.name}"></option>
+                          <select class="form-control" name="cinema">
+                            <option>Pick a cinema</option>
+                            <option  th:each="cinema: ${cinemas}" th:value="${cinema.code}" th:text="${cinema.name}"></option>
                           </select>
                         </div>
                       </div>

@@ -9,5 +9,5 @@ public class FCinemaApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(FCinemaApplication.class, args);
 	}
-
 }
+
