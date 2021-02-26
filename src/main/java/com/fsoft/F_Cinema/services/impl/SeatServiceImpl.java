@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.fsoft.F_Cinema.dto.SeatDTO;
 import com.fsoft.F_Cinema.entities.CinemaEntity;
 import com.fsoft.F_Cinema.entities.RoomEntity;
 import com.fsoft.F_Cinema.entities.SeatEntity;
@@ -17,6 +18,7 @@ import com.fsoft.F_Cinema.repository.SeatRepository;
 import com.fsoft.F_Cinema.services.CinemaService;
 import com.fsoft.F_Cinema.services.RoomService;
 import com.fsoft.F_Cinema.services.SeatService;
+import com.fsoft.F_Cinema.utils.StringUltis;
 
 @Service
 public class SeatServiceImpl implements SeatService {
@@ -31,6 +33,9 @@ public class SeatServiceImpl implements SeatService {
 	
 	@Autowired
 	private CinemaService cinemaService;
+	
+	@Autowired
+	private StringUltis stringUltils;
 
 	@Override
 	public List<SeatEntity> findByCinemaCodeAndRoomCode(String cinemaCode,
@@ -84,6 +89,68 @@ public class SeatServiceImpl implements SeatService {
 				code,
 				roomEntity.getId(),
 				cinemaEntity.getId());
+	}
+
+	/**
+	 * get next <String> character
+	 * ex: A -> B
+	 * 
+	 * @return <String> next character of seat base on cinema code and room code
+	 */
+	@Override
+	public String getNextSeatRow(String cinemaCode, String roomCode) throws Exception {
+		List<SeatEntity> seats = this.findByCinemaCodeAndRoomCode(cinemaCode, roomCode);
+		char lastSeatCode = seats.get(seats.size() - 1).getCode().toCharArray()[0];
+		int asciivalue = lastSeatCode;
+		if (asciivalue > 122 || asciivalue < 65) {
+			if (asciivalue < 97 && asciivalue > 90) {
+				throw new Exception("Invalid seat code");
+			}
+		}
+
+		++asciivalue;
+
+		return String.valueOf((char) asciivalue).toUpperCase();
+	}
+
+	@Override
+	public List<SeatEntity> saveMany(List<SeatEntity> seats) {
+		List<SeatEntity> saved = new ArrayList<SeatEntity>(seats.size());
+		if (!seats.isEmpty())
+			seats.forEach(seat -> {
+				SeatEntity entity = this.save(seat);
+				saved.add(entity);
+			});
+
+		return saved;
+	}
+
+	/**
+	 * @param sorted list
+	 */
+	@Override
+	public List<List<SeatDTO>> convertSeatToRender(List<SeatDTO> seatDTOs) {
+		try {
+			String startCharacterRow = "A";
+			List<List<SeatDTO>> tableOfSeats = new ArrayList<List<SeatDTO>>();
+			List<SeatDTO> columns = new ArrayList<SeatDTO>();
+			for (SeatDTO seat : seatDTOs) {
+				if (!seat.getCode().startsWith(startCharacterRow)) {
+					tableOfSeats.add(columns);
+					startCharacterRow = stringUltils.getNextCharacter(startCharacterRow);
+					columns = new ArrayList<SeatDTO>();
+				}
+				
+				columns.add(seat);
+			}
+			
+			return tableOfSeats;
+		} catch (Exception e) {
+			logger.error(new StringBuilder("Hanle Seat to render failed cause: ")
+					.append(e.getMessage()).toString());
+			return null;
+		}
+
 	}
 
 }

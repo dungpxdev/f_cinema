@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.fsoft.F_Cinema.dto.SeatDTO;
 import com.fsoft.F_Cinema.entities.SeatEntity;
 
 @Service
@@ -15,5 +16,11 @@ public interface SeatService {
 
 	SeatEntity findByCodeAndRoomCodeAndCinemaId(String code, 
 			String roomCode, String cinemaCode) throws Exception;
+	
+	String getNextSeatRow(String cinemaCode, String roomCode) throws Exception;
+
+	List<SeatEntity> saveMany(List<SeatEntity> seats);
+	
+	List<List<SeatDTO>> convertSeatToRender(List<SeatDTO> seatDTOs);
 
 }

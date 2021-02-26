@@ -115,8 +115,7 @@ cinemaSelect.addEventListener('change', async () => {
     });
 });
 
-roomSelect.addEventListener('change', async () => {    
-    console.log(cinemaSelect.text);
+roomSelect.addEventListener('change', async () => {
     const url = document.location.origin + '/api/v1/admin/seat';
     let cinemaParams = {
         cinemaCode: cinemaSelect.value,
@@ -129,24 +128,33 @@ roomSelect.addEventListener('change', async () => {
             let rowIndex = 0;
             let result = '';
 
-        for (let i = 0; i < data.length / 12; i+=12) {
-            result += `<div id="${alphabet[rowIndex++].toUpperCase()}" class="seat-row">
-            <div id="${data[i] ? data[i].code : ''}" value="${data[i] ? data[i].code : ''}" class="seat ${data[i] ? data[i].status === 1 ? 'selected': '' : ''}">${data[i] ? data[i].name : ''}</div>
-            <div id="${data[i + 1] ? data[i + 1].code : ''}" value="${data[i + 1] ? data[i + 1].code : ''}" class="seat ${data[i + 1] ? data[i + 1].status === 1 ? 'selected': '' : ''}">${data[i + 1] ? data[i + 1].name : ''}</div>
-            <div id="${data[i + 2] ? data[i + 2].code : ''}" value="${data[i + 2] ? data[i + 2].code : ''}" class="seat ${data[i + 2] ? data[i + 2].status === 1 ? 'selected': '' : ''}">${data[i + 2] ? data[i + 2].name : ''}</div>
-            <div id="${data[i + 3] ? data[i + 3].code : ''}" value="${data[i + 3] ? data[i + 3].code : ''}" class="seat ${data[i + 3] ? data[i + 3].status === 1 ? 'selected': '' : ''}">${data[i + 3] ? data[i + 3].name : ''}</div>
-            <div id="${data[i + 4] ? data[i + 4].code : ''}" value="${data[i + 4] ? data[i + 4].code : ''}" class="seat ${data[i + 4] ? data[i + 4].status === 1 ? 'selected': '' : ''}">${data[i + 4] ? data[i + 4].name : ''}</div>
-            <div id="${data[i + 5] ? data[i + 5].code : ''}" value="${data[i + 5] ? data[i + 5].code : ''}" class="seat ${data[i + 5] ? data[i + 5].status === 1 ? 'selected': '' : ''}">${data[i + 5] ? data[i + 5].name : ''}</div>
-            <div id="${data[i + 6] ? data[i + 6].code : ''}" value="${data[i + 6] ? data[i + 6].code : ''}" class="seat ${data[i + 6] ? data[i + 6].status === 1 ? 'selected': '' : ''}">${data[i + 6] ? data[i + 6].name : ''}</div>
-            <div id="${data[i + 7] ? data[i + 7].code : ''}" value="${data[i + 7] ? data[i + 7].code : ''}" class="seat ${data[i + 7] ? data[i + 7].status === 1 ? 'selected': '' : ''}">${data[i + 7] ? data[i + 7].name : ''}</div>
-            <div id="${data[i + 8] ? data[i + 8].code : ''}" value="${data[i + 8] ? data[i + 8].code : ''}" class="seat ${data[i + 8] ? data[i + 8].status === 1 ? 'selected': '' : ''}">${data[i + 8] ? data[i + 8].name : ''}</div>
-            <div id="${data[i + 9] ? data[i + 9].code : ''}" value="${data[i + 9] ? data[i + 9].code : ''}" class="seat ${data[i + 9] ? data[i + 9].status === 1 ? 'selected': '' : ''}">${data[i + 9] ? data[i + 9].name : ''}</div>
-            <div id="${data[i + 10] ? data[i + 10].code : ''}" value="${data[i + 10] ? data[i + 10].code : ''}" class="seat ${data[i + 10] ? data[i + 10].status === 1 ? 'selected': '' : ''}">${data[i + 10] ? data[i + 10].name : ''}</div>
-            <div id="${data[i + 11] ? data[i + 11].code : ''}" value="${data[i + 11] ? data[i + 11].code : ''}" class="seat ${data[i + 11] ? data[i + 11].status === 1 ? 'selected': '' : ''}">${data[i + 11] ? data[i + 11].name : ''}</div>
-        </div>`;
-        }
-        container.innerHTML += result;
+            console.log(data);
+            for (let row = 0; row < data.length / 12; row += 12) {
+                for (let col = 0; col < 12; col++) {
+                    const seat = data[row][i];
+                    console.log(seat);
+                }
+            }
 
+
+        // for (let i = 0; i < data.length / 12; i+=12) {
+        //     result += `<div id="${alphabet[rowIndex++].toUpperCase()}" class="seat-row">
+        //     <div id="${data[i] ? data[i].code : ''}" value="${data[i] ? data[i].code : ''}" class="seat ${data[i] ? data[i].status === 1 ? 'selected': '' : ''}">${data[i] ? data[i].name : ''}</div>
+        //     <div id="${data[i + 1] ? data[i + 1].code : ''}" value="${data[i + 1] ? data[i + 1].code : ''}" class="seat ${data[i + 1] ? data[i + 1].status === 1 ? 'selected': '' : ''}">${data[i + 1] ? data[i + 1].name : ''}</div>
+        //     <div id="${data[i + 2] ? data[i + 2].code : ''}" value="${data[i + 2] ? data[i + 2].code : ''}" class="seat ${data[i + 2] ? data[i + 2].status === 1 ? 'selected': '' : ''}">${data[i + 2] ? data[i + 2].name : ''}</div>
+        //     <div id="${data[i + 3] ? data[i + 3].code : ''}" value="${data[i + 3] ? data[i + 3].code : ''}" class="seat ${data[i + 3] ? data[i + 3].status === 1 ? 'selected': '' : ''}">${data[i + 3] ? data[i + 3].name : ''}</div>
+        //     <div id="${data[i + 4] ? data[i + 4].code : ''}" value="${data[i + 4] ? data[i + 4].code : ''}" class="seat ${data[i + 4] ? data[i + 4].status === 1 ? 'selected': '' : ''}">${data[i + 4] ? data[i + 4].name : ''}</div>
+        //     <div id="${data[i + 5] ? data[i + 5].code : ''}" value="${data[i + 5] ? data[i + 5].code : ''}" class="seat ${data[i + 5] ? data[i + 5].status === 1 ? 'selected': '' : ''}">${data[i + 5] ? data[i + 5].name : ''}</div>
+        //     <div id="${data[i + 6] ? data[i + 6].code : ''}" value="${data[i + 6] ? data[i + 6].code : ''}" class="seat ${data[i + 6] ? data[i + 6].status === 1 ? 'selected': '' : ''}">${data[i + 6] ? data[i + 6].name : ''}</div>
+        //     <div id="${data[i + 7] ? data[i + 7].code : ''}" value="${data[i + 7] ? data[i + 7].code : ''}" class="seat ${data[i + 7] ? data[i + 7].status === 1 ? 'selected': '' : ''}">${data[i + 7] ? data[i + 7].name : ''}</div>
+        //     <div id="${data[i + 8] ? data[i + 8].code : ''}" value="${data[i + 8] ? data[i + 8].code : ''}" class="seat ${data[i + 8] ? data[i + 8].status === 1 ? 'selected': '' : ''}">${data[i + 8] ? data[i + 8].name : ''}</div>
+        //     <div id="${data[i + 9] ? data[i + 9].code : ''}" value="${data[i + 9] ? data[i + 9].code : ''}" class="seat ${data[i + 9] ? data[i + 9].status === 1 ? 'selected': '' : ''}">${data[i + 9] ? data[i + 9].name : ''}</div>
+        //     <div id="${data[i + 10] ? data[i + 10].code : ''}" value="${data[i + 10] ? data[i + 10].code : ''}" class="seat ${data[i + 10] ? data[i + 10].status === 1 ? 'selected': '' : ''}">${data[i + 10] ? data[i + 10].name : ''}</div>
+        //     <div id="${data[i + 11] ? data[i + 11].code : ''}" value="${data[i + 11] ? data[i + 11].code : ''}" class="seat ${data[i + 11] ? data[i + 11].status === 1 ? 'selected': '' : ''}">${data[i + 11] ? data[i + 11].name : ''}</div>
+        // </div>`;
+        // }
+        container.innerHTML += result;
+        console.log('called');
         document.querySelectorAll('.seat-row .seat:not(.occupied)').forEach(seat => {
             seat.addEventListener('click', (e) => onHandleClickSeat(e), false);
         });

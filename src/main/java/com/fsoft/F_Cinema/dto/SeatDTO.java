@@ -19,5 +19,6 @@ public class SeatDTO extends AbstractDTO {
 	private String name;
 	private String code;
 	private Integer status;
+	private RoomDTO room;
 
 }
