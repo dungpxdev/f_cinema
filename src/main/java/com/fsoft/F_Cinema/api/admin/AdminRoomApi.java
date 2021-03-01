@@ -3,7 +3,6 @@ package com.fsoft.F_Cinema.api.admin;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -48,11 +47,15 @@ public class AdminRoomApi {
 				apiResponse.setStatus(HttpStatus.BAD_REQUEST);
 				return new ResponseEntity<>(apiResponse, HttpStatus.BAD_REQUEST);
 			}
+			
 			List<RoomEntity> roomEnties = roomService.findbyCinemaId(cinemaEntity.getId());
-
-			List<RoomDTO> rooms = roomEnties.stream()
-					.map(room -> converter.convertTo(room))
-					.collect(Collectors.toList());
+			List<RoomDTO> rooms = new ArrayList<RoomDTO>();
+			roomEnties.forEach(room -> {
+				RoomDTO roomDTO = converter.convertTo(room);
+				roomDTO.setSchedules(null);
+				roomDTO.setSeats(null);
+				rooms.add(roomDTO);
+			});
 
 			return new ResponseEntity<List<RoomDTO>>(rooms, HttpStatus.ACCEPTED);
 		} catch (Exception e) {

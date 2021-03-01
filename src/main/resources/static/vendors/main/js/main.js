@@ -46,22 +46,35 @@ function populateUI() {
 //     }
 // });
 
-function addMoreRowOfSeat() {
-    let rowOfSeat = `<div class="seat-row">
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-    </div>`;
-    container.innerHTML += rowOfSeat;
+async function addMoreRowOfSeat() {
+    const url = document.location.origin + '/api/v1/admin/seat/create';
+    let params = {
+        cinemaCode: cinemaSelect.value,
+        roomCode: roomSelect.value
+    }
+    await fetchData(url, params)
+    .then(async data => {
+        alert(data.response.message);
+        container.innerHTML = '';
+        await fetchData(document.location.origin + '/api/v1/admin/seat', params)
+            .then(res => {
+                let alphabet = "abcdefghijklmnopqrstuvwxyz".split('');
+                let result = '';
+                let seats = res.seats;
+                for (let row = 0; row < seats.length; row++) {
+                    result += `<div id="${alphabet[row].toUpperCase()}" class="seat-row">`;
+                    for (let col = 0; col < 12; col++) {
+                        const seat = seats[row][col];
+                        result += `<div id="${seat ? seat.code : ''}" value="${seat ? seat.code : ''}" class="seat ${seat ? seat.status === 1 ? 'selected': '' : ''}">${seat ? seat.name ? seat.name: '' : ''}</div>`;
+                    }
+                    result += `</div>`;
+                }
+    
+            container.innerHTML += result;
+        });
+    });
+
+
     document.querySelectorAll('.seat-row .seat:not(.occupied)').forEach(seat => {
         seat.addEventListener('click', (e) => onHandleClickSeat(e), false);
     });
@@ -100,6 +113,10 @@ async function fetchData(url, params) {
     return response.json();
 }
 
+/**
+ * Cinema select event
+ * find all room by cinema code
+ */
 cinemaSelect.addEventListener('change', async () => {
     const url = document.location.origin + '/api/v1/admin/room';
     let cinemaParams = {
@@ -115,6 +132,10 @@ cinemaSelect.addEventListener('change', async () => {
     });
 });
 
+/**
+ * Room select event
+ * find all seat by room code
+ */
 roomSelect.addEventListener('change', async () => {
     const url = document.location.origin + '/api/v1/admin/seat';
     let cinemaParams = {
@@ -123,42 +144,23 @@ roomSelect.addEventListener('change', async () => {
     }
     container.innerHTML = '';
     await fetchData(url, cinemaParams)
-        .then(data => {
+        .then(res => {
             let alphabet = "abcdefghijklmnopqrstuvwxyz".split('');
-            let rowIndex = 0;
             let result = '';
-
-            console.log(data);
-            for (let row = 0; row < data.length / 12; row += 12) {
+            let seats = res.seats;
+            for (let row = 0; row < seats.length; row++) {
+                result += `<div id="${alphabet[row].toUpperCase()}" class="seat-row">`;
                 for (let col = 0; col < 12; col++) {
-                    const seat = data[row][i];
-                    console.log(seat);
+                    const seat = seats[row][col];
+                    result += `<div id="${seat ? seat.code : ''}" class="seat ${seat ? seat.status === 1 ? 'selected': '' : ''}">${seat ? seat.name ? seat.name: '' : ''}</div>`;
                 }
+                result += `</div>`;
             }
 
-
-        // for (let i = 0; i < data.length / 12; i+=12) {
-        //     result += `<div id="${alphabet[rowIndex++].toUpperCase()}" class="seat-row">
-        //     <div id="${data[i] ? data[i].code : ''}" value="${data[i] ? data[i].code : ''}" class="seat ${data[i] ? data[i].status === 1 ? 'selected': '' : ''}">${data[i] ? data[i].name : ''}</div>
-        //     <div id="${data[i + 1] ? data[i + 1].code : ''}" value="${data[i + 1] ? data[i + 1].code : ''}" class="seat ${data[i + 1] ? data[i + 1].status === 1 ? 'selected': '' : ''}">${data[i + 1] ? data[i + 1].name : ''}</div>
-        //     <div id="${data[i + 2] ? data[i + 2].code : ''}" value="${data[i + 2] ? data[i + 2].code : ''}" class="seat ${data[i + 2] ? data[i + 2].status === 1 ? 'selected': '' : ''}">${data[i + 2] ? data[i + 2].name : ''}</div>
-        //     <div id="${data[i + 3] ? data[i + 3].code : ''}" value="${data[i + 3] ? data[i + 3].code : ''}" class="seat ${data[i + 3] ? data[i + 3].status === 1 ? 'selected': '' : ''}">${data[i + 3] ? data[i + 3].name : ''}</div>
-        //     <div id="${data[i + 4] ? data[i + 4].code : ''}" value="${data[i + 4] ? data[i + 4].code : ''}" class="seat ${data[i + 4] ? data[i + 4].status === 1 ? 'selected': '' : ''}">${data[i + 4] ? data[i + 4].name : ''}</div>
-        //     <div id="${data[i + 5] ? data[i + 5].code : ''}" value="${data[i + 5] ? data[i + 5].code : ''}" class="seat ${data[i + 5] ? data[i + 5].status === 1 ? 'selected': '' : ''}">${data[i + 5] ? data[i + 5].name : ''}</div>
-        //     <div id="${data[i + 6] ? data[i + 6].code : ''}" value="${data[i + 6] ? data[i + 6].code : ''}" class="seat ${data[i + 6] ? data[i + 6].status === 1 ? 'selected': '' : ''}">${data[i + 6] ? data[i + 6].name : ''}</div>
-        //     <div id="${data[i + 7] ? data[i + 7].code : ''}" value="${data[i + 7] ? data[i + 7].code : ''}" class="seat ${data[i + 7] ? data[i + 7].status === 1 ? 'selected': '' : ''}">${data[i + 7] ? data[i + 7].name : ''}</div>
-        //     <div id="${data[i + 8] ? data[i + 8].code : ''}" value="${data[i + 8] ? data[i + 8].code : ''}" class="seat ${data[i + 8] ? data[i + 8].status === 1 ? 'selected': '' : ''}">${data[i + 8] ? data[i + 8].name : ''}</div>
-        //     <div id="${data[i + 9] ? data[i + 9].code : ''}" value="${data[i + 9] ? data[i + 9].code : ''}" class="seat ${data[i + 9] ? data[i + 9].status === 1 ? 'selected': '' : ''}">${data[i + 9] ? data[i + 9].name : ''}</div>
-        //     <div id="${data[i + 10] ? data[i + 10].code : ''}" value="${data[i + 10] ? data[i + 10].code : ''}" class="seat ${data[i + 10] ? data[i + 10].status === 1 ? 'selected': '' : ''}">${data[i + 10] ? data[i + 10].name : ''}</div>
-        //     <div id="${data[i + 11] ? data[i + 11].code : ''}" value="${data[i + 11] ? data[i + 11].code : ''}" class="seat ${data[i + 11] ? data[i + 11].status === 1 ? 'selected': '' : ''}">${data[i + 11] ? data[i + 11].name : ''}</div>
-        // </div>`;
-        // }
         container.innerHTML += result;
-        console.log('called');
         document.querySelectorAll('.seat-row .seat:not(.occupied)').forEach(seat => {
             seat.addEventListener('click', (e) => onHandleClickSeat(e), false);
         });
-
     });
 });
 
@@ -176,6 +178,10 @@ function onHandleClickSeat(events) {
     $('#seatModal').modal('show');
 }
 
+/**
+ * Modal save button event
+ * update value of current select seat
+ */
 btnSaveSeatModal.addEventListener('click', async () => {
     let seatName = document.getElementById('name');
     let seatStatusModal = document.getElementById('seatStatusModal');
@@ -188,16 +194,37 @@ btnSaveSeatModal.addEventListener('click', async () => {
             cinemaCode: cinemaSelect.value,
             roomCode: roomSelect.value,
             name: seatName.value,//check
-            code: seatName.value,
+            code: currentSelectedSeat.id,
             status: seatStatusModal.checked ? 1 : 0
         }
         const url = document.location.origin + '/api/v1/admin/seat/add';
         await fetchData(url, seatParams)
-        .then(res => {
+        .then(async res => {
             console.log(res);
             alert(res.message);
-        })
-        console.log(seatParams);
-        $('#seatModal').modal('hide');
+            container.innerHTML = '';
+            await fetchData(document.location.origin + '/api/v1/admin/seat', {
+                cinemaCode: cinemaSelect.value,
+                roomCode: roomSelect.value
+            })
+            .then(res => {
+                let alphabet = "abcdefghijklmnopqrstuvwxyz".split('');
+                let result = '';
+                let seats = res.seats;
+                for (let row = 0; row < seats.length; row++) {
+                    result += `<div id="${alphabet[row].toUpperCase()}" class="seat-row">`;
+                    for (let col = 0; col < 12; col++) {
+                        const seat = seats[row][col];
+                        result += `<div id="${seat ? seat.code : ''}" class="seat ${seat ? seat.status === 1 ? 'selected': '' : ''}">${seat ? seat.name ? seat.name: '' : ''}</div>`;
+                    }
+                    result += `</div>`;
+                }
+                container.innerHTML += result;
+                document.querySelectorAll('.seat-row .seat:not(.occupied)').forEach(seat => {
+                    seat.addEventListener('click', (e) => onHandleClickSeat(e), false);
+                });
+                $('#seatModal').modal('hide');
+            });
+        });
     }
 });

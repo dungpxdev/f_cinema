@@ -124,13 +124,19 @@ public class AdminSeatApi {
 		List<String> errors = new ArrayList<String>();
 		try {
 			//checking if seat already exist
-			SeatEntity isExist = seatService.findByCodeAndRoomCodeAndCinemaId(
+			SeatEntity isExist = seatService.findByCodeAndRoomCodeAndCinemaCode(
 					params.getCode(),
 					params.getRoomCode(), 
 					params.getCinemaCode());
 			
 			if (isExist != null) {
-				apiResponse.setMessage("Seat already exist");
+				isExist.setName(params.getName());
+				//validate status code
+				Integer status = Integer.parseInt(params.getStatus().toString());
+				isExist.setStatus(status);
+				
+				seatService.update(isExist);
+				apiResponse.setMessage("Seat updated");
 				return new ResponseEntity<>(apiResponse, HttpStatus.BAD_REQUEST);
 			}
 			
@@ -194,20 +200,12 @@ public class AdminSeatApi {
 				seatEntity.setRoom(roomEntity);
 				newSeats.add(seatEntity);
 			}
-			List<SeatEntity> seatSaved = seatService.saveMany(newSeats);
-			List<SeatDTO> seats = new ArrayList<SeatDTO>();
-			for (SeatEntity seat : seatSaved) {
-				seat.getRoom().setSeats(null);
-				seat.getRoom().setCinema(null);
-				SeatDTO seatDTO = converter.convertTo(seat);
-				seats.add(seatDTO);
-			}
+			seatService.saveMany(newSeats);
 
 			apiResponse.setMessage("List of seats save successfull");
 			apiResponse.setStatus(HttpStatus.OK);
 
 			Map<String, Object> result = new HashMap<String, Object>();
-			result.put(ApiResponseConstant.DATA.getKey(), seats);
 			result.put(ApiResponseConstant.RESPONSE.getKey(), apiResponse);
 			
 			//exclude some fieds not necessary to client

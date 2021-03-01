@@ -74,21 +74,19 @@ public class SeatServiceImpl implements SeatService {
 	 * 
 	 */
 	@Override
-	public SeatEntity findByCodeAndRoomCodeAndCinemaId(String code, 
-			String roomCode, 
-			String cinemaCode)
+	public SeatEntity findByCodeAndRoomCodeAndCinemaCode(String code, String roomCode, String cinemaCode)
 			throws Exception {
 		CinemaEntity cinemaEntity = cinemaService.findByCode(cinemaCode);
-		RoomEntity roomEntity = roomService.findByCodeAndCinemaId(roomCode,
-				cinemaEntity.getId());
+		RoomEntity roomEntity = roomService.findByCodeAndCinemaId(roomCode, cinemaEntity.getId());
 
 		if (roomEntity == null || cinemaEntity == null)
 			throw new Exception("The code given invalid");
+		for (SeatEntity seat : roomEntity.getSeats()) {
+			if (code.equals(seat.getCode()))
+				return seat;
+		}
 		
-		return seatRepository.findByCodeAndRoomIdAndCinemaId(
-				code,
-				roomEntity.getId(),
-				cinemaEntity.getId());
+		return null;
 	}
 
 	/**
@@ -151,6 +149,11 @@ public class SeatServiceImpl implements SeatService {
 			return null;
 		}
 
+	}
+
+	@Override
+	public SeatEntity update(SeatEntity seatEntity) {
+		return seatRepository.update(seatEntity);
 	}
 
 }
