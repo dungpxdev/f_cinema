@@ -14,7 +14,7 @@ public interface SeatService {
 	
 	SeatEntity save(SeatEntity seatEntity);
 
-	SeatEntity findByCodeAndRoomCodeAndCinemaId(String code, 
+	SeatEntity findByCodeAndRoomCodeAndCinemaCode(String code, 
 			String roomCode, String cinemaCode) throws Exception;
 	
 	String getNextSeatRow(String cinemaCode, String roomCode) throws Exception;
@@ -23,4 +23,5 @@ public interface SeatService {
 	
 	List<List<SeatDTO>> convertSeatToRender(List<SeatDTO> seatDTOs);
 
+	SeatEntity update(SeatEntity seatEntity);
 }
