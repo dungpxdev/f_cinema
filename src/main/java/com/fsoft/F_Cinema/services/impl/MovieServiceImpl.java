@@ -68,4 +68,9 @@ public class MovieServiceImpl implements MovieService {
 
 	}
 
+	@Override
+	public MovieEntity findByCode(String code) {
+		return movieRepository.findByCode(code);
+	}
+
 }

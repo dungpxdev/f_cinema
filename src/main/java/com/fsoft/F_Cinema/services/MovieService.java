@@ -16,4 +16,6 @@ public interface MovieService {
 	Optional<MovieEntity> findById(String id);
 	
 	MovieEntity findOneAndUpdate(String id, MovieEntity movieEntity);
+	
+	MovieEntity findByCode(String code);
 }
