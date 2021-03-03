@@ -24,6 +24,9 @@
 	<link th:href="@{/vendors/jqvmap/dist/jqvmap.min.css}" rel="stylesheet"/>
 	<!-- bootstrap-daterangepicker -->
 	<link th:href="@{/vendors/bootstrap-daterangepicker/daterangepicker.css}" rel="stylesheet">
+	<!-- jQuery -->
+    <script th:src="@{/vendors/jquery/dist/jquery.min.js}"></script>
+    <script th:src="@{/vendors/moment/min/moment.min.js}"></script>
 		
 	<!-- Custom Theme Style -->
 	<link th:href="@{/build/css/custom.min.css}" rel="stylesheet">
@@ -60,8 +63,8 @@
 				    <ul class="nav side-menu">
 				      <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
 				        <ul class="nav child_menu">
-				          <li><a href="index.html">Overview</a></li>
-				          <li><a href="index2.html">Revenue Statistic</a></li>
+				          <li><a href="/admin">Overview</a></li>
+				          <li><a href="/statistic">Revenue Statistic</a></li>
 				        </ul>
 				      </li>
 				      <li><a><i class="fa fa-edit"></i> Management <span class="fa fa-chevron-down"></span></a>
@@ -81,8 +84,14 @@
                             <li><a href="#">#</a></li>
                           </ul>
                         </li>
-				          <li><a href="/admin/ticket">Ticket Management</a></li>
-				          <li><a href="/admin/schedule">Schedule Management</a></li>
+				         <li><a href="/admin/ticket">Ticket Management</a></li>
+				         <li><a>Schedule Management<span class="fa fa-chevron-down"></span></a>
+                          <ul class="nav child_menu">
+                          	<li  class="sub_menu"><a href="/admin/schedule">Calendar view</a></li>
+                            <li><a href="/admin/schedule/add">Add Schedule</a></li>
+                            <li><a href="#">#</a></li>
+                          </ul>
+                        </li>
 				         <li><a>Cinema Management<span class="fa fa-chevron-down"></span></a>
                           <ul class="nav child_menu">
                           	<li  class="sub_menu"><a href="/admin/cinema">All</a></li>
@@ -278,9 +287,6 @@
         <!-- /footer content -->
       </div>
     </div>
-
-    <!-- jQuery -->
-    <script th:src="@{/vendors/jquery/dist/jquery.min.js}"></script>
     <!-- Bootstrap -->
     <script th:src="@{/vendors/bootstrap/dist/js/bootstrap.min.js}"></script>
     <!-- FastClick -->
@@ -314,9 +320,7 @@
     <script th:src="@{/vendors/jqvmap/dist/maps/jquery.vmap.world.js}"></script>
     <script th:src="@{/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js}"></script>
     <!-- bootstrap-daterangepicker -->
-    <script th:src="@{/vendors/moment/min/moment.min.js}"></script>
     <script th:src="@{/vendors/bootstrap-daterangepicker/daterangepicker.js}"></script>
-
     <!-- Custom Theme Scripts -->
     <script th:src="@{/build/js/custom.min.js}"></script>
 	

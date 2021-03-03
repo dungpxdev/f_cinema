@@ -7,5 +7,6 @@ import com.fsoft.F_Cinema.entities.MovieEntity;
 
 @Repository
 public interface MovieRepository extends JpaRepository<MovieEntity, Long>, MovieRepositoryCustom {
-
+	
+	MovieEntity findByCode(String code);
 }

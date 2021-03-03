@@ -124,6 +124,7 @@ cinemaSelect.addEventListener('change', async () => {
     }
     await fetchData(url, cinemaParams)
     .then(rooms => {
+        console.log(rooms);
         let options = '';
         for (const room of rooms) {
             options += `<option value="${room.code}">${room.name}</option>`;

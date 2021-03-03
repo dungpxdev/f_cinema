@@ -24,7 +24,8 @@ public class ScheduleDTO extends AbstractDTO {
 	private String code;
 	private Date startTime;
 	private Date endTime;
-	private MovieDTO movie;
-	private RoomDTO room;
+	private String movie;
+	private String room;
+	private String cinema;
 	private Set<TicketDTO> tickets = new HashSet<TicketDTO>();
 }
