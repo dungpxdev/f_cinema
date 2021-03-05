@@ -112,5 +112,8 @@ public class MovieEntity extends BaseEntity {
 
 	@OneToMany(mappedBy = "movie")
 	private Set<ScheduleEntity> schedules = new HashSet<ScheduleEntity>();
+	
+	@OneToMany(mappedBy = "movie")
+	private Set<DisablePlanEntity> disablePlans = new HashSet<DisablePlanEntity>();
 
 }

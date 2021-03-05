@@ -48,5 +48,8 @@ public class CinemaEntity extends BaseEntity {
 	
 	@ManyToMany(mappedBy = "cinemas")
 	private Set<UserEntity> users = new HashSet<UserEntity>();
+	
+	@OneToMany(mappedBy = "cinema")
+	private Set<DisablePlanEntity> disablePlans = new HashSet<DisablePlanEntity>();
 
 }

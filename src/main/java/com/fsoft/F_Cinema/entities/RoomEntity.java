@@ -49,5 +49,8 @@ public class RoomEntity extends BaseEntity {
 
 	@OneToMany(mappedBy = "room")
 	private Set<SeatEntity> seats = new HashSet<SeatEntity>();
+	
+	@OneToMany(mappedBy = "room")
+	private Set<DisablePlanEntity> disablePlans = new HashSet<DisablePlanEntity>();
 
 }

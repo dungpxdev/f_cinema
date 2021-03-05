@@ -42,7 +42,7 @@ public class AdminScheduleController {
 	@GetMapping(path = { "/add" })
 	public String addSchedule(Model model, Principal principal) {
 		List<CinemaEntity> cinemas = cinemaService.findAll();
-		List<RoomEntity> rooms = roomService.findbyCinemaId(1L);
+		List<RoomEntity> rooms = roomService.findbyCinemaId(1L);//hard-code
 		List<MovieEntity> movies = movieService.findAll();
 		model.addAttribute("cinemas", cinemas);
 		model.addAttribute("rooms", rooms);

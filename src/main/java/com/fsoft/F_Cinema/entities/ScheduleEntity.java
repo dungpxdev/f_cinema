@@ -52,4 +52,6 @@ public class ScheduleEntity extends BaseEntity {
 	@OneToMany(mappedBy = "schedule")
 	private Set<TicketEntity> tickets = new HashSet<TicketEntity>();
 
+	@OneToMany(mappedBy = "schedule")
+	private Set<DisablePlanEntity> disablePlans = new HashSet<DisablePlanEntity>();
 }
