@@ -43,4 +43,9 @@ public class CinemaServiceImpl implements CinemaService {
 		return cinemaRepository.findByCode(code);
 	}
 
+	@Override
+	public CinemaEntity findById(Long id) {
+		return cinemaRepository.findById(id).get();
+	}
+
 }

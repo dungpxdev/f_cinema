@@ -10,3 +10,4 @@ public class FCinemaApplication {
 		SpringApplication.run(FCinemaApplication.class, args);
 	}
 }
+

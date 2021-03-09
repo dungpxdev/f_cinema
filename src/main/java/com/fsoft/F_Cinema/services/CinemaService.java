@@ -31,4 +31,6 @@ public interface CinemaService {
 	CinemaEntity findByOwner(Principal principal);
 	
 	CinemaEntity findByCode(String code);
+	
+	CinemaEntity findById(Long id);
 }

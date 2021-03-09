@@ -6,12 +6,14 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -22,6 +24,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @Entity
 @Table(name = "schedules")
+@EqualsAndHashCode(of = { "movie", "room", "tickets", "disablePlans" },
+				callSuper = false)
 public class ScheduleEntity extends BaseEntity {
 
 	/**
@@ -49,9 +53,9 @@ public class ScheduleEntity extends BaseEntity {
 	@JoinColumn(name = "room_id", nullable = false)
 	private RoomEntity room;
 
-	@OneToMany(mappedBy = "schedule")
+	@OneToMany(mappedBy = "schedule", fetch = FetchType.LAZY)
 	private Set<TicketEntity> tickets = new HashSet<TicketEntity>();
 
-	@OneToMany(mappedBy = "schedule")
+	@OneToMany(mappedBy = "schedule", fetch = FetchType.LAZY)
 	private Set<DisablePlanEntity> disablePlans = new HashSet<DisablePlanEntity>();
 }

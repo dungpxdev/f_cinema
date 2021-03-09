@@ -10,14 +10,18 @@ import com.fsoft.F_Cinema.dto.CinemaDTO;
 import com.fsoft.F_Cinema.dto.MovieDTO;
 import com.fsoft.F_Cinema.dto.RoleDTO;
 import com.fsoft.F_Cinema.dto.RoomDTO;
+import com.fsoft.F_Cinema.dto.ScheduleDTO;
 import com.fsoft.F_Cinema.dto.SeatDTO;
 import com.fsoft.F_Cinema.dto.SeatParamsDTO;
+import com.fsoft.F_Cinema.dto.TicketDTO;
 import com.fsoft.F_Cinema.dto.UserDTO;
 import com.fsoft.F_Cinema.entities.CinemaEntity;
 import com.fsoft.F_Cinema.entities.MovieEntity;
 import com.fsoft.F_Cinema.entities.RoleEntity;
 import com.fsoft.F_Cinema.entities.RoomEntity;
+import com.fsoft.F_Cinema.entities.ScheduleEntity;
 import com.fsoft.F_Cinema.entities.SeatEntity;
+import com.fsoft.F_Cinema.entities.TicketEntity;
 import com.fsoft.F_Cinema.entities.UserEntity;
 
 @Component
@@ -95,6 +99,14 @@ public class Converter {
 	
 	public RoomDTO convertTo(RoomEntity roomEntity) {
 		return new ModelMapper().map(roomEntity, RoomDTO.class);
+	}
+	
+	public ScheduleEntity convertTo(ScheduleDTO scheduleDTO) {
+		return new ModelMapper().map(scheduleDTO, ScheduleEntity.class);
+	}
+	
+	public TicketEntity convertTo(TicketDTO ticketDTO) {
+		return new ModelMapper().map(ticketDTO, TicketEntity.class);
 	}
 
 }

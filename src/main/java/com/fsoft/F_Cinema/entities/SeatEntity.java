@@ -1,6 +1,8 @@
 package com.fsoft.F_Cinema.entities;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -40,7 +42,10 @@ public class SeatEntity extends BaseEntity {
 	@ManyToOne
 	@JoinColumn(name = "room_id", nullable = false)
 	private RoomEntity room;
-	
+
+	@OneToMany(mappedBy = "seat")
+	private List<TicketEntity> tickets = new ArrayList<TicketEntity>();
+
 	@OneToMany(mappedBy = "seat")
 	private Set<DisablePlanEntity> disablePlans = new HashSet<DisablePlanEntity>();
 }

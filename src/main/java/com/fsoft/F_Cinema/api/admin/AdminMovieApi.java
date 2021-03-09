@@ -42,6 +42,10 @@ public class AdminMovieApi {
 				return new ResponseEntity<>(apiResponse, HttpStatus.BAD_REQUEST);
 			}
 			
+			movieEntity.setSchedules(null);
+			movieEntity.setDisablePlans(null);
+			movieEntity.setMovieCat(null);
+			
 			return new ResponseEntity<>(movieEntity, HttpStatus.OK);
 		} catch (Exception e) {
 			apiResponse.setMessage(e.getMessage());

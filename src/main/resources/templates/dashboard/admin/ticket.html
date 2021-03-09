@@ -31,26 +31,7 @@
                   </div>
                   <div class="x_content">
                     <br />
-                    <form action="/admin/room" method="post" data-parsley-validate class="form-horizontal form-label-left">
-                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Movies<span class="required">*</span></label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <select class="form-control" name="movie" id="movie">
-                            <option>Pick a movie</option>
-                            <option  th:each="movie: ${movies}" th:value="${movie.code}" th:text="${movie.name}"></option>
-                          </select>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="reservation-time">Timing <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <div class="input-prepend input-group">
-                            <span class="add-on input-group-addon"><i class="glyphicon glyphicon-calendar fa fa-calendar"></i></span>
-                            <input type="text" id="reservation-time" class="form-control" value="01/01/2021 - 01/25/2021" />
-                          </div>
-                        </div>
-                      </div>
+                    <form action="/admin/ticket/generate" method="post" data-parsley-validate class="form-horizontal form-label-left">
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Cinema<span class="required">*</span></label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
@@ -60,19 +41,49 @@
                           </select>
                         </div>
                       </div>
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Room<span class="required">*</span></label>
+                       <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Movies<span class="required">*</span></label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <select class="form-control" name="cinema" id="room">
-                            <option>Pick a room</option>
-                            <option  th:each="room: ${rooms}" th:value="${room.code}" th:text="${room.name}"></option>
+                          <select class="form-control" id="movie">
+                            <option>Pick a movie</option>
+                            <option  th:each="movie: ${movies}" th:value="${movie.code}" th:text="${movie.name}"></option>
                           </select>
+                        </div>
+                      </div>
+                       <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Rooms<span class="required">*</span></label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <select class="form-control" name="room" id="room">
+                            <option>Pick a Room</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Schedules<span class="required">*</span></label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <select class="form-control" name="schedule" id="schedule">
+                            <option>Pick a Schedule</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="quantity">Number of tickets <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="number" name="quantity" id="quantity" required="required" class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="price">Price <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="number" name="price" id="price" required="required" class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
                       <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3" style="left: 35%">
                           <button class="btn btn-primary" type="button">Cancel</button>
-                          <button id="submitBtn" type="button" class="btn btn-success">Submit</button>
+                          <button type="submit" class="btn btn-success">Submit</button>
                         </div>
                       </div>
                     </form>

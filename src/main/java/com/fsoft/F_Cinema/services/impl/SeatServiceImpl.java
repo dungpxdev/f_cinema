@@ -11,11 +11,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fsoft.F_Cinema.dto.SeatDTO;
+import com.fsoft.F_Cinema.dto.TicketDTO;
 import com.fsoft.F_Cinema.entities.CinemaEntity;
 import com.fsoft.F_Cinema.entities.RoomEntity;
+import com.fsoft.F_Cinema.entities.ScheduleEntity;
 import com.fsoft.F_Cinema.entities.SeatEntity;
 import com.fsoft.F_Cinema.repository.SeatRepository;
 import com.fsoft.F_Cinema.services.CinemaService;
+import com.fsoft.F_Cinema.services.DisablePlansService;
 import com.fsoft.F_Cinema.services.RoomService;
 import com.fsoft.F_Cinema.services.SeatService;
 import com.fsoft.F_Cinema.utils.StringUltis;
@@ -33,6 +36,12 @@ public class SeatServiceImpl implements SeatService {
 	
 	@Autowired
 	private CinemaService cinemaService;
+	
+	@Autowired
+	private SeatService seatService;
+	
+	@Autowired
+	private DisablePlansService disablePlanService;
 	
 	@Autowired
 	private StringUltis stringUltils;
@@ -154,6 +163,26 @@ public class SeatServiceImpl implements SeatService {
 	@Override
 	public SeatEntity update(SeatEntity seatEntity) {
 		return seatRepository.update(seatEntity);
+	}
+
+	@Override
+	public List<SeatEntity> findAllSeatNotOcupied(ScheduleEntity scheduleEntity, TicketDTO ticketDTO) {
+		List<SeatEntity> seats = seatService.findByCinemaCodeAndRoomCode(
+				ticketDTO.getCinema(), 
+				ticketDTO.getRoom());
+		List<SeatEntity> ocupiedSeats = disablePlanService.findAllSeatsOcupied(
+				scheduleEntity.getStartTime().toString(),
+				scheduleEntity.getEndTime().toString());
+		
+		for (SeatEntity seat : seats) {
+			for (SeatEntity seatOcupied : ocupiedSeats) {
+				if (seat.getId() == seatOcupied.getId()) {
+					seats.remove(seat);
+				}
+			}
+		}
+
+		return seats;
 	}
 
 }

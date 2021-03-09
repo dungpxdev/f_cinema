@@ -2,8 +2,8 @@ package com.fsoft.F_Cinema.api.admin;
 
 import java.security.Principal;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -41,42 +41,69 @@ public class AdminScheduleApi {
 	@Autowired
 	private MovieService movieService;
 	
+	Map<String, Object> apiResponse;
+	
 	@PostMapping(path = { "/", "" },
 			produces = { MediaType.APPLICATION_JSON_VALUE },
 			consumes = { MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<?> postSchedule(@RequestBody ScheduleDTO scheduleDTO, Principal principal) {
-		ApiResponseDTO apiResponse = new ApiResponseDTO();
-		apiResponse.setCreatedBy(principal.getName());
-		apiResponse.setCreatedDate(new Date());
-		List<String> errors = new ArrayList<String>();
 		try {
 			CinemaEntity cinemaEntity = cinemaService.findByCode(scheduleDTO.getCinema());
-			RoomEntity roomEntity = roomService.findByCodeAndCinemaId(scheduleDTO.getRoom(), 
-					cinemaEntity.getId());
+			RoomEntity roomEntity = roomService.findByCodeAndCinemaId(scheduleDTO.getRoom(), cinemaEntity.getId());
 			MovieEntity movieEntity = movieService.findByCode(scheduleDTO.getMovie());
 
-			ScheduleEntity scheduleEntity = new ScheduleEntity();
-			scheduleEntity.setCode(cinemaEntity.getCode() + 
-					movieEntity.getCode() + 
-					roomEntity.getCode());
-			scheduleEntity.setName(scheduleDTO.getName());
-			scheduleEntity.setCreatedDate(new Date());
-			scheduleEntity.setCreatedBy(principal.getName());
-			scheduleEntity.setMovie(movieEntity);
-			scheduleEntity.setStartTime(scheduleDTO.getStartTime());
-			scheduleEntity.setEndTime(scheduleDTO.getEndTime());
-			scheduleEntity.setRoom(roomEntity);
+			scheduleService.save(scheduleDTO, movieEntity, cinemaEntity, roomEntity);
 
-			scheduleService.save(scheduleEntity);
-			apiResponse.setStatus(HttpStatus.OK);
-			apiResponse.setMessage(new StringBuilder("Schedule for movie ")
-					.append(movieEntity.getName())
-					.append(" created").toString());
+			apiResponse = new ApiResponseDTO()
+					.apiResponseBuilder(
+							null, HttpStatus.OK, "Successfuly", null);
+
 			return new ResponseEntity<>(apiResponse, HttpStatus.OK);
 		} catch (Exception e) {
-			apiResponse.setCreatedDate(new Date());
-			apiResponse.setMessage(e.getMessage());
+			List<String> errors = new ArrayList<String>();
 			errors.add(e.getMessage());
+			apiResponse = new ApiResponseDTO()
+					.apiResponseBuilder(errors, HttpStatus.BAD_REQUEST, "Post Schedule error!", null);
+
+			return new ResponseEntity<>(apiResponse, HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	@PostMapping(path = { "/fetch", "" },
+			produces = { MediaType.APPLICATION_JSON_VALUE },
+			consumes = { MediaType.APPLICATION_JSON_VALUE })
+	public ResponseEntity<?> fetchAllSchedule(
+			@RequestBody ScheduleDTO scheduleDTO, 
+			Principal principal) {
+		try {
+			CinemaEntity cinemaEntity = cinemaService.findByCode(scheduleDTO.getCinema());
+			RoomEntity roomEntity = roomService.findByCodeAndCinemaId(
+					scheduleDTO.getRoom(), 
+					cinemaEntity.getId());
+			MovieEntity movieEntity = movieService.findByCode(scheduleDTO.getMovie());
+			
+			List<ScheduleEntity> schedules = scheduleService.findByIds(
+					movieEntity.getId(), 
+					roomEntity.getId());
+
+			// exclude fields in ScheduleEntity (Lazy not working)
+			for (ScheduleEntity schedule : schedules) {
+				schedule.setTickets(null);
+				schedule.setDisablePlans(null);
+				schedule.setRoom(null);
+				schedule.setMovie(null);
+			}
+
+			apiResponse = new ApiResponseDTO()
+					.apiResponseBuilder(
+							null, HttpStatus.OK, "Successfuly", schedules);
+
+			return new ResponseEntity<>(apiResponse, HttpStatus.OK);
+		} catch (Exception e) {
+			List<String> errors = new ArrayList<String>();
+			errors.add(e.getMessage());
+			apiResponse = new ApiResponseDTO()
+					.apiResponseBuilder(errors, HttpStatus.BAD_REQUEST, "Fetch schedule error!", null);
 
 			return new ResponseEntity<>(apiResponse, HttpStatus.BAD_REQUEST);
 		}

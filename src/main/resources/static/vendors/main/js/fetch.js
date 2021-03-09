@@ -4,6 +4,7 @@ const movieSelect = document.getElementById('movie');
 const timeInput = document.getElementById('reservation-time');
 const submitBtn = document.getElementById('submitBtn');
 const nameInput = document.getElementById('name');
+const scheduleSelect = document.getElementById('schedule');
 
 let movieLength = 0;
 
@@ -34,13 +35,34 @@ movieSelect.addEventListener('change', async (e) => {
     }
     await fetchData(url, movieParams)
     .then(movie => {
+        console.log(movie);
         if (movie.status === 'BAD_REQUEST') {
             alertify.error(movie.message);
         }
         movieLength = 0;
         movieLength = movie.length;
     });
-})
+});
+
+roomSelect.addEventListener('change', async (e) => {
+    const url = document.location.origin + '/api/v1/admin/schedule/fetch';
+    let params = {
+        movie: movieSelect.value,
+        room: roomSelect.value,
+        cinema: cinemaSelect.value
+    }
+    console.log(params);
+    await fetchData(url, params)
+    .then(res => {
+        const schedules = res.data;
+        console.log(schedules);
+        let options = '';
+        for (const schedule of schedules) {
+            options += `<option value="${schedule.code}">${schedule.startTime + ' - '+ schedule.endTime}</option>`;
+        }
+        scheduleSelect.innerHTML = options;
+    });
+});
 
 /**
  * Fetch data from server (url) base on object parameters

@@ -45,19 +45,20 @@ public class TicketEntity extends BaseEntity {
 
 	@Column(name = "gate")
 	private String gate;
-
-	@Column(name = "seat")
-	private String seat;
+	
+	@ManyToOne
+	@JoinColumn(name = "seat_id")
+	private SeatEntity seat;
 
 	@Column(name = "quantity")
 	private Long quantity;
 
 	@ManyToOne
-	@JoinColumn(name = "user_id", nullable = false)
+	@JoinColumn(name = "user_id")
 	private UserEntity user;
 
 	@ManyToOne
-	@JoinColumn(name = "schedule_id", nullable = false)
+	@JoinColumn(name = "schedule_id")
 	private ScheduleEntity schedule;
 
 	@OneToOne(cascade = CascadeType.ALL)

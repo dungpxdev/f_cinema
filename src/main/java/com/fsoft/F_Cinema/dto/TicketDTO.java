@@ -27,6 +27,8 @@ public class TicketDTO extends AbstractDTO {
 	private String seat;
 	private Long quantity;
 	private UserDTO user;
-	private ScheduleDTO schedule;
+	private String schedule;
+	private String room;
+	private String cinema;
 	private TicketCategoryDTO ticketCat;
 }

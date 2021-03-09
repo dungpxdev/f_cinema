@@ -9,19 +9,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.fsoft.F_Cinema.dto.TicketDTO;
 import com.fsoft.F_Cinema.entities.CinemaEntity;
 import com.fsoft.F_Cinema.entities.MovieEntity;
 import com.fsoft.F_Cinema.entities.RoomEntity;
+import com.fsoft.F_Cinema.entities.ScheduleEntity;
+import com.fsoft.F_Cinema.entities.SeatEntity;
 import com.fsoft.F_Cinema.services.CinemaService;
 import com.fsoft.F_Cinema.services.MovieService;
 import com.fsoft.F_Cinema.services.RoomService;
+import com.fsoft.F_Cinema.services.ScheduleService;
+import com.fsoft.F_Cinema.services.SeatService;
+import com.fsoft.F_Cinema.services.TicketService;
 
 @RequestMapping("/admin/ticket")
 @Controller
 public class AdminTicketController {
-	
+
 	Logger logger = LoggerFactory.getLogger(AdminTicketController.class);
 
 	@Autowired
@@ -33,15 +40,41 @@ public class AdminTicketController {
 	@Autowired
 	private MovieService movieService;
 
-	@GetMapping(path = {"/", ""})
+	@Autowired
+	private ScheduleService scheduleService;
+
+	@Autowired
+	private SeatService seatService;
+
+	@Autowired
+	private TicketService ticketService;
+
+	@GetMapping(path = { "/", "" })
 	public String getTickets(Model model, Principal principal) {
 		List<CinemaEntity> cinemas = cinemaService.findAll();
-		List<RoomEntity> rooms = roomService.findbyCinemaId(1L);//hard-code
+		List<RoomEntity> rooms = roomService.findbyCinemaId(1L);// hard-code
 		List<MovieEntity> movies = movieService.findAll();
+
 		model.addAttribute("cinemas", cinemas);
 		model.addAttribute("rooms", rooms);
 		model.addAttribute("movies", movies);
-		
+
 		return "dashboard/admin/ticket";
+	}
+
+	@PostMapping(path = { "/generate" })
+	public String generateTickets(final TicketDTO ticketDTO, final Principal principal) {
+		try {
+			ScheduleEntity scheduleEntity = scheduleService.findByCode(ticketDTO.getSchedule());
+			List<SeatEntity> seats = seatService.findAllSeatNotOcupied(scheduleEntity, ticketDTO);
+			ticketService.generate(seats, scheduleEntity);
+
+		} catch (Exception e) {
+			logger.error(new StringBuilder("Ticket Generate Error Cause: ")
+					.append(e.getMessage())
+					.toString());
+		}
+
+		return "redirect:/admin";
 	}
 }

@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.fsoft.F_Cinema.dto.SeatDTO;
+import com.fsoft.F_Cinema.dto.TicketDTO;
+import com.fsoft.F_Cinema.entities.ScheduleEntity;
 import com.fsoft.F_Cinema.entities.SeatEntity;
 
 @Service
@@ -24,4 +26,6 @@ public interface SeatService {
 	List<List<SeatDTO>> convertSeatToRender(List<SeatDTO> seatDTOs);
 
 	SeatEntity update(SeatEntity seatEntity);
+	
+	List<SeatEntity> findAllSeatNotOcupied(ScheduleEntity scheduleEntity, TicketDTO ticketDTO);
 }

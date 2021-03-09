@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
   <head>
   	<title layout:title-pattern="$CONTENT_TITLE - $LAYOUT_TITLE"></title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -50,7 +51,7 @@
               </div>
               <div class="profile_info">
                 <span>Welcome,</span>
-                <h2 th:text="${username}"></h2>
+                <h2 sec:authentication="name"></h2>
               </div>
             </div>
             <!-- /menu profile quick info -->
@@ -153,7 +154,7 @@
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="/images/img.jpg" alt=""><span th:text="${username}"></span>
+                    <img src="/images/img.jpg" alt=""><span sec:authentication="name"></span>
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">

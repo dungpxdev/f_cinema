@@ -17,12 +17,7 @@ public class UserInterceptor implements HandlerInterceptor {
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
-		/*
-		 * String username =
-		 * SecurityContextHolder.getContext().getAuthentication().getName(); if
-		 * (username == null) username = "guest"; logger.info(username);
-		 * modelAndView.addObject("username", "hi");
-		 */
+
 	}
 
 	@Override
