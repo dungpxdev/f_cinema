@@ -37,24 +37,20 @@ public class DisablePlanEntity extends BaseEntity {
 
 	@Column(name = "end_time")
 	private Date endTime;
-	
+
 	@ManyToOne
-	@JoinColumn(name = "schedule_id", nullable = false)
-	private ScheduleEntity schedule;
-	
-	@ManyToOne
-	@JoinColumn(name = "cinema_id", nullable = false)
+	@JoinColumn(name = "cinema_id")
 	private CinemaEntity cinema;
-	
+
 	@ManyToOne
-	@JoinColumn(name = "room_id", nullable = false)
+	@JoinColumn(name = "room_id")
 	private RoomEntity room;
-	
+
 	@ManyToOne
-	@JoinColumn(name = "seat_id", nullable = false)
+	@JoinColumn(name = "seat_id")
 	private SeatEntity seat;
-	
+
 	@ManyToOne
-	@JoinColumn(name = "movie_id", nullable = false)
+	@JoinColumn(name = "movie_id")
 	private MovieEntity movie;
 }

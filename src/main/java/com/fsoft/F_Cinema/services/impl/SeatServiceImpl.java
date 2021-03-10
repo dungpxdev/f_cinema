@@ -107,6 +107,10 @@ public class SeatServiceImpl implements SeatService {
 	@Override
 	public String getNextSeatRow(String cinemaCode, String roomCode) throws Exception {
 		List<SeatEntity> seats = this.findByCinemaCodeAndRoomCode(cinemaCode, roomCode);
+		
+		if (seats.isEmpty())
+			return "A".toUpperCase();
+		
 		char lastSeatCode = seats.get(seats.size() - 1).getCode().toCharArray()[0];
 		int asciivalue = lastSeatCode;
 		if (asciivalue > 122 || asciivalue < 65) {

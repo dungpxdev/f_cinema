@@ -89,7 +89,6 @@ public class AdminScheduleApi {
 			// exclude fields in ScheduleEntity (Lazy not working)
 			for (ScheduleEntity schedule : schedules) {
 				schedule.setTickets(null);
-				schedule.setDisablePlans(null);
 				schedule.setRoom(null);
 				schedule.setMovie(null);
 			}

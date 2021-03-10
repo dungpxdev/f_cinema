@@ -13,7 +13,7 @@ public interface MovieService {
 	
 	List<MovieEntity> findAll();
 	
-	Optional<MovieEntity> findById(String id);
+	Optional<MovieEntity> findById(Long id);
 	
 	MovieEntity findOneAndUpdate(String id, MovieEntity movieEntity);
 	

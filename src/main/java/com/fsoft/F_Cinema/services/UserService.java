@@ -19,5 +19,7 @@ public interface UserService {
 	UserEntity findByUsername(String username);
 	
 	List<UserDTO> findNewsUsers();
+	
+	UserEntity createMember(UserDTO userDTO) throws Exception;
 
 }

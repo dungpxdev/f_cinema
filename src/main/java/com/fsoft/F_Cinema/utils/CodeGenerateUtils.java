@@ -22,5 +22,16 @@ public class CodeGenerateUtils {
 				.split("-")[0]
 				.toUpperCase();
 	}
+	
+	public String ticketCodeGenerator(String cinemaCode, String roomCode, String movieCode, String seatCode) {
+		return new StringBuilder(
+				cinemaCode)
+				.append(roomCode)
+				.append(movieCode)
+				.append(seatCode)
+				.append(this.uniqueCodeGenerator()
+						.toUpperCase())
+				.toString();
+	}
 
 }

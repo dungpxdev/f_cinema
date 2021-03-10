@@ -88,7 +88,8 @@ public class AdminMovieController {
 	@GetMapping(path = { "/edit" })
 	public String fetchMovie(Model model, @RequestParam String movieId) {
 		try {
-			Optional<MovieEntity> movieEntity = movieService.findById(movieId);
+			Long movieID = Long.parseLong(movieId);
+			Optional<MovieEntity> movieEntity = movieService.findById(movieID);
 			model.addAttribute("movie", movieEntity.get());
 			return "dashboard/admin/editMovie";
 		} catch (Exception e) {

@@ -24,7 +24,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Entity
 @Table(name = "schedules")
-@EqualsAndHashCode(of = { "movie", "room", "tickets", "disablePlans" },
+@EqualsAndHashCode(of = { "movie", "room", "tickets" },
 				callSuper = false)
 public class ScheduleEntity extends BaseEntity {
 
@@ -56,6 +56,4 @@ public class ScheduleEntity extends BaseEntity {
 	@OneToMany(mappedBy = "schedule", fetch = FetchType.LAZY)
 	private Set<TicketEntity> tickets = new HashSet<TicketEntity>();
 
-	@OneToMany(mappedBy = "schedule", fetch = FetchType.LAZY)
-	private Set<DisablePlanEntity> disablePlans = new HashSet<DisablePlanEntity>();
 }

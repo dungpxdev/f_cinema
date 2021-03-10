@@ -77,4 +77,10 @@ public class AdminTicketController {
 
 		return "redirect:/admin";
 	}
+
+	@GetMapping(path = { "/views" })
+	public String getTickets(Principal principal) {
+
+		return "dashboard/admin/ticketView";
+	}
 }

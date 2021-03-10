@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<title>F-Cinema | Home Page</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link th:href="@{/vendors/main/css/home.css}" rel="stylesheet">
+<script th:src="@{/vendors/jquery/dist/jquery.min.js}"></script>
+<script th:src="@{/vendors/main/js/TweenMax.min.js}"></script>
+<script th:src="@{/vendors/main/js/home.js}"></script>
+<link rel="shortcut icon" th:href="@{/icons/favicon.ico}"
+	type="image/x-icon">
+</head>
+<body>
+	<svg>
+<defs>
+  <symbol id="icon-heart" viewBox="0 0 768 1024">
+    <title>heart</title>
+    <path class="path1"
+			d="M384 864c399-314 384-425 384-512s-72-192-192-192-192 128-192 128-72-128-192-128-192 105-192 192-15 198 384 512z"></path>
+  </symbol>
+  <symbol id="icon-star-empty" viewBox="0 0 1024 1024">
+    <title>star-empty</title>
+    <path class="path1"
+			d="M1024 397.050l-353.78-51.408-158.22-320.582-158.216 320.582-353.784 51.408 256 249.538-60.432 352.352 316.432-166.358 316.432 166.358-60.434-352.352 256.002-249.538zM512 753.498l-223.462 117.48 42.676-248.83-180.786-176.222 249.84-36.304 111.732-226.396 111.736 226.396 249.836 36.304-180.788 176.222 42.678 248.83-223.462-117.48z"></path>
+  </symbol>
+  <symbol id="icon-star-full" viewBox="0 0 1024 1024">
+    <title>star-full</title>
+    <path class="path1"
+			d="M1024 397.050l-353.78-51.408-158.22-320.582-158.216 320.582-353.784 51.408 256 249.538-60.432 352.352 316.432-166.358 316.432 166.358-60.434-352.352 256.002-249.538z"></path>
+  </symbol>
+  <symbol id="icon-home" viewBox="0 0 1024 1024">
+    <title>home</title>
+    <path class="path1"
+			d="M1024 590.444l-512-397.426-512 397.428v-162.038l512-397.426 512 397.428zM896 576v384h-256v-256h-256v256h-256v-384l384-288z"></path>
+  </symbol>
+  <symbol id="icon-users" viewBox="0 0 1152 1024">
+    <title>users</title>
+    <path class="path1"
+			d="M768 770.612v-52.78c70.498-39.728 128-138.772 128-237.832 0-159.058 0-288-192-288s-192 128.942-192 288c0 99.060 57.502 198.104 128 237.832v52.78c-217.102 17.748-384 124.42-384 253.388h896c0-128.968-166.898-235.64-384-253.388z"></path>
+    <path class="path2"
+			d="M327.196 795.328c55.31-36.15 124.080-63.636 199.788-80.414-15.054-17.784-28.708-37.622-40.492-59.020-30.414-55.234-46.492-116.058-46.492-175.894 0-86.042 0-167.31 30.6-233.762 29.706-64.504 83.128-104.496 159.222-119.488-16.914-76.48-61.94-126.75-181.822-126.75-192 0-192 128.942-192 288 0 99.060 57.502 198.104 128 237.832v52.78c-217.102 17.748-384 124.42-384 253.388h279.006c14.518-12.91 30.596-25.172 48.19-36.672z"></path>
+  </symbol>
+  <symbol id="icon-circle-left" viewBox="0 0 1024 1024">
+    <title>circle-left</title>
+    <path class="path2"
+			d="M669.256 317.256l-90.512-90.512-285.254 285.256 285.256 285.254 90.508-90.508-194.744-194.746z"></path>
+  </symbol>
+  <symbol id="icon-circle-right" viewBox="0 0 1024 1024">
+    <title>circle-right</title>
+    <path class="path2"
+			d="M354.744 706.744l90.512 90.512 285.254-285.256-285.256-285.254-90.508 90.508 194.744 194.746z"></path>
+  </symbol>
+  <symbol id="icon-play" viewBox="0 0 1024 1024">
+    <title>play</title>
+    <path class="path1"
+			d="M512 1024c-282.75 0-512-229.25-512-512 0-282.782 229.25-512 512-512s512 229.218 512 512c0 282.75-229.25 512-512 512zM512 128c-212.062 0-384 171.938-384 384s171.938 384 384 384 384-171.938 384-384-171.938-384-384-384zM384 320l320 192-320 192v-384z"></path>
+  </symbol>
+  <symbol id="icon-cross" viewBox="0 0 1024 1024">
+    <title>cross</title>
+    <path class="path1"
+			d="M1014.662 822.66c-0.004-0.004-0.008-0.008-0.012-0.010l-310.644-310.65 310.644-310.65c0.004-0.004 0.008-0.006 0.012-0.010 3.344-3.346 5.762-7.254 7.312-11.416 4.246-11.376 1.824-24.682-7.324-33.83l-146.746-146.746c-9.148-9.146-22.45-11.566-33.828-7.32-4.16 1.55-8.070 3.968-11.418 7.31 0 0.004-0.004 0.006-0.008 0.010l-310.648 310.652-310.648-310.65c-0.004-0.004-0.006-0.006-0.010-0.010-3.346-3.342-7.254-5.76-11.414-7.31-11.38-4.248-24.682-1.826-33.83 7.32l-146.748 146.748c-9.148 9.148-11.568 22.452-7.322 33.828 1.552 4.16 3.97 8.072 7.312 11.416 0.004 0.002 0.006 0.006 0.010 0.010l310.65 310.648-310.65 310.652c-0.002 0.004-0.006 0.006-0.008 0.010-3.342 3.346-5.76 7.254-7.314 11.414-4.248 11.376-1.826 24.682 7.322 33.83l146.748 146.746c9.15 9.148 22.452 11.568 33.83 7.322 4.16-1.552 8.070-3.97 11.416-7.312 0.002-0.004 0.006-0.006 0.010-0.010l310.648-310.65 310.648 310.65c0.004 0.002 0.008 0.006 0.012 0.008 3.348 3.344 7.254 5.762 11.414 7.314 11.378 4.246 24.684 1.826 33.828-7.322l146.746-146.748c9.148-9.148 11.57-22.454 7.324-33.83-1.552-4.16-3.97-8.068-7.314-11.414z"></path>
+  </symbol>
+  <symbol id="icon-search" viewBox="0 0 973 1024">
+	<title>search</title>
+	<path class="path1"
+			d="M960 832l-249.125-249.125c35.563-58.063 57.125-125.719 57.125-198.875 0-212.031-172-384-384-384-212.031 0-384 171.969-384 384 0 212 171.969 384 384 384 73.156 0 140.812-21.562 198.875-57l249.125 249c17.5 17.5 46.5 17.375 64 0l64-64c17.5-17.5 17.5-46.5 0-64zM384 640c-141.375 0-256-114.625-256-256s114.625-256 256-256 256 114.625 256 256-114.625 256-256 256z"></path>
+</symbol>
+</defs>
+</svg>
+<body>
+	<p class="disc">I do not own any of these images. No rights goes to
+		me</p>
+	<div class="videoPlayer">
+		<iframe width="100%" height="100%"
+			src="https://www.youtube.com/embed/ej3ioOneTy8" class="videoH"
+			frameborder="0" allowfullscreen></iframe>
+		<div class="closeV">
+			<svg class="iconC icon-cross">
+    <use xlink:href="#icon-cross"></use>
+    </svg>
+		</div>
+	</div>
+	<div class="background"></div>
+	<div class="arrowL arr">
+		<svg class="icon icon-circle-left">
+  <use xlink:href="#icon-circle-left"></use>
+  </svg>
+	</div>
+	<div class="arrowR arr">
+		<svg class="icon icon-circle-right">
+  <use xlink:href="#icon-circle-right"></use>
+  </svg>
+	</div>
+	<div class="search">
+		<h2>SEARCH FOR A MOVIE</h2>
+		<input class="searchI" placeholder="SEARCH"></input>
+		<div class="proclose">
+			<svg class="iconpros icon-search">
+				<use xlink:href="#icon-search"></use></svg>
+		</div>
+	</div>
+	<div class="pro">
+		<svg class="iconpro icon-search">
+			<use xlink:href="#icon-search"></use></svg>
+	</div>
+	<div class="closepro">
+		<svg class="iconpros icon-search">
+			<use xlink:href="#icon-cross"></use></svg>
+	</div>
+	<div class="PageCon">
+		<div class="Page" data-myattribute="1">
+			<div class="HeroImg">
+				<div class="video">
+					<svg class="icon icon-play">
+        <use xlink:href="#icon-play"></use>
+        </svg>
+				</div>
+				<div class="Favorites">
+					<svg class="icon icon-heart">
+        <use xlink:href="#icon-heart"></use>
+        </svg>
+				</div>
+				<div class="imdb">8,4</div>
+				<div class="fade"></div>
+				<div class="triangleBottom"></div>
+			</div>
+			<div class="content">
+				<h3>THE MARTIAN</h3>
+				<p>During a manned mission to Mars, Astronaut Mark Watney (Matt
+					Damon) is presumed dead after a fierce storm and left behind by his
+					crew.</p>
+				<div class="rate">
+					<div class="star" data-myattribute="1">
+						<svg class="icon icons">
+          <use class="uses" xlink:href="#icon-star-empty"></use>
+          </svg>
+					</div>
+					<div class="star" data-myattribute="2">
+						<svg class="icon icons">
+          <use class="uses" xlink:href="#icon-star-empty"></use>
+          </svg>
+					</div>
+					<div class="star" data-myattribute="3">
+						<svg class="icon icons">
+          <use class="uses" xlink:href="#icon-star-empty"></use>
+          </svg>
+					</div>
+					<div class="star" data-myattribute="4">
+						<svg class="icon icons">
+          <use class="uses" xlink:href="#icon-star-empty"></use>
+          </svg>
+					</div>
+					<div class="star" data-myattribute="5">
+						<svg class="icon icons">
+          <use class="uses" xlink:href="#icon-star-empty"></use>
+          </svg>
+					</div>
+				</div>
+				<div class="ty">THANKS FOR RATING</div>
+			</div>
+		</div>
+	</div>
+	<div class="PageCon">
+		<div class="Page2" data-myattribute="2">
+			<div class="HeroImg">
+				<div class="video">
+					<svg class="icon icon-play">
+      <use xlink:href="#icon-play"></use>
+      </svg>
+				</div>
+				<div class="Favorites">
+					<svg class="icon icon-heart">
+      <use xlink:href="#icon-heart"></use>
+      </svg>
+				</div>
+				<div class="imdb">8,3</div>
+				<div class="fade"></div>
+				<div class="triangleBottom"></div>
+			</div>
+			<div class="content">
+				<h3></h3>
+				<p>A woman rebels against a tyrannical ruler in post apocalyptic
+					Australia in search for her homeland with the help of a group of
+					female prisoners, a psychotic worshiper, and a drifter named Max.</p>
+				<div class="rate">
+					<div class="star" data-myattribute="1">
+						<svg class="icon icons">
+        <use class="uses" xlink:href="#icon-star-empty"></use>
+        </svg>
+					</div>
+					<div class="star" data-myattribute="2">
+						<svg class="icon icons">
+        <use class="uses" xlink:href="#icon-star-empty"></use>
+        </svg>
+					</div>
+					<div class="star" data-myattribute="3">
+						<svg class="icon icons">
+        <use class="uses" xlink:href="#icon-star-empty"></use>
+        </svg>
+					</div>
+					<div class="star" data-myattribute="4">
+						<svg class="icon icons">
+        <use class="uses" xlink:href="#icon-star-empty"></use>
+        </svg>
+					</div>
+					<div class="star" data-myattribute="5">
+						<svg class="icon icons">
+        <use class="uses" xlink:href="#icon-star-empty"></use>
+        </svg>
+					</div>
+				</div>
+				<div class="ty">THANKS FOR RATING</div>
+			</div>
+		</div>
+</body>
+</html>

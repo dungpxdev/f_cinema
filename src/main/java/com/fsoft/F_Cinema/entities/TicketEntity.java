@@ -45,13 +45,13 @@ public class TicketEntity extends BaseEntity {
 
 	@Column(name = "gate")
 	private String gate;
+
+	@Column(name = "status")
+	private String status;
 	
 	@ManyToOne
 	@JoinColumn(name = "seat_id")
 	private SeatEntity seat;
-
-	@Column(name = "quantity")
-	private Long quantity;
 
 	@ManyToOne
 	@JoinColumn(name = "user_id")

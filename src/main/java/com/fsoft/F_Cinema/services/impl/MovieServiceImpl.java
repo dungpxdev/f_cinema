@@ -31,16 +31,8 @@ public class MovieServiceImpl implements MovieService {
 	}
 
 	@Override
-	public Optional<MovieEntity> findById(String id) {
-		try {
-			Long movieId = Long.parseLong(id);
-			return movieRepository.findById(movieId);
-		} catch (Exception e) {
-			logger.error(new StringBuilder("Parse movie error cause: ")
-					.append(e.getMessage()).toString());
-			return null;
-		}
-
+	public Optional<MovieEntity> findById(Long id) {
+		return movieRepository.findById(id);
 	}
 
 	@Override

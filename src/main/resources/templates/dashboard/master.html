@@ -39,7 +39,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="index.html" class="site_title"><img src="/images/movie-ticket.png" width="60"><span><img src="/icons/logo.svg" width="130"></span></a>
+              <a href="/" class="site_title"><img src="/images/movie-ticket.png" width="60"><span><img src="/icons/logo.svg" width="130"></span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -81,11 +81,14 @@
                           <ul class="nav child_menu">
                           	<li  class="sub_menu"><a href="/admin/room">Add Room</a></li>
                             <li><a href="/admin/seat">Add Seat</a></li>
-                            <li><a href="#">#</a></li>
-                            <li><a href="#">#</a></li>
                           </ul>
                         </li>
-				         <li><a href="/admin/ticket">Ticket Management</a></li>
+                 <li><a>Ticket Management<span class="fa fa-chevron-down"></span></a>
+                  <ul class="nav child_menu">
+                    <li  class="sub_menu"><a href="/admin/ticket">Ticket Generate</a></li>
+                    <li><a href="/admin/ticket/views">Ticket views</a></li>
+                  </ul>
+                </li>
 				         <li><a>Schedule Management<span class="fa fa-chevron-down"></span></a>
                           <ul class="nav child_menu">
                           	<li  class="sub_menu"><a href="/admin/schedule">Calendar view</a></li>
@@ -97,7 +100,6 @@
                           <ul class="nav child_menu">
                           	<li  class="sub_menu"><a href="/admin/cinema">All</a></li>
                             <li><a href="/admin/cinema/add">Add Cinema</a></li>
-                            <li><a href="#">#</a></li>
                           </ul>
                         </li>
 				        </ul>
