@@ -171,10 +171,18 @@ function onHandleClickSeat(events) {
     let cinemaModalCode = document.getElementById('cinemaModalCode');
     let cinemaModalName = document.getElementById('cinemaModalName');
     let seatStatusModal = document.getElementById('seatStatusModal');
+    let modalInput = document.getElementById('name');
 
+    modalInput.value = events.target.innerText;
     cinemaModalCode.innerHTML = cinemaSelect.value;
+    if (events.target.className.includes('selected')) {
+        document.querySelectorAll('.icheckbox_flat-green')[0].classList.add('checked');
+        seatStatusModal.value = true;
+    }else{
+        document.querySelectorAll('.icheckbox_flat-green')[0].classList.remove('checked');
+        seatStatusModal.value = false;
+    }
     cinemaModalName.innerHTML = $('#cinema option:selected').text();
-    seatStatusModal.setAttribute('checked', '');
     currentSelectedSeat = events.target;
     $('#seatModal').modal('show');
 }

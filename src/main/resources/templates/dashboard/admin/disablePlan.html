@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{/dashboard/master.html}">
+<head>
+	<title>F-Movie | Disable Planing Management</title>
+</head>
+<body>
+	<div layout:fragment="content">
+		<div class="row">
+			<div class="col-md-12 col-sm-12 col-xs-12">
+				<div class="x_panel">
+					<h3>Select an option that you want to plan disable</h3>
+					<div class="x_content">
+						<div class="row">
+							<div class="col-md-3 col-sm-12 col-xs-12 form-group">
+								<button id="btnCinema" type="button" class="btn btn-round btn-primary" data-toggle="collapse" data-target="#cinema" aria-expanded="false">
+									Cinema
+								</button>
+							</div>
+							<div class="col-md-3 col-sm-12 col-xs-12 form-group">
+								<button id="btnMovie" type="button" class="btn btn-round btn-primary" data-toggle="collapse" data-target="#movie" aria-expanded="false">
+									Movie
+								</button>
+							</div>
+							<div class="col-md-3 col-sm-12 col-xs-12 form-group">
+								<button id="btnRoom" type="button" class="btn btn-round btn-primary" data-toggle="collapse" data-target="#room" aria-expanded="false">
+									Room
+								</button>
+							</div>
+							<div class="col-md-3 col-sm-12 col-xs-12 form-group">
+								<button id="btnSeat" type="button" class="btn btn-round btn-primary" data-toggle="collapse" data-target="#seat" aria-expanded="false">
+									Seat
+								</button>
+							</div>
+						</div>
+						<div class="row">
+							<div class="collapse col-md-6 col-sm-12 col-xs-12 form-group" id="cinema">
+								<div class="card card-body">
+									<div>
+										<label for="cinemaSelect">Pick a cinema *:</label>
+										<select id="cinemaSelect" class="form-control" required>
+										  <option >Choose..</option>
+										  <option th:each="cinema: ${cinemas}" th:value="${cinema.code}" th:text="${cinema.name}"></option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="collapse col-md-6 col-sm-12 col-xs-12 form-group" id="movie">
+								<div class="card card-body">Anim pariatur cliche
+									reprehenderit, enim eiusmod high life accusamus terry
+									richardson ad squid. Nihil anim keffiyeh helvetica, craft beer
+									labore wes anderson cred nesciunt sapiente ea proident.
+								</div>
+							</div>
+							<div class="collapse col-md-6 col-sm-12 col-xs-12 form-group" id="room">
+								<div class="card card-body">Anim pariatur cliche
+									reprehenderit, enim eiusmod high life accusamus terry
+									richardson ad squid. Nihil anim keffiyeh helvetica, craft beer
+									labore wes anderson cred nesciunt sapiente ea proident.
+								</div>
+							</div>
+							<div class="collapse col-md-6 col-sm-12 col-xs-12 form-group" id="seat">
+								<div class="card card-body">Anim pariatur cliche
+									reprehenderit, enim eiusmod high life accusamus terry
+									richardson ad squid. Nihil anim keffiyeh helvetica, craft beer
+									labore wes anderson cred nesciunt sapiente ea proident.
+								</div>
+							</div>
+							<div class="col-md-6 col-sm-12 col-xs-12 form-group">
+								Date and Time
+								<form class="form-horizontal">
+								  <fieldset>
+									<div class="control-group">
+									  <div class="controls">
+										<div class="input-prepend input-group">
+										  <span class="add-on input-group-addon"><i class="glyphicon glyphicon-calendar fa fa-calendar"></i></span>
+										  <input type="text" name="reservation-time" id="reservation-time" class="form-control" value="01/01/2021 - 01/25/2021" />
+										</div>
+									  </div>
+									</div>
+								  </fieldset>
+								</form>
+							</div>
+						</div>
+						<div class="row mx-auto">
+							<button type="button" id="btnSubmit" class="btn btn-success">Submit</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" th:src="@{/vendors/main/js/disablePlan.js}"></script>
+	</div>
+</body>
+</html>

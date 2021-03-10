@@ -11,6 +11,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import com.fsoft.F_Cinema.constants.RoleConstant;
+
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -37,12 +39,43 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.authorizeRequests()
 			.antMatchers("/admin/auth/login").permitAll()
 			.antMatchers("/admin/auth/register").permitAll()
-//			.antMatchers("/admin/movie/**").hasAuthority("MOVIE_MANAGER")
-//			.antMatchers("/admin/ticket/**").hasAuthority("TICKET_MANAGER")
-//			.antMatchers("/api/v1/admin/ticket/**").hasAuthority("TICKET_MANAGER")
-//			.antMatchers("/api/v1/admin/movie/**").hasAuthority("MOVIE_MANAGER")
-			.antMatchers("/admin/**").hasAuthority("ADMIN")
-			.antMatchers("/api/v1/admin/**").hasAuthority("ADMIN")
+			
+			.antMatchers("/admin/movie/**")
+				.hasAnyAuthority(RoleConstant.MOVIE_MANAGER.getKey(), 
+								 RoleConstant.ADMIN.getKey())
+				
+			.antMatchers("/admin/schedule/**")
+				.hasAnyAuthority(RoleConstant.SCHEDULE_MANAGER.getKey(), 
+								 RoleConstant.ADMIN.getKey())
+				
+			.antMatchers("/admin/room/**")
+				.hasAnyAuthority(RoleConstant.ROOM_MANAGER.getKey(), 
+								 RoleConstant.ADMIN.getKey())
+				
+			.antMatchers("/admin/ticket/**")
+				.hasAnyAuthority(RoleConstant.TICKET_MANAGER.getKey(), 
+								 RoleConstant.ADMIN.getKey())
+				
+			.antMatchers("/api/v1/admin/ticket/**")
+				.hasAnyAuthority(RoleConstant.TICKET_MANAGER.getKey(), 
+								 RoleConstant.ADMIN.getKey())
+				
+			.antMatchers("/api/v1/admin/movie/**")
+				.hasAnyAuthority(RoleConstant.MOVIE_MANAGER.getKey(), 
+								 RoleConstant.ADMIN.getKey())
+				
+			.antMatchers("/api/v1/admin/schedule/**")
+				.hasAnyAuthority(RoleConstant.SCHEDULE_MANAGER.getKey(), 
+								 RoleConstant.ADMIN.getKey())
+				
+			.antMatchers("/api/v1/admin/room/**")
+				.hasAnyAuthority(RoleConstant.ROOM_MANAGER.getKey(), 
+								 RoleConstant.ADMIN.getKey())
+				
+			.antMatchers("/admin/**").hasAuthority(RoleConstant.ADMIN.getKey())
+			.antMatchers("/api/v1/admin/**").hasAuthority(RoleConstant.ADMIN.getKey())
+			
+			.antMatchers("/**").permitAll()
 			.anyRequest().authenticated()
 			.and()
 			.formLogin().loginPage("/admin/auth/login")
