@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -25,6 +27,8 @@ import com.fsoft.F_Cinema.utils.Converter;
 @RestController
 @RequestMapping(path = { "/api/v1/admin/room" })
 public class AdminRoomApi {
+	
+	Logger logger = LoggerFactory.getLogger(AdminRoomApi.class);
 
 	@Autowired
 	private RoomService roomService;
@@ -59,6 +63,7 @@ public class AdminRoomApi {
 
 			return new ResponseEntity<List<RoomDTO>>(rooms, HttpStatus.ACCEPTED);
 		} catch (Exception e) {
+			logger.error(e.getMessage());
 			apiResponse.setCreatedDate(new Date());
 			apiResponse.setMessage(e.getMessage());
 			errors.add(e.getMessage());

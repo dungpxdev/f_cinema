@@ -58,7 +58,7 @@ roomSelect.addEventListener('change', async (e) => {
         console.log(schedules);
         let options = '';
         for (const schedule of schedules) {
-            options += `<option value="${schedule.code}">${schedule.startTime + ' - '+ schedule.endTime}</option>`;
+            options += `<option value="${schedule.code}">${new Date(schedule.startTime).toLocaleString() + ' - '+ new Date(schedule.endTime).toLocaleString()}</option>`;
         }
         scheduleSelect.innerHTML = options;
     });
@@ -110,7 +110,7 @@ submitBtn.addEventListener('click', (e) => {
     fetchData(url, params)
     .then(data => {
         console.log(data);
-        alert(data.message);
+        alert(data.response.message);
         window.location.href = document.location.origin + '/admin/schedule';
     });
 })

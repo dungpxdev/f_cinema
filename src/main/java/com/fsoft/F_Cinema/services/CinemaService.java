@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.fsoft.F_Cinema.dto.CinemaDTO;
 import com.fsoft.F_Cinema.entities.CinemaEntity;
 
 @Service
@@ -35,4 +36,6 @@ public interface CinemaService {
 	CinemaEntity findById(Long id);
 	
 	CinemaEntity changeStatus(String cinemaCode) throws Exception;
+	
+	CinemaEntity update(String cinemaCode, CinemaDTO cinemaDTO);
 }

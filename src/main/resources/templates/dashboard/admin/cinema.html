@@ -51,7 +51,7 @@
                           <td>
                             <a th:text="${cinema.name}"></a>
                             <br />
-                            <small th:text="${cinema.createdDate}"></small>
+                            <small th:text="${#dates.format(cinema.createdDate, 'dd-MM-yyyy HH:mm')}"></small>
                           </td>
                           <td>
                             <ul class="list-inline">

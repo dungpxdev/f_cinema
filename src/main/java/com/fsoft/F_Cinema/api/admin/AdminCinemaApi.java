@@ -4,6 +4,8 @@ import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -22,6 +24,8 @@ import com.fsoft.F_Cinema.services.CinemaService;
 @RequestMapping(path = { "/api/v1/admin/cinema" })
 public class AdminCinemaApi {
 	
+	Logger logger = LoggerFactory.getLogger(AdminCinemaApi.class);
+	
 	@Autowired
 	private CinemaService cinemaService;
 
@@ -34,6 +38,7 @@ public class AdminCinemaApi {
 			apiResponse.apiResponseBuilder(null, HttpStatus.OK, cinemaEntity.getStatus(), cinemaEntity);
 			return new ResponseEntity<>(apiResponse, HttpStatus.OK);
 		} catch (Exception e) {
+			logger.error(e.getMessage());
 			List<String> errors = new ArrayList<String>();
 			errors.add(e.getMessage());
 			apiResponse.apiResponseBuilder(errors, HttpStatus.BAD_REQUEST, "Something wrong !", null);

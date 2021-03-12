@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -28,6 +30,8 @@ import com.fsoft.F_Cinema.services.ScheduleService;
 @RestController
 @RequestMapping(path = { "/api/v1/admin/schedule" })
 public class AdminScheduleApi {
+	
+	Logger logger = LoggerFactory.getLogger(AdminScheduleApi.class);
 	
 	@Autowired
 	private ScheduleService scheduleService;
@@ -60,6 +64,7 @@ public class AdminScheduleApi {
 
 			return new ResponseEntity<>(apiResponse, HttpStatus.OK);
 		} catch (Exception e) {
+			logger.error(e.getMessage());
 			List<String> errors = new ArrayList<String>();
 			errors.add(e.getMessage());
 			apiResponse = new ApiResponseDTO()
@@ -99,6 +104,7 @@ public class AdminScheduleApi {
 
 			return new ResponseEntity<>(apiResponse, HttpStatus.OK);
 		} catch (Exception e) {
+			logger.error(e.getMessage());
 			List<String> errors = new ArrayList<String>();
 			errors.add(e.getMessage());
 			apiResponse = new ApiResponseDTO()

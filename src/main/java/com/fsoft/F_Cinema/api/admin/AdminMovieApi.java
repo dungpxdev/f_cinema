@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -22,6 +24,8 @@ import com.fsoft.F_Cinema.services.MovieService;
 @RestController
 @RequestMapping(path = { "/api/v1/admin/movie" })
 public class AdminMovieApi {
+	
+	Logger logger = LoggerFactory.getLogger(AdminMovieApi.class);
 	
 	@Autowired
 	private MovieService movieService;
@@ -48,6 +52,7 @@ public class AdminMovieApi {
 			
 			return new ResponseEntity<>(movieEntity, HttpStatus.OK);
 		} catch (Exception e) {
+			logger.error(e.getMessage());
 			apiResponse.setMessage(e.getMessage());
 			errors.add(e.getMessage());
 

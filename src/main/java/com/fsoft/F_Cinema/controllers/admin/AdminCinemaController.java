@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -33,11 +34,11 @@ public class AdminCinemaController {
 	private Converter converter;
 
 	@PostMapping(path = { "/add" })
-	public String postCinema(Principal principal, @Valid CinemaDTO cinemaDTO) {
+	public String postCinema(Principal principal, @Valid final CinemaDTO cinemaDTO) {
 		try {
-			cinemaDTO.setCreatedBy(principal.getName());
-			cinemaDTO.setCreatedDate(new Date());
 			CinemaEntity cinemaEntity = converter.convertTo(cinemaDTO);
+			cinemaEntity.setCreatedBy(principal.getName());
+			cinemaEntity.setCreatedDate(new Date());
 			cinemaService.save(cinemaEntity);
 
 			logger.info(new StringBuilder("INSERTED: ")
@@ -58,6 +59,19 @@ public class AdminCinemaController {
 		List<CinemaEntity> cinemas = cinemaService.findAll();
 		model.addAttribute("cinemas", cinemas);
 		return "dashboard/admin/cinema";
+	}
+	
+	@GetMapping(path = { "/edit/{cinemaCode}" })
+	public String getEditCinema(Model model, @PathVariable String cinemaCode) {
+		CinemaEntity cinemaEntity = cinemaService.findByCode(cinemaCode);
+		model.addAttribute("cinema", cinemaEntity);
+		return "dashboard/admin/editCinema";
+	}
+	
+	@PostMapping(path = { "/edit/{cinemaCode}" })
+	public String postEditCinema(Model model, @PathVariable String cinemaCode, CinemaDTO cinemaDTO) {
+		cinemaService.update(cinemaDTO.getCode(), cinemaDTO);
+		return "redirect:/admin/cinema";
 	}
 	
 	@GetMapping(path = { "/add" })

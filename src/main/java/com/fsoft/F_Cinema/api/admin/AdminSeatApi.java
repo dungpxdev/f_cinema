@@ -99,6 +99,7 @@ public class AdminSeatApi {
 
 			return new ResponseEntity<>(response, HttpStatus.OK);
 		} catch (Exception e) {
+			logger.error(e.getMessage());
 			apiResponse.setCreatedDate(new Date());
 			apiResponse.setMessage(e.getMessage());
 			errors.add(e.getMessage());
@@ -157,6 +158,7 @@ public class AdminSeatApi {
 			
 			return new ResponseEntity<>(apiResponse, HttpStatus.OK);
 		} catch (Exception e) {
+			logger.error(e.getMessage());
 			apiResponse.setMessage("Adding seat failed cause some errors");
 			apiResponse.setStatus(HttpStatus.BAD_REQUEST);
 			errors.add(e.getMessage());

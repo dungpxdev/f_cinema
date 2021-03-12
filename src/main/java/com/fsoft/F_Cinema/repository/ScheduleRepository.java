@@ -17,4 +17,8 @@ public interface ScheduleRepository extends JpaRepository<ScheduleEntity, Long> 
 	List<ScheduleEntity> findByIds(@Param("movieId") Long movieId, @Param("roomId") Long roomId);
 	
 	ScheduleEntity findByCode(String code);
+	
+	@Query(value = "select * from schedules where convert(varchar(10), start_time, 120) = :date",
+		   nativeQuery = true)
+	List<ScheduleEntity> findByDate(@Param("date") String date);
 }

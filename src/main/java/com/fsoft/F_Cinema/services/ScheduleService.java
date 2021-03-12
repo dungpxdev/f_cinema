@@ -1,5 +1,6 @@
 package com.fsoft.F_Cinema.services;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -16,10 +17,12 @@ public interface ScheduleService {
 	ScheduleEntity save(ScheduleDTO scheduleDTO,
 						MovieEntity movieEntity, 
 						CinemaEntity cinemaEntity,
-						RoomEntity roomEntity);
+						RoomEntity roomEntity) throws Exception;
 
 	List<ScheduleEntity> findByIds(Long movieId, Long roomId);
 
 	ScheduleEntity findByCode(String code);
+	
+	List<ScheduleEntity> findByDate(Date date);
 
 }

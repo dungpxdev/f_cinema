@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.fsoft.F_Cinema.entities.CinemaEntity;
 
 @Repository
-public interface CinemaRepository extends JpaRepository<CinemaEntity, Long> {
+public interface CinemaRepository extends JpaRepository<CinemaEntity, Long>, CinemaRepositoryCustom {
 
 	@Query(value = "select top 1 * from cinema c left join user_cinema uc on c.id = uc.cinema_id where uc.user_id = :userId",
 		   nativeQuery = true)
