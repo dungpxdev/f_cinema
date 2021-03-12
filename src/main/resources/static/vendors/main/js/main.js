@@ -187,6 +187,29 @@ function onHandleClickSeat(events) {
     $('#seatModal').modal('show');
 }
 
+window.addEventListener('DOMContentLoaded', (event) => {
+    let inputStatusModal = document.querySelectorAll('.iCheck-helper')[0];
+    inputStatusModal.addEventListener('click', e => {
+        if (e.target.previousSibling.checked) {
+            console.log('remove scheduling ....');
+        }else {
+            let scheduleCalendar = `<div class="form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-3">Disable planing date: </label>
+            <div class="col-md-9 col-sm-9 col-xs-9">
+              <input type="text" id="inputScheduleCalendar" class="form-control">
+              <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+            </div>
+          </div>`;
+          let notify = `Date format: <code>MM/dd/yyyy HH:mm - MM/dd/yyyy HH:mm</code>`;
+          document.getElementById('scheduleCalendar').innerHTML = scheduleCalendar;
+          cinemaModalName.innerHTML = notify;
+            console.log('show scheduling ....');
+            console.log('call api ....');
+        }
+        document.getElementById('inputScheduleCalendar').value = getCurrentDayRange();
+    });
+});
+
 /**
  * Modal save button event
  * update value of current select seat
@@ -210,7 +233,7 @@ btnSaveSeatModal.addEventListener('click', async () => {
         await fetchData(url, seatParams)
         .then(async res => {
             console.log(res);
-            alert(res.message);
+            alertify.alert('Seat Management', res.message);
             container.innerHTML = '';
             await fetchData(document.location.origin + '/api/v1/admin/seat', {
                 cinemaCode: cinemaSelect.value,
@@ -235,5 +258,45 @@ btnSaveSeatModal.addEventListener('click', async () => {
                 $('#seatModal').modal('hide');
             });
         });
+
+        if (!seatStatusModal.checked) {
+            let inputScheduleCalendar = document.getElementById('inputScheduleCalendar');
+            if (inputScheduleCalendar.value) {
+                    let startTime = new Date(inputScheduleCalendar.value.split("-")[0]);
+                    let expireTime = new Date(inputScheduleCalendar.value.split("-")[1]);
+                    if (!isNaN(startTime.getTime()) && !isNaN(expireTime.getTime())) {
+                        let params = {
+                            startTime,
+                            expireTime
+                        }
+                        
+                    }
+            }
+        }
     }
 });
+
+function getCurrentDayRange() {
+    let current = new Date();
+    let nextDay = new Date();
+    nextDay.setDate(nextDay.getDate() + 1);
+
+    let now = {
+        month: current.getMonth() < 10 ? '0' + current.getMonth().toString() : current.getMonth(),
+        day: current.getDay() < 10 ? '0' + current.getDay().toString() : current.getDay(),
+        year: current.getFullYear(),
+        hour: current.getHours() < 10 ? '0' + current.getHours().toString() : current.getHours(),
+        minutes: current.getMinutes() < 10 ? '0' + current.getMinutes().toString() : current.getMinutes()
+    }
+
+    let tomorrow = {
+        month: nextDay.getMonth() < 10 ? '0' + nextDay.getMonth().toString() : nextDay.getMonth(),
+        day: nextDay.getDay() < 10 ? '0' + nextDay.getDay().toString() : nextDay.getDay(),
+        year: nextDay.getFullYear(),
+        hour: nextDay.getHours() < 10 ? '0' + nextDay.getHours().toString() : nextDay.getHours(),
+        minutes: nextDay.getMinutes() < 10 ? '0' + nextDay.getMinutes().toString() : nextDay.getMinutes()
+    }
+
+    return `${now.month}/${now.day}/${now.year} ${now.hour}:${now.minutes} - 
+    ${tomorrow.month}/${tomorrow.day}/${tomorrow.year} ${tomorrow.hour}:${tomorrow.minutes}`;
+}

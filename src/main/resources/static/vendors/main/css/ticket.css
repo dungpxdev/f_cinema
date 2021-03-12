@@ -104,6 +104,7 @@ margin: 40px auto 0;
 }
 .event-title h3 {
     margin: 0;
+    font-size: 15px;
 }
 .event-image{
     width: calc(46% - 20px);
@@ -111,12 +112,11 @@ margin: 40px auto 0;
     margin: 10px;
     float: left;
     overflow: hidden;
-text-align: center;
+	text-align: center;
 }
-.image {
+.image img{
     display: block;
-    height: 100%;
-      width: 100%;
-      background: url('https://bizweb.dktcdn.net/thumb/large/100/098/550/files/mo-hinh-iron-man-mark-46-polystone-ti-le-12-cao-35cm-mk46-civil-war-1.jpg?v=1575022160977') no-repeat center;
-      background-size: cover;
+    width: 100%;
+    height: auto;
+    background-size: cover;
 }

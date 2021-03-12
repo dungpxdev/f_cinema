@@ -19,9 +19,6 @@ import com.fsoft.F_Cinema.utils.CodeGenerateUtils;
 
 @Service
 public class ScheduleServiceImpl implements ScheduleService {
-	
-	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
 	@Autowired
 	private ScheduleRepository scheduleRepository;
 	
@@ -41,6 +38,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 	@Override
 	public ScheduleEntity save(ScheduleDTO scheduleDTO, MovieEntity movieEntity, CinemaEntity cinemaEntity,
 			RoomEntity roomEntity) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		ScheduleEntity scheduleEntity = new ScheduleEntity();
 		String code = codeGeneratorUtils.scheduleCodeGenerator(
 				cinemaEntity.getCode(),

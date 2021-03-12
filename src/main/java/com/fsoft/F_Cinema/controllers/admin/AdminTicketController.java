@@ -18,6 +18,7 @@ import com.fsoft.F_Cinema.entities.MovieEntity;
 import com.fsoft.F_Cinema.entities.RoomEntity;
 import com.fsoft.F_Cinema.entities.ScheduleEntity;
 import com.fsoft.F_Cinema.entities.SeatEntity;
+import com.fsoft.F_Cinema.entities.TicketEntity;
 import com.fsoft.F_Cinema.services.CinemaService;
 import com.fsoft.F_Cinema.services.MovieService;
 import com.fsoft.F_Cinema.services.RoomService;
@@ -63,12 +64,12 @@ public class AdminTicketController {
 	}
 
 	@PostMapping(path = { "/generate" })
-	public String generateTickets(final TicketDTO ticketDTO, final Principal principal) {
+	public String generateTickets(final TicketDTO ticketDTO, final Principal principal, Model model) {
 		try {
 			ScheduleEntity scheduleEntity = scheduleService.findByCode(ticketDTO.getSchedule());
 			List<SeatEntity> seats = seatService.findAllSeatNotOcupied(scheduleEntity, ticketDTO);
-			ticketService.generate(seats, scheduleEntity);
-
+			ticketService.generate(seats, scheduleEntity, ticketDTO);
+			
 		} catch (Exception e) {
 			logger.error(new StringBuilder("Ticket Generate Error Cause: ")
 					.append(e.getMessage())
@@ -79,8 +80,15 @@ public class AdminTicketController {
 	}
 
 	@GetMapping(path = { "/views" })
-	public String getTickets(Principal principal) {
-
+	public String getTickets(Model model) {
+		List<TicketEntity> tickets = ticketService.findAllByStatus("AVAILABLE");
+		List<TicketDTO> ticketDTOs = ticketService.mapping(tickets);
+		List<CinemaEntity> cinemas = cinemaService.findAll();
+		List<MovieEntity> movies = movieService.findAll();
+		
+		model.addAttribute("cinemas", cinemas);
+		model.addAttribute("movies", movies);
+		model.addAttribute("tickets", ticketDTOs);
 		return "dashboard/admin/ticketView";
 	}
 }

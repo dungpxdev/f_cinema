@@ -23,4 +23,5 @@ public interface RoomRepository extends JpaRepository<RoomEntity, Long> {
 			@Param("cinemaId") Long cinemaId);
 	
 	RoomEntity findByCode(String code);
+	
 }

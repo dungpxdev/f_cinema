@@ -69,6 +69,10 @@ public class Converter {
 		return movieBuilder;
 	}
 	
+	public MovieDTO convertTo(MovieEntity movieEntity) {
+		return new ModelMapper().map(movieEntity, MovieDTO.class);
+	}
+	
 	public RoomEntity convertTo(RoomDTO roomDTO) {
 		return new ModelMapper().map(roomDTO, RoomEntity.class);
 	}
@@ -105,8 +109,12 @@ public class Converter {
 		return new ModelMapper().map(scheduleDTO, ScheduleEntity.class);
 	}
 	
+	public ScheduleDTO convertTo(ScheduleEntity scheduleEntity) {
+		return new ModelMapper().map(scheduleEntity, ScheduleDTO.class);
+	}
+	
 	public TicketEntity convertTo(TicketDTO ticketDTO) {
 		return new ModelMapper().map(ticketDTO, TicketEntity.class);
 	}
-
+	
 }

@@ -39,6 +39,9 @@ public class CinemaEntity extends BaseEntity {
 	@Column(name = "number_of_room")
 	private Integer numberOfRoom;
 
+	@Column(name = "status")
+	private String status;
+
 	@Nationalized
 	@Column(name = "address")
 	private String address;

@@ -72,9 +72,9 @@
                             <button type="button" class="btn btn-success btn-xs">Running</button>
                           </td>
                           <td>
-                            <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>
-                            <a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
-                            <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
+                            <a th:href="'/admin/cinema/?cienma=' + ${cinema.code}" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>
+                            <a th:href="'/admin/cinema/edit/' + ${cinema.code}" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
+                            <button th:classappend="${cinema.status == 'ACTIVE'}? 'btn-danger' : 'btn-success'" class="btn btn-xs cinema-deactive" th:value="${cinema.code}" th:text="${cinema.status == 'ACTIVE'? 'Deactive': 'Active'}"><i class="fa fa-trash-o"></i></button>
                           </td>
                         </tr>
                       </tbody>
@@ -85,6 +85,7 @@
                 </div>
               </div>
           </div>
+          <script th:src="@{/vendors/main/js/cinema.js}"></script>
         </div>
 </body>
 </html>

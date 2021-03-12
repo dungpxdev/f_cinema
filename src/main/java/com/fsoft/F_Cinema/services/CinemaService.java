@@ -33,4 +33,6 @@ public interface CinemaService {
 	CinemaEntity findByCode(String code);
 	
 	CinemaEntity findById(Long id);
+	
+	CinemaEntity changeStatus(String cinemaCode) throws Exception;
 }

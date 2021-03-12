@@ -69,7 +69,7 @@ public class AdminScheduleApi {
 		}
 	}
 	
-	@PostMapping(path = { "/fetch", "" },
+	@PostMapping(path = { "/fetch" },
 			produces = { MediaType.APPLICATION_JSON_VALUE },
 			consumes = { MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<?> fetchAllSchedule(

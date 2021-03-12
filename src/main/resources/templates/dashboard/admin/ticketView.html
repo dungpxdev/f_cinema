@@ -31,70 +31,58 @@
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
-                  	<div class='event col-lg-3 col-md-3 col-sm-6 col-xs-12'>
-				      <div class='event-side'>
-				          <div class='dotted-line-separator'><span class='line'></span></div>
-				          <div class='event-icon'><span></span></div>
-				          <div class='event-date'>Jan 17</div>
-				          <div class='event-time'>11 PM <span class='to'>to </span>12 PM</div>
-				          <div class='cut-out'></div>
-				      </div>
-				      <div class='event-body'>
-				        <div class='event-image'><a href='#'><span class='image'></a></div>
-				        <div class="event-location">Club Disco</div>
-				        <div class="event-title"><h3>Spinning</h3><span>as Resident DJ</span></div>
-				        <div class="event-details">Techno and HipHop</div>	
-				      </div>
-					</div>
-					<div class='event col-lg-3 col-md-3 col-sm-6 col-xs-12'>
-						<div class='event-side'>
-							<div class='dotted-line-separator'><span class='line'></span></div>
-							<div class='event-icon'><span></span></div>
-							<div class='event-date'>Jan 17</div>
-							<div class='event-time'>11 PM <span class='to'>to </span>12 PM</div>
-							<div class='cut-out'></div>
-						</div>
-						<div class='event-body'>
-						  <div class='event-image'><a href='#'><span class='image'></a></div>
-						  <div class="event-location">Club Disco</div>
-						  <div class="event-title"><h3>Spinning</h3><span>as Resident DJ</span></div>
-						  <div class="event-details">Techno and HipHop</div>	
-						</div>
-					  </div>
-					  <div class='event col-lg-3 col-md-3 col-sm-6 col-xs-12'>
-						<div class='event-side'>
-							<div class='dotted-line-separator'><span class='line'></span></div>
-							<div class='event-icon'><span></span></div>
-							<div class='event-date'>Jan 17</div>
-							<div class='event-time'>11 PM <span class='to'>to </span>12 PM</div>
-							<div class='cut-out'></div>
-						</div>
-						<div class='event-body'>
-						  <div class='event-image'><a href='#'><span class='image'></a></div>
-						  <div class="event-location">Club Disco</div>
-						  <div class="event-title"><h3>Spinning</h3><span>as Resident DJ</span></div>
-						  <div class="event-details">Techno and HipHop</div>	
-						</div>
-					  </div>
-					  <div class='event col-lg-3 col-md-3 col-sm-6 col-xs-12'>
-						<div class='event-side'>
-							<div class='dotted-line-separator'><span class='line'></span></div>
-							<div class='event-icon'><span></span></div>
-							<div class='event-date'>Jan 17</div>
-							<div class='event-time'>11 PM <span class='to'>to </span>12 PM</div>
-							<div class='cut-out'></div>
-						</div>
-						<div class='event-body'>
-						  <div class='event-image'><a href='#'><span class='image'></a></div>
-						  <div class="event-location">Club Disco</div>
-						  <div class="event-title"><h3>Spinning</h3><span>as Resident DJ</span></div>
-						  <div class="event-details">Techno and HipHop</div>	
-						</div>
-					  </div>
-                  </div>
+                    <div class="row">
+                      <div class="col-md-4 col-sm-12 col-xs-12 form-group">
+                        <label for="cinema">Pick a cinema *:</label>
+                        <select id="cinema" class="form-control" required>
+                          <option value="">Choose..</option>
+                          <option th:each="cinema: ${cinemas}" th:value="${cinema.code}" th:text="${cinema.name}"></option>
+                        </select>
+                      </div>
+                      <div class="col-md-4 col-sm-12 col-xs-12 form-group">
+                        <label for="room">Pick a room *:</label>
+                        <select id="room" class="form-control" required>
+                          <option value="">Choose..</option>
+                          <option value="press">Press</option>
+                          <option value="net">Internet</option>
+                          <option value="mouth">Word of mouth</option>
+                        </select>
+                      </div>
+                      <div class="col-md-4 col-sm-12 col-xs-12 form-group">
+                        <label for="movie">Pick a movie *:</label>
+                        <select id="movie" class="form-control" required>
+                          <option value="">Choose..</option>
+                          <option th:each="movie: ${movies}" th:value="${movie.code}" th:text="${movie.name}"></option>
+                        </select>
+                      </div>
+                    </div>
+                    <div th:each="ticket: ${tickets}">
+                  	  <div class='event col-md-1 col-sm-12 col-xs-12 form-group'>
+				                <div class='event-side'>
+				                  <div class='dotted-line-separator'><span class='line'></span></div>
+				                  <div class='event-icon'><span></span></div>
+				                  <div class='event-time'><span th:text="${#dates.format(ticket.startTime, 'dd-MM-yyyy HH:mm')}"></span><label class='to'>to </label><span th:text="${#dates.format(ticket.expireTime, 'dd-MM-yyyy HH:mm')}"></span></div>
+				                  <div class='cut-out'></div>
+				                </div>
+				              <div class='event-body'>
+				                <div class='event-image'><a href='#'><span class='image'>
+				                	<img th:src="${ticket.movieDTO.image}" alt="AI is analyzing...">
+				                </span>
+				                </a></div>
+				                <div class="event-location" th:text="${ticket.cinema}"></div>
+				                <div class="event-title"><h3 th:text="${ticket.movieDTO.name}"></h3><span th:text="${ticket.movieDTO.cast}"></span></div>
+				                <div class="event-details">
+				                	<label>Seat: <span  th:text="${ticket.seat}"></span></label>
+				                	<label>|</label>
+				                	<label>Room: <span th:text="${ticket.room}"></span></label>
+				                </div>
+				              </div>
+					          </div>
+					        </div>
                 </div>
-              </div>
-          </div>
+            </div>
+        </div>
+      </div>
         <!-- Custom Js -->
     	<script type="text/javascript" th:src="@{/vendors/main/js/fetch.js}"></script>
         </div>

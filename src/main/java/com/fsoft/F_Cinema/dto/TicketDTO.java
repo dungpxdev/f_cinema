@@ -31,4 +31,5 @@ public class TicketDTO extends AbstractDTO {
 	private String room;
 	private String cinema;
 	private TicketCategoryDTO ticketCat;
+	private MovieDTO movieDTO;
 }

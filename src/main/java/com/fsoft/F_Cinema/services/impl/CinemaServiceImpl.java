@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.fsoft.F_Cinema.constants.CinemaConstants;
 import com.fsoft.F_Cinema.entities.CinemaEntity;
 import com.fsoft.F_Cinema.entities.UserEntity;
 import com.fsoft.F_Cinema.repository.CinemaRepository;
@@ -46,6 +47,20 @@ public class CinemaServiceImpl implements CinemaService {
 	@Override
 	public CinemaEntity findById(Long id) {
 		return cinemaRepository.findById(id).get();
+	}
+
+	@Override
+	public CinemaEntity changeStatus(String cinemaCode) throws Exception {
+		CinemaEntity cinemaEntity = cinemaRepository.findByCode(cinemaCode);
+		if (cinemaEntity == null)
+			throw new Exception("Cinema Not Found");
+
+		if (CinemaConstants.ACTIVE.getKey().equals(cinemaEntity.getStatus()))
+			cinemaEntity.setStatus(CinemaConstants.DEACTIVE.getKey());
+		else
+			cinemaEntity.setStatus(CinemaConstants.ACTIVE.getKey());
+
+		return cinemaRepository.save(cinemaEntity);
 	}
 
 }
