@@ -65,7 +65,9 @@ public class TicketServiceImpl implements TicketService {
 						movieEntity.getCode(), 
 						seatCode));
 				ticketEntity.setStatus(TicketStatusConstant.AVAILABLE.getKey());
-				ticketEntity.setPrice(ticketDTO.getPrice());
+				ticketEntity.setPrice(
+						(long) this.calulateTicketPrice(movieEntity.getPrice(), 
+								Math.toIntExact(ticketDTO.getPrice())));
 
 				ticketRepository.save(ticketEntity);
 			}
@@ -122,5 +124,9 @@ public class TicketServiceImpl implements TicketService {
 		}
 		
 		return result;
+	}
+	
+	private int calulateTicketPrice(int moviePrice, int ticketPrice) {
+		return moviePrice + ticketPrice;
 	}
 }

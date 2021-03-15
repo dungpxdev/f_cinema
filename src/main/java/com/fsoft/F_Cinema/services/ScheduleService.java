@@ -24,5 +24,7 @@ public interface ScheduleService {
 	ScheduleEntity findByCode(String code);
 	
 	List<ScheduleEntity> findByDate(Date date);
+	
+	List<ScheduleEntity> findNexts();
 
 }

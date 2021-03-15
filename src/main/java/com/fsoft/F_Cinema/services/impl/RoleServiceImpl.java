@@ -31,4 +31,9 @@ public class RoleServiceImpl implements RoleService {
 		return roleRepository.saveUserRole(userId, roleId);
 	}
 
+	@Override
+	public RoleEntity findById(Long id) {
+		return roleRepository.findById(id).get();
+	}
+
 }

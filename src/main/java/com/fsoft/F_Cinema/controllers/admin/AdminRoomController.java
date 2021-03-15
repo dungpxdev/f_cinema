@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.fsoft.F_Cinema.constants.SeatConstant;
 import com.fsoft.F_Cinema.dto.RoomDTO;
 import com.fsoft.F_Cinema.entities.CinemaEntity;
 import com.fsoft.F_Cinema.entities.RoomEntity;
@@ -44,14 +45,24 @@ public class AdminRoomController {
 	}
 	
 	@PostMapping(path = { "/", "" })
-	public String postRoom(RoomDTO roomDTO, Model model, Principal principal) {
+	public String postRoom(final RoomDTO roomDTO, Model model, Principal principal) {
 		try {
-			roomDTO.setCreatedBy(principal.getName());
-			roomDTO.setCreatedDate(new Date());
-			roomDTO.setName(roomDTO.getName().toUpperCase());
-			roomDTO.setCode(roomDTO.getCode().toUpperCase());
+
 			RoomEntity roomEntity = converter.convertTo(roomDTO);
+			roomEntity.setCreatedBy(principal.getName());
+			roomEntity.setCreatedDate(new Date());
+			roomEntity.setName(roomDTO.getName().toUpperCase());
+			roomEntity.setCode(roomDTO.getCode().toUpperCase());
+			
 			CinemaEntity cinemaEntity = cinemaService.findByCode(roomDTO.getCinema());
+			
+			if (roomEntity.getNumberOfSeat() % SeatConstant.NUMBERSEATOFROW.getValue() != 0) {
+				throw new Exception("Number of seats provided invalid");
+			}
+			
+			
+			
+			
 			RoomEntity isExistRoom = roomService.findByCodeAndCinemaId(roomEntity.getCode(), cinemaEntity.getId());
 			List<String> errors = new ArrayList<String>();
 			if (isExistRoom != null) {

@@ -21,4 +21,8 @@ public interface ScheduleRepository extends JpaRepository<ScheduleEntity, Long> 
 	@Query(value = "select * from schedules where convert(varchar(10), start_time, 120) = :date",
 		   nativeQuery = true)
 	List<ScheduleEntity> findByDate(@Param("date") String date);
+	
+	@Query(value = "select * from schedules where start_time >= GETDATE()", 
+		   nativeQuery = true)
+	List<ScheduleEntity> findNexts();
 }

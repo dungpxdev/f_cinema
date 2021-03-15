@@ -106,6 +106,9 @@ public class MovieEntity extends BaseEntity {
 	@Column(name = "trailer")
 	private String trailer;
 
+	@Column(name = "price")
+	private Integer price;
+
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "movie_category_id", referencedColumnName = "id")
 	private MovieCategoryEntity movieCat;

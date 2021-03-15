@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{/dashboard/master.html}">
+<head>
+	<title>F-Movie | Schedule Management</title>
+	<link th:href="@{/vendors/main/schedule.css}" rel="stylesheet">
+</head>
+<body>
+	<div layout:fragment="content">
+		<div class="row">
+			<div class="col-md-12 col-sm-12 col-xs-12">
+				<div class="x_panel">
+					<div class="x_content">
+						<div>
+							<p></p>
+
+							<div class="table-responsive">
+							  <table class="table table-striped jambo_table bulk_action">
+								<thead>
+								  <tr class="headings">
+									<th>
+									  <input type="checkbox" id="check-all" class="flat">
+									</th>
+									<th class="column-title">Code </th>
+									<th class="column-title">Date </th>
+									<th class="column-title">Movie </th>
+									<th class="column-title">Created By </th>
+									<th class="column-title">Status </th>
+									<th class="column-title">Room </th>
+									<th class="column-title no-link last"><span class="nobr">Action</span>
+									</th>
+									<th class="bulk-actions" colspan="7">
+									  <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+									</th>
+								  </tr>
+								</thead>
+		
+								<tbody>
+								  <tr class="odd pointer" th:each="schedule: ${schedules}">
+									<td class="a-center ">
+									  <input type="checkbox" class="flat" name="table_records">
+									</td>
+									<td class=" " th:text="${schedule.code}"></td>
+									<td class=" " th:text="${#dates.format(schedule.startTime, 'dd-MM-yyyy HH:mm')}  + ' - ' + ${#dates.format(schedule.endTime, 'dd-MM-yyyy HH:mm')}"></td>
+									<td class=" " th:text="${schedule.movie.name}"> <i class="success fa fa-long-arrow-up"></i>
+									</td>
+									<td class=" " th:text="${schedule.createdBy}"></td>
+									<td class=" " th:text="${schedule.status}"></td>
+									<td class="a-right a-right " th:text="${schedule.room.name}"></td>
+									<td class=" last"><a href="#">View</a>
+									</td>
+								  </tr>
+								  <!-- even pointer -->
+								</tbody>
+							  </table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script th:src="@{/vendors/main/js/schedule.js}"></script>
+	</div>
+</body>
+</html>

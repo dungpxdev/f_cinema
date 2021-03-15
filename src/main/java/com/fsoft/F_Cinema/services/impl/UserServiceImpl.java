@@ -33,8 +33,6 @@ public class UserServiceImpl implements UserService {
 
 	Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 	
-	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
 	@Autowired
 	private UserRepository userRepository;
 	
@@ -101,6 +99,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public UserEntity createMember(UserDTO userDTO) throws Exception {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		List<String> errors = new ArrayList<String>();
 		
 		switch (userDTO.getGender()) {

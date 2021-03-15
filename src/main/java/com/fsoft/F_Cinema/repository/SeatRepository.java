@@ -23,4 +23,7 @@ public interface SeatRepository extends JpaRepository<SeatEntity, Long>, SeatRep
 	List<SeatEntity> findByCinemaCodeAndRoomCode(@Param("cinemaCode") String cinemaCode, @Param("roomCode") String roomCode);
 	
 	SeatEntity findByCode(String code);
+	
+	@Query(value = "select count(*) from seat where room_id = :roomId", nativeQuery = true)
+	Integer count(@Param("roomId") Long roomId);
 }

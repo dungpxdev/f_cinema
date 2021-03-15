@@ -28,4 +28,6 @@ public interface SeatService {
 	SeatEntity update(SeatEntity seatEntity);
 	
 	List<SeatEntity> findAllSeatNotOcupied(ScheduleEntity scheduleEntity, TicketDTO ticketDTO);
+	
+	int count(String cinemaCode, String roomCode);
 }

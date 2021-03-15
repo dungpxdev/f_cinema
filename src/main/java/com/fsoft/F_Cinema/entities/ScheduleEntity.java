@@ -41,6 +41,9 @@ public class ScheduleEntity extends BaseEntity {
 
 	@Column(name = "start_time")
 	private Date startTime;
+	
+	@Column(name = "status")
+	private String status;
 
 	@Column(name = "end_time")
 	private Date endTime;

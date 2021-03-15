@@ -68,7 +68,7 @@ public class AdminScheduleApi {
 			List<String> errors = new ArrayList<String>();
 			errors.add(e.getMessage());
 			apiResponse = new ApiResponseDTO()
-					.apiResponseBuilder(errors, HttpStatus.BAD_REQUEST, "Post Schedule error!", null);
+					.apiResponseBuilder(errors, HttpStatus.BAD_REQUEST, e.getMessage(), null);
 
 			return new ResponseEntity<>(apiResponse, HttpStatus.BAD_REQUEST);
 		}

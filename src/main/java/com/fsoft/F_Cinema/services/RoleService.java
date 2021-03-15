@@ -11,4 +11,6 @@ public interface RoleService {
 	RoleEntity findByCode(Integer code);
 
 	Long saveUserRole(Long userId, Long roleId);
+	
+	RoleEntity findById(Long id);
 }

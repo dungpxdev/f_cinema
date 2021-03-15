@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.fsoft.F_Cinema.entities.CinemaEntity;
 import com.fsoft.F_Cinema.entities.MovieEntity;
 import com.fsoft.F_Cinema.entities.RoomEntity;
+import com.fsoft.F_Cinema.entities.ScheduleEntity;
 import com.fsoft.F_Cinema.services.CinemaService;
 import com.fsoft.F_Cinema.services.MovieService;
 import com.fsoft.F_Cinema.services.RoomService;
+import com.fsoft.F_Cinema.services.ScheduleService;
 
 @Controller
 @RequestMapping("/admin/schedule")
@@ -32,6 +34,9 @@ public class AdminScheduleController {
 	
 	@Autowired
 	private MovieService movieService;
+	
+	@Autowired
+	private ScheduleService scheduleService;
 
 	@GetMapping(path = { "/", "" })
 	public String getSchedule() {
@@ -48,6 +53,13 @@ public class AdminScheduleController {
 		model.addAttribute("rooms", rooms);
 		model.addAttribute("movies", movies);
 		return "dashboard/admin/addSchedule";
+	}
+
+	@GetMapping(path = { "/table" })
+	public String getScheduleTable(Model model) {
+		List<ScheduleEntity> scheduleEntities = scheduleService.findNexts();
+		model.addAttribute("schedules", scheduleEntities);
+		return "dashboard/admin/scheduleTable";
 	}
 
 }

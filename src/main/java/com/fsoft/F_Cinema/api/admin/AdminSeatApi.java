@@ -187,12 +187,14 @@ public class AdminSeatApi {
 			CinemaEntity cinemaEntity = cinemaService.findByCode(params.getCinemaCode());
 			RoomEntity roomEntity = roomService.findByCodeAndCinemaId(params.getRoomCode(),
 					cinemaEntity.getId());
+			
 			if (roomEntity == null) {
 				apiResponse.setMessage("Save list of seats failed");
 				apiResponse.setStatus(HttpStatus.BAD_REQUEST);
 				return new ResponseEntity<>(apiResponse, HttpStatus.BAD_REQUEST);
 			}
 			int rowSize = SeatConstant.NUMBERSEATOFROW.getValue();
+			isValidQuantityOfSeat(cinemaEntity, roomEntity, rowSize);
 			List<SeatEntity> newSeats = new ArrayList<SeatEntity>();
 			for (int i = 0; i < rowSize; i++) {
 				SeatEntity seatEntity = new SeatEntity();
@@ -231,6 +233,25 @@ public class AdminSeatApi {
 		}
 		
 		return new ResponseEntity<>(apiResponse, HttpStatus.BAD_REQUEST);
+	}
+
+	/**
+	 * @param cinemaEntity
+	 * @param roomEntity
+	 * @param rowSize
+	 * @throws Exception
+	 */
+	private void isValidQuantityOfSeat(CinemaEntity cinemaEntity, 
+			RoomEntity roomEntity, 
+			int rowSize) throws Exception {
+		Integer currentRowSize = seatService.count(cinemaEntity.getCode(), 
+				roomEntity.getCode());
+		if (currentRowSize + rowSize > roomEntity.getNumberOfSeat()) {
+			throw new Exception(new StringBuilder("The room ")
+					.append(roomEntity.getCode())
+					.append(" number of seat not valid")
+					.toString());
+		}
 	}
 	
 }

@@ -23,6 +23,7 @@ public class MovieDTO extends AbstractDTO {
 
 	private String name;
 	private String code;
+	private Integer price;
 	private String startTime;
 	private String endTime;
 	private String cast;

@@ -4,12 +4,14 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import com.fsoft.F_Cinema.constants.ScheduleStatusConstant;
 import com.fsoft.F_Cinema.dto.ScheduleDTO;
 import com.fsoft.F_Cinema.entities.CinemaEntity;
 import com.fsoft.F_Cinema.entities.MovieEntity;
@@ -48,10 +50,11 @@ public class ScheduleServiceImpl implements ScheduleService {
 			RoomEntity roomEntity) throws Exception {
 		Authentication authentication = SecurityContextHolder.getContext()
 											.getAuthentication();
-		scheduleDateValidate(scheduleDTO);
+		scheduleDateValidate(scheduleDTO, movieEntity);
 
 		ScheduleEntity scheduleEntity = scheduleBuild(scheduleDTO, 
 				movieEntity, cinemaEntity, roomEntity, authentication);
+		scheduleEntity.setStatus(ScheduleStatusConstant.WAITING.getKey());
 
 		return scheduleRepository.save(scheduleEntity);
 	}
@@ -78,10 +81,16 @@ public class ScheduleServiceImpl implements ScheduleService {
 		return scheduleEntity;
 	}
 
-	private void scheduleDateValidate(ScheduleDTO scheduleDTO) throws Exception {
+	private void scheduleDateValidate(ScheduleDTO scheduleDTO, MovieEntity movieEntity) throws Exception {
 		if (scheduleDTO.getStartTime().compareTo(new Date()) < 0)
 			throw new Exception("The Time provide is passed");
 		
+		long diffInMinutes = Math.abs(scheduleDTO.getEndTime().getTime() - scheduleDTO.getStartTime().getTime());
+		long scheduleDuration = TimeUnit.DAYS.convert(diffInMinutes, TimeUnit.MINUTES);
+		if (scheduleDuration < movieEntity.getLength()) {
+			throw new Exception("The Time provide is less than movie length");
+		}
+	    
 		List<ScheduleEntity> schedules = this.findByDate(scheduleDTO.getStartTime());
 		if (!schedules.isEmpty()) {
 			List<Date> range1 = new ArrayList<Date>();
@@ -106,6 +115,11 @@ public class ScheduleServiceImpl implements ScheduleService {
 		List<ScheduleEntity> schedules = scheduleRepository.findByDate(
 											sdf.format(date).toString());
 		return schedules;
+	}
+
+	@Override
+	public List<ScheduleEntity> findNexts() {
+		return scheduleRepository.findNexts();
 	}
 
 }

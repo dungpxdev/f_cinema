@@ -189,4 +189,17 @@ public class SeatServiceImpl implements SeatService {
 		return seats;
 	}
 
+	@Override
+	public int count(String cinemaCode, String roomCode) {
+		CinemaEntity cinemaEntity = cinemaService.findByCode(cinemaCode);
+		RoomEntity roomEntity = roomService.findByCodeAndCinemaId(roomCode, cinemaEntity.getId());
+		if (seatRepository.count(roomEntity.getId()) != null) {
+			if (seatRepository.count(roomEntity.getId()) == null) {
+				return 0;
+			}
+		}
+
+		return seatRepository.count(roomEntity.getId());
+	}
+
 }

@@ -10,6 +10,7 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -47,7 +48,7 @@ public class AdminMovieController {
 		return "dashboard/admin/addMovie";
 	}
 
-	@PostMapping(path = { "/add" })
+	@PostMapping(path = { "/add" }, consumes = { MediaType.APPLICATION_FORM_URLENCODED_VALUE })
 	public String postMovie(MovieDTO movieDTO, Model model, Principal principal) {
 		try {
 			MultipartFile multipartFile = movieDTO.getPoster();
@@ -59,6 +60,7 @@ public class AdminMovieController {
 			MovieEntity movieEntity = converter.convertTo(movieDTO);
 			movieEntity.setCreatedDate(new Date());
 			movieEntity.setCreatedBy(principal.getName());
+			movieEntity.setPrice(movieDTO.getPrice());
 			
 			movieService.save(movieEntity);
 		} catch (IllegalStateException | IOException e) {
