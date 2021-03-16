@@ -47,7 +47,6 @@ public class AdminRoomController {
 	@PostMapping(path = { "/", "" })
 	public String postRoom(final RoomDTO roomDTO, Model model, Principal principal) {
 		try {
-
 			RoomEntity roomEntity = converter.convertTo(roomDTO);
 			roomEntity.setCreatedBy(principal.getName());
 			roomEntity.setCreatedDate(new Date());
@@ -59,9 +58,6 @@ public class AdminRoomController {
 			if (roomEntity.getNumberOfSeat() % SeatConstant.NUMBERSEATOFROW.getValue() != 0) {
 				throw new Exception("Number of seats provided invalid");
 			}
-			
-			
-			
 			
 			RoomEntity isExistRoom = roomService.findByCodeAndCinemaId(roomEntity.getCode(), cinemaEntity.getId());
 			List<String> errors = new ArrayList<String>();

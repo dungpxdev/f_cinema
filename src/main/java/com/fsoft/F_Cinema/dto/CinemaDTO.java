@@ -26,7 +26,6 @@ public class CinemaDTO extends AbstractDTO {
 
 	private String address;
 
-	@NotEmpty(message = "Please provive number of rooms")
 	private Integer numberOfRoom;
 
 }

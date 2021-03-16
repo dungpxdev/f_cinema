@@ -13,6 +13,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Nationalized;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -37,12 +39,15 @@ public class UserEntity extends BaseEntity {
 	@Column(name = "password")
 	private String password;
 
+	@Nationalized
 	@Column(name = "firstname")
 	private String firstname;
 
+	@Nationalized
 	@Column(name = "lastname")
 	private String lastname;
 
+	@Nationalized
 	@Column(name = "fullname")
 	private String fullname;
 

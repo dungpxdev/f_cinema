@@ -16,5 +16,9 @@ public interface DisablePlansRepository extends JpaRepository<DisablePlanEntity,
 	@Query(value = "select * from disable_plan where seat_id != null and start_time >= :fromDate  and end_time <= :toDate",
 			nativeQuery = true)
 	List<SeatEntity> findAllSeatsOcupied(@Param("fromDate") String fromDate, @Param("toDate") String toDate);
+	
+	@Query(value = "select * from disable_plan where start_time >= GETDATE()",
+		   nativeQuery = true)
+	List<DisablePlanEntity> findNextDisable();
 
 }

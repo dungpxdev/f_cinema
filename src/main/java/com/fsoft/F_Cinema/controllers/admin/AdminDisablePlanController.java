@@ -10,22 +10,22 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.fsoft.F_Cinema.entities.CinemaEntity;
-import com.fsoft.F_Cinema.services.CinemaService;
+import com.fsoft.F_Cinema.entities.DisablePlanEntity;
+import com.fsoft.F_Cinema.services.DisablePlansService;
 
 @RequestMapping("/admin/disable")
 @Controller
 public class AdminDisablePlanController {
 
 	@Autowired
-	private CinemaService cinemaService;
+	private DisablePlansService disablePlanService;
 
 	Logger logger = LoggerFactory.getLogger(AdminDisablePlanController.class);
 
 	@GetMapping(path = { "", "/" })
 	public String getDisablePlan(Model model) {
-		List<CinemaEntity> cinemas = cinemaService.findAll();
-		model.addAttribute("cinemas", cinemas);
+		List<DisablePlanEntity> disables = disablePlanService.findNextDisable();
+		model.addAttribute("disables", disables);
 		return "dashboard/admin/disablePlan";
 	}
 

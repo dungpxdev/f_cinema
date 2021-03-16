@@ -24,9 +24,18 @@
 									</th>
 									<th class="column-title">Code </th>
 									<th class="column-title">Date </th>
-									<th class="column-title">Movie </th>
+									<th class="column-title">Movie 
+										<select id="movie" name="datatable-keytable_length" aria-controls="datatable-keytable" class="form-control input-sm">
+											<option th:each="movie: ${movies}" th:value="${movie.code}" th:text="${movie.name}"></option>
+										</select>
+									</th>
 									<th class="column-title">Created By </th>
-									<th class="column-title">Status </th>
+									<th class="column-title">Status
+										<select id="status" name="datatable-keytable_length" aria-controls="datatable-keytable" class="form-control input-sm">
+										  <option th:each="item: ${status}" th:value="${item.key}" th:text="${item.key}"></option>
+										</select>
+									</th>
+									<th class="column-title">Cinema </th>
 									<th class="column-title">Room </th>
 									<th class="column-title no-link last"><span class="nobr">Action</span>
 									</th>
@@ -47,6 +56,7 @@
 									</td>
 									<td class=" " th:text="${schedule.createdBy}"></td>
 									<td class=" " th:text="${schedule.status}"></td>
+									<td class="a-right a-right " th:text="${schedule.room.name}"></td>
 									<td class="a-right a-right " th:text="${schedule.room.name}"></td>
 									<td class=" last"><a href="#">View</a>
 									</td>

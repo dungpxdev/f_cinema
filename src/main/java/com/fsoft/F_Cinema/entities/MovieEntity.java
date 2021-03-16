@@ -12,6 +12,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Nationalized;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Builder;
@@ -56,6 +57,7 @@ public class MovieEntity extends BaseEntity {
 		this.schedules = schedules;
 	}
 
+	@Nationalized
 	@Column(name = "name")
 	private String name;
 
@@ -70,9 +72,11 @@ public class MovieEntity extends BaseEntity {
 	@Column(name = "end_time")
 	private Date endTime;
 
+	@Nationalized
 	@Column(name = "cast")
 	private String cast;
 
+	@Nationalized
 	@Column(name = "director")
 	private String director;
 

@@ -2,8 +2,10 @@ package com.fsoft.F_Cinema.api.admin;
 
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -89,7 +91,10 @@ public class AdminScheduleApi {
 			
 			List<ScheduleEntity> schedules = scheduleService.findByIds(
 					movieEntity.getId(), 
-					roomEntity.getId());
+					roomEntity.getId())
+					.stream().filter(schedule -> 
+					schedule.getStartTime().compareTo(new Date()) >= 0)
+					.collect(Collectors.toList());
 
 			// exclude fields in ScheduleEntity (Lazy not working)
 			for (ScheduleEntity schedule : schedules) {
