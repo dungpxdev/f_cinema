@@ -1,4 +1,10 @@
 const btnCinemaDeactives = document.querySelectorAll('.cinema-deactive');
+var btnSubmit = document.getElementById('btnSubmit');
+const inputCinema = document.getElementById('name');
+const inputCode = document.getElementById('code');
+const inputAddress = document.getElementById('address');
+const inputRoom = document.getElementById('numberOfRoom');
+
 
 for (const btn of btnCinemaDeactives) {
     btn.addEventListener('click', e => {
@@ -37,4 +43,33 @@ for (const btn of btnCinemaDeactives) {
 
     return response.json();
 }
+
+
+btnSubmit.addEventListener('click', e =>{
+    if(inputCinema.value===''){
+        document.querySelectorAll('label[for~="name"]')[0].setAttribute('style', 'color: red');    
+    }else{
+        document.querySelectorAll('label[for~="name"]')[0].setAttribute('style', 'color: black');
+    }
+
+    if(inputCode.value===''){
+        document.querySelectorAll('label[for~="code"]')[0].setAttribute('style', 'color: red');    
+    }else{
+        document.querySelectorAll('label[for~="code"]')[0].setAttribute('style', 'color: black');    
+
+    }
+
+    if(inputAddress.value===''){
+        document.querySelectorAll('label[for~="address"]')[0].setAttribute('style', 'color: red');    
+    }else{
+        document.querySelectorAll('label[for~="address"]')[0].setAttribute('style', 'color: black')
+    }
+
+    if(inputRoom.value===''){
+        document.querySelectorAll('label[for~="numberOfRoom"]')[0].setAttribute('style', 'color: red');    
+    }else{
+        document.querySelectorAll('label[for~="numberOfRoom"]')[0].setAttribute('style', 'color: black');    
+
+    }
+});
 

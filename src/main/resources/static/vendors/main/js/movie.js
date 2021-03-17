@@ -12,6 +12,9 @@ const selectCountry = document.getElementById('country');
 const image = document.getElementById('poster');
 const movieGenre = document.getElementById('tags_1');
 const notifySpan = document.getElementById('notify');
+var clickButton = document.getElementById('btnCreate');
+
+
 
 function errorSpanBuild(message) {
     return notifySpan.innerHTML = `<div class="alert alert-danger alert-dismissible fade in" role="alert">
@@ -63,6 +66,50 @@ inputLength.addEventListener('focusout', e => {
     if (characters.length > 0) {
         errorSpanBuild('The Length of movie must not empty and be a number');
     }
+});
+
+clickButton.addEventListener('click', e => {
+    if(inputMovie.value === '') {
+        document.querySelectorAll('label[for~="name"]')[0].setAttribute('style', 'color: red');
+    }
+
+    if(inputPrice.value === '') {
+        document.querySelectorAll('label[for~="price"]')[0].setAttribute('style', 'color: red');
+    }
+
+    if(inputCode.value === '') {
+        document.querySelectorAll('label[for~="code"]')[0].setAttribute('style', 'color: red');    }
+
+    if(inputStartDate.value === '') {
+        document.querySelectorAll('label[for~="startTime"]')[0].setAttribute('style', 'color: red');    }
+
+    if(inputEndDate.value === '') {
+        document.querySelectorAll('label[for~="endTime"]')[0].setAttribute('style', 'color: red');    }
+
+    if(inputCast.value === '') {
+        document.querySelectorAll('label[for~="cast"]')[0].setAttribute('style', 'color: red');    }
+
+    if(inputDirector.value === '') {
+        document.querySelectorAll('label[for~="director"]')[0].setAttribute('style', 'color: red');    }
+
+    if(inputLength.value === '') {
+        document.querySelectorAll('label[for~="length"]')[0].setAttribute('style', 'color: red');    }
+    
+    if(inputLanguage.value === '') {
+        document.querySelectorAll('label[for~="language"]')[0].setAttribute('style', 'color: red');    }
+
+    if(inputDescription.value === '') {
+        document.querySelectorAll('label[for~="description"]')[0].setAttribute('style', 'color: red');    }
+  
+    if(selectCountry.value === '') {
+        document.querySelectorAll('label[for~="country"]')[0].setAttribute('style', 'color: red');    }
+    
+    if(image.files[0]) {
+        document.querySelectorAll('label[for~="poster"]')[0].setAttribute('style', 'color: red');    }
+    
+    /*if(notifySpan.value === '') {
+        inputMovie.setAttribute('style', 'background-color :#ff0000');
+    }*/
 });
 
 
