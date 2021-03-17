@@ -56,3 +56,5 @@ public class CinemaEntity extends BaseEntity {
 	private Set<DisablePlanEntity> disablePlans = new HashSet<DisablePlanEntity>();
 
 }
+
+
