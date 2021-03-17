@@ -43,7 +43,7 @@ public class AdminScheduleController {
 	@GetMapping(path = { "/", "" })
 	public String getSchedule() {
 
-		return "dashboard/admin/schedule";
+		return "redirect:/admin/schedule/table";
 	}
 
 	@GetMapping(path = { "/add" })
@@ -62,6 +62,8 @@ public class AdminScheduleController {
 		List<ScheduleEntity> scheduleEntities = scheduleService.findNexts();
 		List<ScheduleStatusConstant> status = Arrays.asList(ScheduleStatusConstant.values());
 		List<MovieEntity> movies = movieService.findAll();
+		List<ScheduleEntity> schedules = scheduleService.findAllNextSchedules();
+		model.addAttribute("dates", schedules);
 		model.addAttribute("schedules", scheduleEntities);
 		model.addAttribute("status", status);
 		model.addAttribute("movies", movies);

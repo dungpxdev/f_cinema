@@ -18,6 +18,8 @@ import com.fsoft.F_Cinema.entities.MovieEntity;
 import com.fsoft.F_Cinema.entities.RoomEntity;
 import com.fsoft.F_Cinema.entities.ScheduleEntity;
 import com.fsoft.F_Cinema.repository.ScheduleRepository;
+import com.fsoft.F_Cinema.services.MovieService;
+import com.fsoft.F_Cinema.services.RoomService;
 import com.fsoft.F_Cinema.services.ScheduleService;
 import com.fsoft.F_Cinema.utils.CodeGenerateUtils;
 import com.fsoft.F_Cinema.validation.DateValidation;
@@ -32,6 +34,12 @@ public class ScheduleServiceImpl implements ScheduleService {
 	
 	@Autowired
 	private DateValidation dateValidation;
+	
+	@Autowired
+	private MovieService movieService;
+	
+	@Autowired
+	private RoomService roomService;
 
 	@Override
 	public List<ScheduleEntity> findByIds(Long movieId, Long roomId) {
@@ -122,4 +130,43 @@ public class ScheduleServiceImpl implements ScheduleService {
 		return scheduleRepository.findNexts();
 	}
 
+	@Override
+	public List<ScheduleEntity> findAllNextSchedules() {
+		return scheduleRepository.findAllNextSchedules();
+	}
+
+	@Override
+	public List<ScheduleEntity> search(ScheduleDTO scheduleDTO) {
+		try {
+			List<Object[]> schedulesObjects = scheduleRepository.search(scheduleDTO);
+			List<ScheduleEntity> schedules = new ArrayList<ScheduleEntity>();
+
+			for (Object[] schedule : schedulesObjects) {
+				ScheduleEntity scheduleEntity = new ScheduleEntity();
+				scheduleEntity.setCode(String.valueOf(schedule[5]));
+				scheduleEntity.setStartTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(String.valueOf(schedule[2])));
+				
+				MovieEntity movieEntity = movieService.findById(Long.parseLong(String.valueOf(schedule[9]))).get();
+				RoomEntity roomEntity = roomService.findById(Long.parseLong(String.valueOf(schedule[10])));
+				roomEntity.setCinema(null);
+				roomEntity.setDisablePlans(null);
+				roomEntity.setSchedules(null);
+				roomEntity.setSeats(null);
+				movieEntity.setSchedules(null);
+				movieEntity.setDisablePlans(null);
+				
+				scheduleEntity.setMovie(movieEntity);
+				scheduleEntity.setCreatedBy(String.valueOf(schedule[1]));
+				scheduleEntity.setStatus(String.valueOf(schedule[11]));
+				scheduleEntity.setRoom(roomEntity);
+				schedules.add(scheduleEntity);
+			}
+
+			return schedules;
+		} catch (Exception e) {
+			e.getMessage();
+			return null;
+		}
+
+	}
 }

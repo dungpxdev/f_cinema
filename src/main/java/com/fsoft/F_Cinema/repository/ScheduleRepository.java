@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.fsoft.F_Cinema.entities.ScheduleEntity;
 
 @Repository
-public interface ScheduleRepository extends JpaRepository<ScheduleEntity, Long> {
+public interface ScheduleRepository extends JpaRepository<ScheduleEntity, Long>, ScheduleRepositoryCustom {
 
 	@Query(value = "select * from schedules where movie_id = :movieId and room_id = :roomId",
 			nativeQuery = true)
@@ -25,4 +25,8 @@ public interface ScheduleRepository extends JpaRepository<ScheduleEntity, Long> 
 	@Query(value = "select * from schedules where start_time >= GETDATE()", 
 		   nativeQuery = true)
 	List<ScheduleEntity> findNexts();
+	
+	@Query(value = "select distinct id, start_time, created_by, code from schedules where start_time >= GETDATE()",
+		   nativeQuery = true)
+	List<ScheduleEntity> findAllNextSchedules();
 }

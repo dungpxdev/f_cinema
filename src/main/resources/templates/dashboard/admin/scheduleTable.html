@@ -22,14 +22,26 @@
 									<th>
 									  <input type="checkbox" id="check-all" class="flat">
 									</th>
-									<th class="column-title">Code </th>
-									<th class="column-title">Date </th>
-									<th class="column-title">Movie 
-										<select id="movie" name="datatable-keytable_length" aria-controls="datatable-keytable" class="form-control input-sm">
-											<option th:each="movie: ${movies}" th:value="${movie.code}" th:text="${movie.name}"></option>
+									<th class="column-title">Code
+										<select id="code" name="datatable-keytable_length" aria-controls="datatable-keytable" class="form-control input-sm">
+											<option th:each="date: ${dates}" th:value="${date.code}" th:text="${date.code}"></option>
 										</select>
 									</th>
-									<th class="column-title">Created By </th>
+									<th class="column-title">Date 
+										<select id="date" name="datatable-keytable_length" aria-controls="datatable-keytable" class="form-control input-sm">
+											<option th:each="date: ${dates}" th:value="${#dates.format(date.startTime, 'yyyy-MM-dd HH:mm:ss')}" th:text="${#dates.format(date.startTime, 'dd-MM-yyyy')}"></option>
+										</select>
+									</th>
+									<th class="column-title">Movie 
+										<select id="movie" name="datatable-keytable_length" aria-controls="datatable-keytable" class="form-control input-sm">
+											<option th:each="movie: ${movies}" th:value="${movie.id}" th:text="${movie.name}"></option>
+										</select>
+									</th>
+									<th class="column-title">Created By 
+										<select id="createdBy" name="datatable-keytable_length" aria-controls="datatable-keytable" class="form-control input-sm">
+											<option th:each="date: ${dates}" th:value="${date.createdBy}" th:text="${date.createdBy}"></option>
+										</select>
+									</th>
 									<th class="column-title">Status
 										<select id="status" name="datatable-keytable_length" aria-controls="datatable-keytable" class="form-control input-sm">
 										  <option th:each="item: ${status}" th:value="${item.key}" th:text="${item.key}"></option>
