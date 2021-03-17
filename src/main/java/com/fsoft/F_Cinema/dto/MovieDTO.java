@@ -35,7 +35,7 @@ public class MovieDTO extends AbstractDTO {
 	private String country;
 	private Integer year;
 	private Long numberOfTickets;
-	private Integer status;
+	private String status;
 	private MultipartFile poster;
 	private String image;
 	private String trailer;

@@ -46,7 +46,7 @@
                             <th class="column-title">Director</th>
                             <th class="column-title">Actors </th>
                             <th class="column-title">Status </th>
-                            <th class="column-title">Amount </th>
+                            <th class="column-title">Tickets </th>
                             <th class="column-title no-link last"><span class="nobr">Action</span>
                             </th>
                             <th class="bulk-actions" colspan="7">
@@ -64,8 +64,8 @@
                             <td class=" " th:text="${movie.createdDate}"></td>
                             <td class=" " th:text="${movie.director}"><i class="success fa fa-long-arrow-up"></i></td>
                             <td class=" " th:text="${movie.cast}"></td>
-                            <td class=" ">Paid</td>
-                            <td class="a-right a-right ">$7.45</td>
+                            <td class=" " th:text="${movie.status}"></td>
+                            <td class="a-right a-right " th:text="${movie.numberOfTickets}"></td>
                             <td class=" last">
                             	<a th:href="@{/admin/movie/edit(movieId=${movie.id})}">Edit</a>
                             </td>

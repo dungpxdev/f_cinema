@@ -47,26 +47,21 @@ public class AdminMovieController {
 		return "dashboard/admin/addMovie";
 	}
 
-	@PostMapping(path = { "/add" })
+	@PostMapping(path = { "/add" }, consumes = "multipart/form-data;charset=UTF-8")
 	public String postMovie(MovieDTO movieDTO, Model model, Principal principal) {
 		try {
-			MultipartFile multipartFile = movieDTO.getPoster();
-			String fileName = multipartFile.getOriginalFilename();
-			File file = new File(fileConfig.getFolderUpload(), fileName);
-			multipartFile.transferTo(file);
-			movieDTO.setImage(file.getPath().split("static")[1]);
-			
-			MovieEntity movieEntity = converter.convertTo(movieDTO);
-			movieEntity.setCreatedDate(new Date());
-			movieEntity.setCreatedBy(principal.getName());
-			movieEntity.setPrice(movieDTO.getPrice());
-			
+			MovieEntity movieEntity = movieService.movieBuild(movieDTO, principal);
 			movieService.save(movieEntity);
 		} catch (IllegalStateException | IOException e) {
 			logger.error(new StringBuilder("POST MOVIE ERROR: Cause ")
-					.append(e.getMessage()).toString());
+					.append(e.getMessage())
+					.toString());
+		} catch (Exception e) {
+			logger.error(new StringBuilder("POST MOVIE ERROR: Cause ")
+					.append(e.getMessage())
+					.toString());
 		}
-		
+
 		return "redirect:/admin/movie";
 	}
 	
@@ -98,7 +93,7 @@ public class AdminMovieController {
 		}
 	}
 	
-	@PostMapping(path = { "/edit" })
+	@PostMapping(path = { "/edit" }, consumes = "multipart/form-data;charset=UTF-8")
 	public String editMovie(MovieDTO movie, 
 							@RequestParam String movieId, 
 							Principal principal) {

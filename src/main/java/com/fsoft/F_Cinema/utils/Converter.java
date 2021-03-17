@@ -1,11 +1,9 @@
 package com.fsoft.F_Cinema.utils;
 
-import java.util.Date;
-
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
-import com.fsoft.F_Cinema.constants.StatusConstant;
+import com.fsoft.F_Cinema.constants.MovieStatusConstant;
 import com.fsoft.F_Cinema.dto.CinemaDTO;
 import com.fsoft.F_Cinema.dto.MovieDTO;
 import com.fsoft.F_Cinema.dto.RoleDTO;
@@ -50,8 +48,6 @@ public class Converter {
 		MovieEntity movieBuilder = MovieEntity.builder()
 				.name(movieDTO.getName())
 				.code(movieDTO.getCode())
-				.startTime(new Date())
-				.endTime(new Date())
 				.cast(movieDTO.getCast())
 				.director(movieDTO.getDirector())
 				.language(movieDTO.getLanguage())
@@ -61,7 +57,7 @@ public class Converter {
 				.country(movieDTO.getCountry())
 				.year(movieDTO.getYear())
 				.numberOfTickets(movieDTO.getNumberOfTickets())
-				.status(StatusConstant.ACTIVE.getValue())
+				.status(MovieStatusConstant.ACTIVE.getKey())
 				.image(movieDTO.getImage())
 				.trailer(movieDTO.getTrailer())
 				.build();

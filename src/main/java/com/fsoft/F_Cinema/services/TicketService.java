@@ -21,4 +21,6 @@ public interface TicketService {
 	List<TicketEntity> findAllByMovie(String movieCode);
 	
 	List<TicketDTO> mapping(List<TicketEntity> tickets);
+	
+	Long countByMovie(Long movieId);
 }

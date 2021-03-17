@@ -35,7 +35,7 @@ public class MovieEntity extends BaseEntity {
 	@Builder
 	public MovieEntity(String name, String code, Date startTime, Date endTime, String cast, String director,
 			String language, Integer length, Integer rating, String description, String country, Integer year,
-			Long numberOfTickets, Integer status, String image, String trailer, MovieCategoryEntity movieCat,
+			Long numberOfTickets, String status, String image, String trailer, MovieCategoryEntity movieCat,
 			Set<ScheduleEntity> schedules) {
 		this.name = name;
 		this.code = code;
@@ -89,7 +89,9 @@ public class MovieEntity extends BaseEntity {
 	@Column(name = "rating")
 	private Integer rating;
 
-	@Column(name = "description", columnDefinition = "text")
+	@Column(name = "description",
+			columnDefinition = "nvarchar",
+			length = 4000)
 	private String description;
 
 	@Column(name = "country")
@@ -102,7 +104,7 @@ public class MovieEntity extends BaseEntity {
 	private Long numberOfTickets;
 
 	@Column(name = "status")
-	private Integer status;
+	private String status;
 
 	@Column(name = "image")
 	private String image;

@@ -20,6 +20,7 @@ import com.fsoft.F_Cinema.entities.ScheduleEntity;
 import com.fsoft.F_Cinema.entities.SeatEntity;
 import com.fsoft.F_Cinema.entities.TicketEntity;
 import com.fsoft.F_Cinema.repository.TicketRepository;
+import com.fsoft.F_Cinema.services.MovieService;
 import com.fsoft.F_Cinema.services.TicketService;
 import com.fsoft.F_Cinema.utils.CodeGenerateUtils;
 import com.fsoft.F_Cinema.utils.Converter;
@@ -29,6 +30,9 @@ public class TicketServiceImpl implements TicketService {
 
 	@Autowired
 	private TicketRepository ticketRepository;
+	
+	@Autowired
+	private MovieService movieService;
 	
 	@Autowired
 	private CodeGenerateUtils codeGeneratorUtils;
@@ -71,6 +75,11 @@ public class TicketServiceImpl implements TicketService {
 
 				ticketRepository.save(ticketEntity);
 			}
+			
+			//update number of ticket in movie
+			Long numberOfTickets = this.countByMovie(movieEntity.getId());
+			numberOfTickets += items.size();
+			movieService.updateTickets(numberOfTickets, movieEntity.getId());
 			return 1;
 		}
 
@@ -128,5 +137,10 @@ public class TicketServiceImpl implements TicketService {
 	
 	private int calulateTicketPrice(int moviePrice, int ticketPrice) {
 		return moviePrice + ticketPrice;
+	}
+
+	@Override
+	public Long countByMovie(Long movieId) {
+		return ticketRepository.countByMovieId(movieId);
 	}
 }

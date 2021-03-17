@@ -8,5 +8,7 @@ import com.fsoft.F_Cinema.entities.MovieEntity;
 public interface MovieRepositoryCustom {
 
 	MovieEntity findOneAndUpdate(Long id, MovieEntity movieEntity);
+	
+	MovieEntity updateTickets(Long number, Long movieId);
 
 }

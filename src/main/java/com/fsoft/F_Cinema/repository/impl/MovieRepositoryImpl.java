@@ -28,4 +28,12 @@ public class MovieRepositoryImpl implements MovieRepositoryCustom {
 		return newMovie;
 	}
 
+	@Override
+	public MovieEntity updateTickets(Long number, Long movieId) {
+		MovieEntity oldMovie = entityManager.find(MovieEntity.class, movieId);
+		oldMovie.setNumberOfTickets(number);
+		entityManager.merge(oldMovie);
+		return oldMovie;
+	}
+
 }

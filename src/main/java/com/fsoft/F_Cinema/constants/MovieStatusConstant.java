@@ -3,16 +3,17 @@ package com.fsoft.F_Cinema.constants;
 import lombok.Getter;
 
 @Getter
-public enum StatusConstant {
+public enum MovieStatusConstant {
 
 	DEACTIVE("DEACTIVE", 0),
 	ACTIVE("ACTIVE", 1),
-	SUSPENDED("SUSPENDED", 2);
+	WAITING("WAITING", 2),
+	SUSPENDED("SUSPENDED", 3);
 
 	private final String key;
 	private final Integer value;
 
-	StatusConstant(String key, Integer value) {
+	MovieStatusConstant(String key, Integer value) {
 		this.key = key;
 		this.value = value;
 	}

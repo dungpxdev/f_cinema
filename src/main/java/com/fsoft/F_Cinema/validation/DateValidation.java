@@ -29,4 +29,9 @@ public class DateValidation {
 		return false;
 	}
 
+	public Boolean isDatePassAway(Date date) {
+		if (date.compareTo(new Date()) < 0)
+			return true;
+		return false;
+	}
 }

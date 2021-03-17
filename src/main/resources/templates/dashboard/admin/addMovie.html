@@ -12,7 +12,7 @@
                   <div class="x_panel">
                     <div class="x_content">
                     <form action="/admin/movie/add" th:action="@{/admin/movie/add}" method="POST" enctype="multipart/form-data" th:object="${file}" class="form-horizontal form-label-left">
-                        <span class="section">Add Movie</span>
+                        <span class="section" id="notify">Add Movie</span>
                         <div class="item form-group">
                           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Movie <span class="required">*</span>
                           </label>
@@ -66,7 +66,7 @@
                           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="length">Length <span class="required">*</span>
                           </label>
                           <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input id="length" name="length" th:field="*{length}" required="required" class="form-control col-md-7 col-xs-12">
+                            <input id="length" name="length" type="number" th:field="*{length}" required="required" class="form-control col-md-7 col-xs-12">
                           </div>
                         </div>
                         <div class="item form-group">
@@ -121,6 +121,7 @@
                   </div>
                 </div>
           </div>
+          <script type="text/javascript" th:src="@{/vendors/main/js/movie.js}"></script>
         </div>
 </body>
 </html>
