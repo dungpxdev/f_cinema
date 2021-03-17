@@ -26,5 +26,9 @@ public interface ScheduleService {
 	List<ScheduleEntity> findByDate(Date date);
 	
 	List<ScheduleEntity> findNexts();
+	
+	List<ScheduleEntity> findAllNextSchedules();
+	
+	List<ScheduleEntity> search(ScheduleDTO scheduleDTO);
 
 }

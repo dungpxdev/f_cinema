@@ -118,5 +118,31 @@ public class AdminScheduleApi {
 			return new ResponseEntity<>(apiResponse, HttpStatus.BAD_REQUEST);
 		}
 	}
+	
+	@PostMapping(path = { "/search" },
+			produces = { MediaType.APPLICATION_JSON_VALUE },
+			consumes = { MediaType.APPLICATION_JSON_VALUE })
+	public ResponseEntity<?> searchSchedule(
+			@RequestBody ScheduleDTO scheduleDTO, 
+			Principal principal) {
+		try {
+			
+			List<ScheduleEntity> schedules = scheduleService.search(scheduleDTO);
+
+			apiResponse = new ApiResponseDTO()
+					.apiResponseBuilder(
+							null, HttpStatus.OK, "Successfuly", schedules);
+			
+			return new ResponseEntity<>(apiResponse, HttpStatus.OK);
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			List<String> errors = new ArrayList<String>();
+			errors.add(e.getMessage());
+			apiResponse = new ApiResponseDTO()
+					.apiResponseBuilder(errors, HttpStatus.BAD_REQUEST, "Fetch schedule error!", null);
+
+			return new ResponseEntity<>(apiResponse, HttpStatus.BAD_REQUEST);
+		}
+	}
 
 }

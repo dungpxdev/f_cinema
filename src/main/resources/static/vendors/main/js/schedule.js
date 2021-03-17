@@ -1,27 +1,103 @@
-$(document).ready(function() {
-  $('#addFilm').click(function() {
-    var name = $('#timetableFilm').val();
-    var duration = parseInt($('#timetableDuration').val()) * (5 / 3); /*must be in mins*/
-    var dur = $('#timetableDuration').val();
-    var startTime = $('#timetableStart').val();
+const codeSelect = document.getElementById('code');
+const dateSelect = document.getElementById('date');
+const movieSelect = document.getElementById('movie');
+const createdBySelect = document.getElementById('createdBy');
+const statusSelect = document.getElementById('status');
+const tableBody = document.querySelector('tbody');
 
-    /*get the hour*/
-    var hour = parseInt($('#timetableStart').val()) * 100;
-    /*get the minutes*/
-    var min = $('#timetableStart').val();
-    var res = min.split(":");
-    var minute = parseInt(res[1]) / 60 * 100;
-    var t = hour + parseInt(minute);
-    var screen = parseInt($('#timetableScreen').val()) * 10;
-    $('.timetable .layoutdesign').append("<span class='film' style='top:" + 5 + "vh;left:calc(10vw + " + t + "px); width:" + duration + "px' data-start='" + startTime + "'>" + name + " -"+dur+"mins</span>");
+/**
+ * Fetch data from server (url) base on object parameters
+ * 
+ * @param {Object} params 
+ * @param {String} url 
+ */
+ async function fetchData(url, params) {
+  const response = await fetch(url,  {
+      method: 'POST',
+      credentials: 'same-origin',
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(params)
   });
 
-  $('.layoutdesign').on("click", ".film", function() {
-    $(this).toggleClass("activeFilm");
-    $('#deleteFilm').show();
-  });
-  $('#deleteFilm').click(function() {
-    $('.activeFilm').remove();
-    $(this).hide();
+  return response.json();
+}
+
+let criteriaParams = {
+  code: '',
+  startTime: '',
+  movie: '',
+  createdBy: '',
+  status: ''
+}
+
+const url = document.location.origin + '/api/v1/admin/schedule/search';
+
+codeSelect.addEventListener('change', async e => {
+  criteriaParams.code = codeSelect.value;
+  await fetchData(url, criteriaParams).then(res => {
+    render(res.data);
   });
 });
+
+dateSelect.addEventListener('change', async e => {
+  criteriaParams.date = dateSelect.value;
+    await fetchData(url, criteriaParams).then(res => {
+    render(res.data);
+  });
+});
+
+movieSelect.addEventListener('change', async e => {
+  criteriaParams.movie = movieSelect.value;
+    await fetchData(url, criteriaParams).then(res => {
+    render(res.data);
+  });
+});
+
+createdBySelect.addEventListener('change', async e => {
+  criteriaParams.createdBy = createdBySelect.value;
+    await fetchData(url, criteriaParams).then(res => {
+    render(res.data);
+  });
+});
+
+statusSelect.addEventListener('change', async e => {
+  criteriaParams.status = statusSelect.value;
+    await fetchData(url, criteriaParams).then(res => {
+    render(res.data);
+  });
+});
+
+function render(schedules) {
+  tableBody.innerHTML = '';
+  let bodies = '';
+  for (const schedule of schedules) {
+    bodies += `
+    <tr class="odd pointer">
+    <td class="a-center ">
+      <input type="checkbox" class="flat" name="table_records">
+    </td>
+    <td class=" ">${schedule.code}</td>
+    <td class=" ">${schedule.startTime + '-' + schedule.endTime}</td>
+    <td class=" ">${schedule.movie.name} <i class="success fa fa-long-arrow-up"></i>
+    </td>
+    <td class=" ">${schedule.createdBy}</td>
+    <td class=" ">${schedule.status}</td>
+    <td class="a-right a-right ">${schedule.room.name}</td>
+    <td class="a-right a-right ">${schedule.room.name}</td>
+    <td class=" last"><a href="#">View</a>
+    </td>
+    </tr>
+    `;
+  }
+  return tableBody.innerHTML = bodies;
+}
+
+
+function formatDates(date1, date2) {
+  let d1 = new Date(date1);
+  let d2 = new Date(date2);
+  return `${d1.getDate()}-${d1.getMonth()}-${d1.getYear()} ${d1.getHours()}:${d1.getMinutes()} - 
+  ${d2.getDate()}-${d2.getMonth()}-${d2.getYear()} ${d2.getHours()}:${d2.getMinutes()}`;
+}
